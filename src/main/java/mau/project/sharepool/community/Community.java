@@ -97,6 +97,7 @@ public class Community {
         is_visible = visible;
     }
 
+
     @Override
     public String toString() {
         return "Community{" +

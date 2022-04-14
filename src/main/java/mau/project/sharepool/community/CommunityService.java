@@ -19,4 +19,12 @@ public class CommunityService {
     public void addToCommunity(Community community){
         communityRepository.save(community);
     }
+
+    public void deleteACommunity(Long id){
+        communityRepository.deleteById(id);
+    }
+
+    public void deleteAllCommunities(){
+        communityRepository.deleteAll();
+    }
 }

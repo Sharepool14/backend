@@ -27,4 +27,18 @@ public class CommunityController {
         System.out.println(community.getVisible());
         return ResponseEntity.ok(HttpStatus.OK); // Godkännande
     }
+
+    @PostMapping(path = "delete")
+    public ResponseEntity delete(@RequestBody Long id){
+        service.deleteACommunity(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
+
+    @PostMapping(path = "deleteAll")
+    public ResponseEntity deleteAll(){
+        service.deleteAllCommunities();
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }
