@@ -11,19 +11,19 @@ public class Account {
 
     @Id
     @SequenceGenerator(
-            name = "community_id_seq",
-            sequenceName = "community_id_seq",
+            name = "account_id_seq",
+            sequenceName = "account_id_seq",
             allocationSize = 1)
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "community_id_seq"
+            generator = "account_id_seq"
     )
 
     private int account_id;
     private String first_name;
     private String last_name;
-    private int score;
+    private Short score;
     private String city;
     private int zip_code;
     private String address;
@@ -34,7 +34,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(String first_name, String last_name, int score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
+    public Account(String first_name, String last_name, Short score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.score = score;
@@ -46,7 +46,7 @@ public class Account {
         this.profile_picture = profile_picture;
     }
 
-    public Account(int account_id, String first_name, String last_name, int score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
+    public Account(int account_id, String first_name, String last_name, Short score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
         this.account_id = account_id;
         this.first_name = first_name;
         this.last_name = last_name;

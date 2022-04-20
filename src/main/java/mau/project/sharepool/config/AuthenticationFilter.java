@@ -2,6 +2,7 @@ package mau.project.sharepool.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -29,12 +31,22 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        System.out.println(username);
+
+        String username = null;
+        String password = null;
+        try {
+            Map<String, String> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            username = requestMap.get("username");
+            password = requestMap.get("password");
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username,password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //String username = request.getParameter("username");
+        //String password = request.getParameter("password");
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username,password);
-        System.out.println("TEST");
-        return  authenticationManager.authenticate(authToken);
+        return authenticationManager.authenticate(authToken);
     }
 
     @Override

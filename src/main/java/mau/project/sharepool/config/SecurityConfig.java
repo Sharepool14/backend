@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -37,9 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(STATELESS);
+        httpSecurity.authorizeRequests().antMatchers(POST,"/api/account/signup").permitAll();
         httpSecurity.authorizeRequests().antMatchers(GET,"/api/**").authenticated();
+        httpSecurity.authorizeRequests().antMatchers(POST,"/api/**").authenticated();
         httpSecurity.authorizeRequests().anyRequest().permitAll();
-
         httpSecurity.addFilter(new AuthenticationFilter(authenticationManagerBean()));
         httpSecurity.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

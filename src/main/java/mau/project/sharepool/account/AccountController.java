@@ -21,4 +21,10 @@ public class AccountController {
     public List getAccounts() {
         return service.getAccounts();
     }
+
+    @PostMapping(path = "signup")
+    public void addAccount(@RequestBody Account account) {
+        System.out.println("sign up!");
+        service.addAccount(account);
+    }
 }
