@@ -1,8 +1,6 @@
 package mau.project.sharepool.login;
 
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,21 +27,24 @@ public class LoginService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<Login> single(Long l) {
+    public Optional<Login2> single(Long l) {
         return loginRepo.findById(l);
     }
 
-    public List<Login> getAll() {
+    public List<Login2> getAll() {
         return loginRepo.findAll();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Login login = loginRepo.findByUsername(username);
+        Login2 login = loginRepo.findByUsername(username);
+        if (login == null) System.out.println("IS NULL");
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
         System.out.println("LOGG");
 
         return new User(login.getUsername(),login.getPassword(),authorities);
     }
+
+
 }

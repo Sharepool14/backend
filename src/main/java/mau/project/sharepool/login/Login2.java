@@ -1,7 +1,6 @@
 package mau.project.sharepool.login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.Entity;
 
@@ -9,27 +8,42 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Login {
+@Table(name = "login2")
+public class Login2 {
     @Id
     @SequenceGenerator(
-            name = "login_id_seq",
-            sequenceName = "login_id_seq",
+            name = "login2_id_seq",
+            sequenceName = "login2_id_seq",
             allocationSize = 1
     )
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "login_id_seq"
+            generator = "login2_id_seq"
     )
     private Long id;
-    //private String username;
-    private String email;
+    private String username;
     private String password;
     private Date last_logged_in;
     @JsonProperty("is_active")
     private boolean is_active;
 
-    public Login() {
+    public Login2() {
+    }
+
+    public Login2(String username, String password, Date last_logged_in, boolean is_active) {
+        this.username = username;
+        this.password = password;
+        this.last_logged_in = last_logged_in;
+        this.is_active = is_active;
+    }
+
+    public Login2(Long id, String username, String password, Date last_logged_in, boolean is_active) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.last_logged_in = last_logged_in;
+        this.is_active = is_active;
     }
 
     public Long getId() {
@@ -40,12 +54,12 @@ public class Login {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -74,9 +88,9 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{" +
+        return "Login2{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", last_logged_in=" + last_logged_in +
                 ", is_active=" + is_active +
