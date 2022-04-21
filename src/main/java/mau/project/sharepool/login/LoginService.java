@@ -27,17 +27,17 @@ public class LoginService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<Login2> single(Long l) {
+    public Optional<Login> single(Long l) {
         return loginRepo.findById(l);
     }
 
-    public List<Login2> getAll() {
+    public List<Login> getAll() {
         return loginRepo.findAll();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Login2 login = loginRepo.findByUsername(username);
+        Login login = loginRepo.findByUsername(username);
         if (login == null) System.out.println("IS NULL");
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));

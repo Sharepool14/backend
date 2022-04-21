@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "login2")
-public class Login2 {
+@Table(name = "login")
+public class Login {
     @Id
     @SequenceGenerator(
             name = "login2_id_seq",
@@ -24,26 +24,22 @@ public class Login2 {
     private Long id;
     private String username;
     private String password;
-    private Date last_logged_in;
-    @JsonProperty("is_active")
-    private boolean is_active;
+    private String account_id;
 
-    public Login2() {
+    public Login() {
     }
 
-    public Login2(String username, String password, Date last_logged_in, boolean is_active) {
+    public Login(String username, String password, String account_id) {
         this.username = username;
         this.password = password;
-        this.last_logged_in = last_logged_in;
-        this.is_active = is_active;
+        this.account_id = account_id;
     }
 
-    public Login2(Long id, String username, String password, Date last_logged_in, boolean is_active) {
+    public Login(Long id, String username, String password, String account_id) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.last_logged_in = last_logged_in;
-        this.is_active = is_active;
+        this.account_id = account_id;
     }
 
     public Long getId() {
@@ -70,30 +66,21 @@ public class Login2 {
         this.password = password;
     }
 
-    public Date getLast_logged_in() {
-        return last_logged_in;
+    public String getAccount_id() {
+        return account_id;
     }
 
-    public void setLast_logged_in(Date last_logged_in) {
-        this.last_logged_in = last_logged_in;
-    }
-
-    public boolean isIs_active() {
-        return is_active;
-    }
-
-    public void setIs_active(boolean is_active) {
-        this.is_active = is_active;
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
     }
 
     @Override
     public String toString() {
-        return "Login2{" +
+        return "Login{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", last_logged_in=" + last_logged_in +
-                ", is_active=" + is_active +
+                ", account_id='" + account_id + '\'' +
                 '}';
     }
 }

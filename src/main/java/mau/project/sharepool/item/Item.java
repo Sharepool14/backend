@@ -21,55 +21,45 @@ public class Item {
             generator = "item_id_seq"
     )
 
-    private long item_id;
+    private long id;
+    private int account_id;
     private String name;
-    private Date borrow_date;
-    private Date return_date;
-    @JsonProperty ("available")
-    private boolean available;
-    @JsonProperty ("status")
-    private boolean status;
+    private String description;
+    private int category_id;
 
-    public Item(){
+    public Item() {
 
     }
 
-    public Item(
-            long item_id,
-            String name,
-            Date borrow_date,
-            Date return_date,
-            boolean available,
-            boolean status) {
-
-        this.item_id = item_id;
+    public Item(int account_id, String name, String description, int category_id) {
+        this.account_id = account_id;
         this.name = name;
-        this.borrow_date = borrow_date;
-        this.return_date = return_date;
-        this.available = available;
-        this.status = status;
+        this.description = description;
+        this.category_id = category_id;
     }
 
-    public Item(
-            String name,
-            Date borrow_date,
-            Date return_date,
-            boolean available,
-            boolean status) {
-
+    public Item(long id, int account_id, String name, String description, int category_id) {
+        this.id = id;
+        this.account_id = account_id;
         this.name = name;
-        this.borrow_date = borrow_date;
-        this.return_date = return_date;
-        this.available = available;
-        this.status = status;
+        this.description = description;
+        this.category_id = category_id;
     }
 
-    public long getItem_id() {
-        return item_id;
+    public long getId() {
+        return id;
     }
 
-    public void setItem_id(long item_id) {
-        this.item_id = item_id;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getAccount_id() {
+        return account_id;
+    }
+
+    public void setAccount_id(int account_id) {
+        this.account_id = account_id;
     }
 
     public String getName() {
@@ -80,47 +70,30 @@ public class Item {
         this.name = name;
     }
 
-    public Date getBorrow_date() {
-        return borrow_date;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBorrow_date(Date borrow_date) {
-        this.borrow_date = borrow_date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getReturn_date() {
-        return return_date;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setReturn_date(Date return_date) {
-        this.return_date = return_date;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "item_id=" + item_id +
+                "id=" + id +
+                ", account_id=" + account_id +
                 ", name='" + name + '\'' +
-                ", borrow_date=" + borrow_date +
-                ", return_date=" + return_date +
-                ", available=" + available +
-                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", category_id=" + category_id +
                 '}';
     }
 }

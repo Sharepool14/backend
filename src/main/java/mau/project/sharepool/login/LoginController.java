@@ -22,13 +22,13 @@ public class LoginController {
 
 
     @GetMapping("account/{id}")
-    public Optional<Login2> getLogin(@PathVariable("id") Long l) {
+    public Optional<Login> getLogin(@PathVariable("id") Long l) {
         System.out.println(l);
         return loginService.single(l);
     }
 
     @GetMapping("accounts")
-    public List<Login2> getAll() {
+    public List<Login> getAll() {
         return loginService.getAll();
     }
 }

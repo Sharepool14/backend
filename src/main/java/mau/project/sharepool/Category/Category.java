@@ -18,43 +18,42 @@ public class Category {
             generator = "category_id_seq"
     )
 
-    private long category_id;
-    private String name;
+    private long id;
+    private String type;
 
     public Category() {
     }
 
-    public Category(String name) {
-        this.name = name;
+    public Category(String type) {
+        this.type = type;
     }
 
-    public Category(int category_id, String name) {
-        this.category_id = category_id;
-        this.name = name;
+    public Category(long id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
-    public long getCategory_id() {
-        return category_id;
+    public long getId() {
+        return id;
     }
 
-    public void setCategory_id(long category_id) {
-        this.category_id = category_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "category_id=" + category_id +
-                ", name='" + name + '\'' +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
-

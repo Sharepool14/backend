@@ -24,7 +24,7 @@ public class CommunityController {
     @PostMapping(path = "add") // Post = lägga in/ändra
     public ResponseEntity add(@RequestBody Community community){
         service.addToCommunity(community); // Lägger in i DB
-        System.out.println(community.getVisible());
+        //System.out.println(community.getVisible());
         return ResponseEntity.ok(HttpStatus.OK); // Godkännande
     }
 

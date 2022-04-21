@@ -1,9 +1,6 @@
 package mau.project.sharepool.account;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "account")
@@ -20,42 +17,78 @@ public class Account {
             generator = "account_id_seq"
     )
 
-    private int account_id;
-    private String first_name;
-    private String last_name;
-    private Short score;
-    private String city;
-    private int zip_code;
-    private String address;
-    private String phone_number;
-    private Date date_joined;
-    private String profile_picture;
+    private int id;
+    private String firstname;
+    private String lastname;
+    private int address_id;
+    private String phone;
 
     public Account() {
     }
 
-    public Account(String first_name, String last_name, Short score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.score = score;
-        this.city = city;
-        this.zip_code = zip_code;
-        this.address = address;
-        this.phone_number = phone_number;
-        this.date_joined = date_joined;
-        this.profile_picture = profile_picture;
+    public Account(String firstname, String lastname, int address_id, String phone) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address_id = address_id;
+        this.phone = phone;
     }
 
-    public Account(int account_id, String first_name, String last_name, Short score, String city, int zip_code, String address, String phone_number, Date date_joined, String profile_picture) {
-        this.account_id = account_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.score = score;
-        this.city = city;
-        this.zip_code = zip_code;
-        this.address = address;
-        this.phone_number = phone_number;
-        this.date_joined = date_joined;
-        this.profile_picture = profile_picture;
+    public Account(int id, String firstname, String lastname, int address_id, String phone) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address_id = address_id;
+        this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", address_id=" + address_id +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }
