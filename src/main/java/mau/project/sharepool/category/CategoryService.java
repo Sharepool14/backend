@@ -1,4 +1,4 @@
-package mau.project.sharepool.Category;
+package mau.project.sharepool.category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

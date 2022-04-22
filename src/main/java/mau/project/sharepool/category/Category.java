@@ -1,4 +1,4 @@
-package mau.project.sharepool.Category;
+package mau.project.sharepool.category;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;

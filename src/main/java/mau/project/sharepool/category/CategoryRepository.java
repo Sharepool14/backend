@@ -1,4 +1,4 @@
-package mau.project.sharepool.Category;
+package mau.project.sharepool.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
