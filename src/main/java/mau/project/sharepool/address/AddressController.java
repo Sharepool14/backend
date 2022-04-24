@@ -12,7 +12,6 @@ public class AddressController {
     private final AddressService service;
 
     @Autowired
-
     public AddressController(AddressService service) {
         this.service = service;
     }
@@ -21,5 +20,4 @@ public class AddressController {
     public List getAccounts() {
         return service.getAddress();
     }
-
 }
