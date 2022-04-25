@@ -38,13 +38,7 @@ public class LoginService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Login login = loginRepo.findByUsername(username);
-        if (login == null) System.out.println("IS NULL");
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("USER"));
-        System.out.println("LOGG");
-
         return new User(login.getUsername(),login.getPassword(),authorities);
     }
-
-
 }
