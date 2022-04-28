@@ -1,5 +1,9 @@
 package mau.project.sharepool.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.address.Address;
+import mau.project.sharepool.login.Login;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,25 +24,30 @@ public class Account {
     private int id;
     private String firstname;
     private String lastname;
-    private int address_id;
+    @OneToOne @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
     private String phone;
+    @OneToOne (mappedBy = "account") @JsonIgnore
+    private Login login;
 
     public Account() {
     }
 
-    public Account(String firstname, String lastname, int address_id, String phone) {
+    public Account(String firstname, String lastname, Address address, String phone, Login login) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.address_id = address_id;
+        this.address = address;
         this.phone = phone;
+        this.login = login;
     }
 
-    public Account(int id, String firstname, String lastname, int address_id, String phone) {
+    public Account(int id, String firstname, String lastname, Address address, String phone, Login login) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.address_id = address_id;
+        this.address = address;
         this.phone = phone;
+        this.login = login;
     }
 
     public int getId() {
@@ -65,12 +74,12 @@ public class Account {
         this.lastname = lastname;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -81,14 +90,23 @@ public class Account {
         this.phone = phone;
     }
 
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", address_id=" + address_id +
+                ", address=" + address +
                 ", phone='" + phone + '\'' +
+                ", login=" + login +
                 '}';
     }
 }
