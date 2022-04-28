@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
+        httpSecurity.cors();
         httpSecurity.sessionManagement().sessionCreationPolicy(STATELESS);
         httpSecurity.authorizeRequests().antMatchers(POST,"/api/account/signup").permitAll();
         httpSecurity.authorizeRequests().antMatchers(GET,"/api/**").authenticated();

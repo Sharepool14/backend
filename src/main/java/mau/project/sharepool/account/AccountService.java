@@ -14,6 +14,9 @@ public class AccountService {
     }
 
     public List<Account> getAccounts() {
+        int i = accountRepository.test(5);
+        System.out.println(i);
+
         return accountRepository.findAll();
     }
 

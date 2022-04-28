@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping (path = "/api/account")
 public class AccountController {
@@ -15,6 +16,7 @@ public class AccountController {
     }
 
     @GetMapping(path = "all") // Get = hämtar info
+
     public List getAccounts() {
         return service.getAccounts();
     }
