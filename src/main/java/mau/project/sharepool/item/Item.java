@@ -1,6 +1,8 @@
 package mau.project.sharepool.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mau.project.sharepool.category.Category;
+import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -82,7 +84,7 @@ public class Item {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(Category category) {
         this.category_id = category_id;
     }
 
@@ -93,7 +95,7 @@ public class Item {
                 ", account_id=" + account_id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", category_id=" + category_id +
+                ", category" + category_id +
                 '}';
     }
 }

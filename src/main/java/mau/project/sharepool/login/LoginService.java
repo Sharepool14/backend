@@ -16,8 +16,6 @@ import java.util.Optional;
 
 @Service
 public class LoginService implements UserDetailsService {
-
-
     private final LoginRepository loginRepo;
     private final PasswordEncoder passwordEncoder;
 
