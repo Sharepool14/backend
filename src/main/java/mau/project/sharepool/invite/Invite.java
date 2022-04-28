@@ -14,7 +14,7 @@ public class Invite {
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "account_id_seq"
+            generator = "invite_id_seq"
     )
 
     private long id;

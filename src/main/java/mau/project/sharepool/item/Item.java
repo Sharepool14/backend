@@ -1,6 +1,8 @@
 package mau.project.sharepool.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mau.project.sharepool.category.Category;
+import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,25 +27,27 @@ public class Item {
     private int account_id;
     private String name;
     private String description;
-    private int category_id;
+
+    @OneToMany(mappedBy = "id")
+    private Category category;
 
     public Item() {
 
     }
 
-    public Item(int account_id, String name, String description, int category_id) {
+    public Item(int account_id, String name, String description, Category category) {
         this.account_id = account_id;
         this.name = name;
         this.description = description;
-        this.category_id = category_id;
+        this.category = category;
     }
 
-    public Item(long id, int account_id, String name, String description, int category_id) {
+    public Item(long id, int account_id, String name, String description, Category category) {
         this.id = id;
         this.account_id = account_id;
         this.name = name;
         this.description = description;
-        this.category_id = category_id;
+        this.category = category;
     }
 
     public long getId() {
@@ -78,12 +82,12 @@ public class Item {
         this.description = description;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public Category getCategory_id() {
+        return category;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategory_id(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -93,7 +97,7 @@ public class Item {
                 ", account_id=" + account_id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", category_id=" + category_id +
+                ", category" + category +
                 '}';
     }
 }

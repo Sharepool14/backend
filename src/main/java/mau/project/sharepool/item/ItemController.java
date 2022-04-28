@@ -1,12 +1,11 @@
 package mau.project.sharepool.item;
 
+import mau.project.sharepool.login.Login;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/item")
@@ -26,5 +25,11 @@ public class ItemController {
     @PostMapping(path = "add")
     public void addItem(Item item){
         service.addItem(item);
+    }
+
+    @GetMapping("{account_id}")
+    public Optional<Item> itemsBy(@PathVariable("account_id") Long account_id) {
+        System.out.println(account_id);
+        return service.itemsBy(account_id);
     }
 }
