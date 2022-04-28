@@ -27,27 +27,25 @@ public class Item {
     private int account_id;
     private String name;
     private String description;
-
-    @OneToMany(mappedBy = "id")
-    private Category category;
+    private int category_id;
 
     public Item() {
 
     }
 
-    public Item(int account_id, String name, String description, Category category) {
+    public Item(int account_id, String name, String description, int category_id) {
         this.account_id = account_id;
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.category_id = category_id;
     }
 
-    public Item(long id, int account_id, String name, String description, Category category) {
+    public Item(long id, int account_id, String name, String description, int category_id) {
         this.id = id;
         this.account_id = account_id;
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.category_id = category_id;
     }
 
     public long getId() {
@@ -82,12 +80,12 @@ public class Item {
         this.description = description;
     }
 
-    public Category getCategory_id() {
-        return category;
+    public int getCategory_id() {
+        return category_id;
     }
 
     public void setCategory_id(Category category) {
-        this.category = category;
+        this.category_id = category_id;
     }
 
     @Override
@@ -97,7 +95,7 @@ public class Item {
                 ", account_id=" + account_id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", category" + category +
+                ", category" + category_id +
                 '}';
     }
 }
