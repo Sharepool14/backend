@@ -9,7 +9,7 @@ import java.util.Date;
 public class Role {
     @Id
     @SequenceGenerator(
-            name = "role_iq_seq",
+            name = "role_id_seq",
             sequenceName = "role_id_seq",
             allocationSize = 1
     )
