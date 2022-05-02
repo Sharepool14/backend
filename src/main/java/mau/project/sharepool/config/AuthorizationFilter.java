@@ -32,14 +32,10 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
         } else {
             String authHeader = request.getHeader(AUTHORIZATION);
-            if (authHeader == null) {
-                System.out.println("NO HEADER");
-            }
 
             if (authHeader != null ) {
 
                 try {
-                    System.out.println("Try statement");
                     String token = authHeader.substring("Bearer ".length());
                     Algorithm algo = Algorithm.HMAC256("secret".getBytes());
                     JWTVerifier verify = JWT.require(algo).build();
