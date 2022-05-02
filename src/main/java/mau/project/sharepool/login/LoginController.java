@@ -1,6 +1,5 @@
 package mau.project.sharepool.login;
 
-import mau.project.sharepool.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class LoginController {
     }
 
     @PostMapping("create_account")
-    public void createAccount(Login login){
+    public void createAccount(@RequestBody Login login){
         loginService.create_account(login);
     }
 }
