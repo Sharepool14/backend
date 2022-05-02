@@ -1,5 +1,7 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.address.Address;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,24 +22,27 @@ public class Account {
     private int id;
     private String firstname;
     private String lastname;
-    private int address_id;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
     private String phone;
 
     public Account() {
     }
 
-    public Account(String firstname, String lastname, int address_id, String phone) {
+    public Account(String firstname, String lastname, Address address, String phone) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.address_id = address_id;
+        this.address = address;
         this.phone = phone;
     }
 
-    public Account(int id, String firstname, String lastname, int address_id, String phone) {
+    public Account(int id, String firstname, String lastname, Address address, String phone) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.address_id = address_id;
+        this.address = address;
         this.phone = phone;
     }
 
@@ -65,12 +70,12 @@ public class Account {
         this.lastname = lastname;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -87,8 +92,8 @@ public class Account {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", address_id=" + address_id +
-                ", phone='" + phone + '\'' +
-                '}';
+                ", address{" + address.toString() +
+                        "} , phone='" + phone + '\'' +
+                        '}';
+        }
     }
-}
