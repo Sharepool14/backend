@@ -10,14 +10,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class LoginController {
-
     private final LoginService loginService;
 
     @Autowired
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
-
 
     @GetMapping("account/{id}")
     public Optional<Login> getLogin(@PathVariable("id") Long l) {
@@ -31,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("create_account")
-    public void createAccount(Login login, Account account){
-        loginService.create_account(login, account);
+    public void createAccount(Login login){
+        loginService.create_account(login);
     }
 }

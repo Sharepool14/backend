@@ -5,6 +5,7 @@ import mau.project.sharepool.address.Address;
 import mau.project.sharepool.login.Login;
 
 import javax.persistence.*;
+import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
 @Entity
 @Table(name = "account")
@@ -24,7 +25,7 @@ public class Account {
     private int id;
     private String firstname;
     private String lastname;
-    @OneToOne @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL) @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     private String phone;
     @OneToOne (mappedBy = "account") @JsonIgnore
