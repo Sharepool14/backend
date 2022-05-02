@@ -42,11 +42,12 @@ public class LoginService implements UserDetailsService {
         return new User(login.getUsername(),login.getPassword(),authorities);
     }
 
-    public void create_account(Login login) {
+    public int create_account(Login login) {
         try {
             loginRepo.save(login);
+            return 1;
         } catch (DataIntegrityViolationException e){
-            System.out.println("Username already exists. Choose another name.");
+            return 2;
         }
     }
 }
