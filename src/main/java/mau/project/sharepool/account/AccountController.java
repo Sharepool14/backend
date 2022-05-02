@@ -17,7 +17,6 @@ public class AccountController {
     }
 
     @GetMapping(path = "all") // Get = hämtar info
-
     public List getAccounts() {
         return service.getAccounts();
     }

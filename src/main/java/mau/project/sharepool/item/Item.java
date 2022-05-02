@@ -1,6 +1,7 @@
 package mau.project.sharepool.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mau.project.sharepool.account.Account;
 import mau.project.sharepool.category.Category;
 import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
@@ -24,28 +25,32 @@ public class Item {
     )
 
     private long id;
-    private int account_id;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
     private String name;
     private String description;
-    private int category_id;
+    @OneToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
     public Item() {
 
     }
 
-    public Item(int account_id, String name, String description, int category_id) {
-        this.account_id = account_id;
+    public Item(Account account, String name, String description, Category category) {
+        this.account = account;
         this.name = name;
         this.description = description;
-        this.category_id = category_id;
+        this.category = category;
     }
 
-    public Item(long id, int account_id, String name, String description, int category_id) {
+    public Item(long id, Account account, String name, String description, Category category) {
         this.id = id;
-        this.account_id = account_id;
+        this.account = account;
         this.name = name;
         this.description = description;
-        this.category_id = category_id;
+        this.category = category;
     }
 
     public long getId() {
@@ -56,12 +61,12 @@ public class Item {
         this.id = id;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccount_id(Account account) {
+        this.account = account;
     }
 
     public String getName() {
@@ -80,22 +85,22 @@ public class Item {
         this.description = description;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(Category category) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", account_id=" + account_id +
-                ", name='" + name + '\'' +
+                ", account{" +  account.toString() +
+                "}, name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", category" + category_id +
+                ", category{" + category.toString() + "}" +
                 '}';
     }
 }

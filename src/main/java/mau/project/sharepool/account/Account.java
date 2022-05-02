@@ -24,7 +24,7 @@ public class Account {
     private String lastname;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     private String phone;
 
