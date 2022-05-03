@@ -16,18 +16,13 @@ public class ItemController {
         this.service = service;
     }
 
-    @GetMapping(path = "get")
-    public List<Item> getItems() {
-        return service.getItems();
-    }
-
     @PostMapping(path = "add")
     public void addItem(Item item){
         service.addItem(item);
     }
 
-    @GetMapping("{account_id}")
-    public Optional<Item> itemsBy(@PathVariable("account_id") Long account_id) {
+    @GetMapping("{account_id}/get")
+    public List<Item> itemsBy(@PathVariable("account_id") String account_id) {
         System.out.println(account_id);
         return service.itemsBy(account_id);
     }

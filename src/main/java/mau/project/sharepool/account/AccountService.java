@@ -3,6 +3,7 @@ import mau.project.sharepool.community.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -22,5 +23,9 @@ public class AccountService {
 
     public void addAccount(Account account) {
         accountRepository.save(account);
+    }
+
+    public Optional<Account> accountBy(Long account_id){
+        return accountRepository.findById(account_id);
     }
 }

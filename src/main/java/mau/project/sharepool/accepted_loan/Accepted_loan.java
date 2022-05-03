@@ -1,6 +1,8 @@
 package mau.project.sharepool.accepted_loan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mau.project.sharepool.item.Item;
+import mau.project.sharepool.item_requester.Item_Requester;
 
 import javax.persistence.*;
 
@@ -20,21 +22,24 @@ public class Accepted_loan {
     )
 
     private long id;
-    private int item_requester_id;
+
+    @OneToOne
+    @JoinColumn(name = "item_requester_id", referencedColumnName = "id")
+    private Item_Requester item_requester;
     @JsonProperty("returned")
     private boolean returned;
 
     public Accepted_loan() {
     }
 
-    public Accepted_loan(int item_requester_id, boolean returned) {
-        this.item_requester_id = item_requester_id;
+    public Accepted_loan(Item item_requeste, boolean returned) {
+        this.item_requester = item_requester;
         this.returned = returned;
     }
 
-    public Accepted_loan(long id, int item_requester_id, boolean returned) {
+    public Accepted_loan(long id, Item_Requester item_requester, boolean returned) {
         this.id = id;
-        this.item_requester_id = item_requester_id;
+        this.item_requester = item_requester;
         this.returned = returned;
     }
 
@@ -46,12 +51,12 @@ public class Accepted_loan {
         this.id = id;
     }
 
-    public int getItem_requester_id() {
-        return item_requester_id;
+    public Item_Requester getItem_requester() {
+        return item_requester;
     }
 
-    public void setItem_requester_id(int item_requester_id) {
-        this.item_requester_id = item_requester_id;
+    public void setItem_requester(Item_Requester item_requester) {
+        this.item_requester = item_requester;
     }
 
     public boolean isReturned() {
@@ -66,8 +71,8 @@ public class Accepted_loan {
     public String toString() {
         return "Accepted_loan{" +
                 "id=" + id +
-                ", item_requester_id=" + item_requester_id +
-                ", returned=" + returned +
+                ", item_requester{" +  item_requester.toString() +
+                "} , returned=" + returned +
                 '}';
     }
 }

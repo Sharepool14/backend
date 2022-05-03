@@ -1,9 +1,9 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.address.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.address.Address;
 import mau.project.sharepool.login.Login;
-
 import javax.persistence.*;
 import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
@@ -25,6 +25,8 @@ public class Account {
     private int id;
     private String firstname;
     private String lastname;
+
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL) @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     private String phone;
@@ -110,4 +112,3 @@ public class Account {
                 ", login=" + login +
                 '}';
     }
-}
