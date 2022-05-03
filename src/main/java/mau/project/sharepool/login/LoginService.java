@@ -1,6 +1,7 @@
 package mau.project.sharepool.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.NestedServletException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,5 +40,14 @@ public class LoginService implements UserDetailsService {
         Login login = loginRepo.findByUsername(username);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         return new User(login.getUsername(),login.getPassword(),authorities);
+    }
+
+    public int create_account(Login login) {
+        try {
+            loginRepo.save(login);
+            return 1;
+        } catch (DataIntegrityViolationException e){
+            return 2;
+        }
     }
 }

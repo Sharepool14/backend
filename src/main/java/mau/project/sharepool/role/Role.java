@@ -1,8 +1,6 @@
 package mau.project.sharepool.role;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "role")
