@@ -26,11 +26,13 @@ public class Account {
     private String firstname;
     private String lastname;
 
+    //@JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL) @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     private String phone;
-    @OneToOne (mappedBy = "account") @JsonIgnore
+    @OneToOne(mappedBy = "account")
+    @JsonIgnore
     private Login login;
 
     public Account() {
@@ -112,3 +114,4 @@ public class Account {
                 ", login=" + login +
                 '}';
     }
+}
