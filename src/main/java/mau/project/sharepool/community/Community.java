@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "community")
 public class Community {
-
     @Id
     @SequenceGenerator(
             name = "community_id_seq",

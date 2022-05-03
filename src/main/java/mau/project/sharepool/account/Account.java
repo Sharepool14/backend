@@ -2,10 +2,8 @@ package mau.project.sharepool.account;
 
 import mau.project.sharepool.address.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import mau.project.sharepool.address.Address;
 import mau.project.sharepool.login.Login;
 import javax.persistence.*;
-import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
 @Entity
 @Table(name = "account")

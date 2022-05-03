@@ -1,12 +1,10 @@
 package mau.project.sharepool.login;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import mau.project.sharepool.account.Account;
 
 import javax.persistence.Entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "login")
