@@ -1,6 +1,7 @@
 package mau.project.sharepool.login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mau.project.sharepool.account.Account;
 
 import javax.persistence.Entity;
 
@@ -12,34 +13,35 @@ import java.util.Date;
 public class Login {
     @Id
     @SequenceGenerator(
-            name = "login2_id_seq",
-            sequenceName = "login2_id_seq",
+            name = "login_id_seq",
+            sequenceName = "login_id_seq",
             allocationSize = 1
     )
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "login2_id_seq"
+            generator = "login_id_seq"
     )
     private Long id;
     private String username;
     private String password;
-    private String account_id;
+    @OneToOne(cascade = CascadeType.ALL) @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
 
     public Login() {
     }
 
-    public Login(String username, String password, String account_id) {
+    public Login(String username, String password, Account account) {
         this.username = username;
         this.password = password;
-        this.account_id = account_id;
+        this.account = account;
     }
 
-    public Login(Long id, String username, String password, String account_id) {
+    public Login(Long id, String username, String password, Account account) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.account_id = account_id;
+        this.account = account;
     }
 
     public Long getId() {
@@ -66,12 +68,12 @@ public class Login {
         this.password = password;
     }
 
-    public String getAccount_id() {
-        return account_id;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccount_id(String account_id) {
-        this.account_id = account_id;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class Login {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", account_id='" + account_id + '\'' +
+                ", account=" + account +
                 '}';
     }
 }
