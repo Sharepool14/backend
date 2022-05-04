@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users/")
+@RequestMapping("/user/")
 public class LoginController {
     private final LoginService loginService;
 
@@ -29,18 +29,18 @@ public class LoginController {
         return loginService.getAll();
     }
 
-    @PostMapping("register")
+    @PostMapping(value="register", produces = "application/json",consumes="application/json")
     public ResponseEntity<String> createAccount(@RequestBody Login login) {
         switch (loginService.create_account(login)) {
             case 1 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("application-JSON",
+                responseHeaders.set("application/json",
                         "Value-accountCreation");
                 return ResponseEntity.ok().headers(responseHeaders).body("Success.");
             }
             case 2 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("application-JSON",
+                responseHeaders.set("application/json",
                         "Value-accountCreation");
                 return ResponseEntity.ok().headers(responseHeaders).body("Something went wrong.");
             }
