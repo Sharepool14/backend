@@ -1,5 +1,7 @@
 package mau.project.sharepool.community;
 
+import mau.project.sharepool.community_account.Community_Account;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
@@ -20,17 +22,25 @@ public class Community {
 
     private long id;
     private String name;
+    @ManyToOne
+    @JoinColumns({
+              @JoinColumn(name = "community_account_accountId", referencedColumnName = "accountId"),
+              @JoinColumn(name = "community_account_communityId", referencedColumnName = "communityId")
+    })
+    private Community_Account community_account;
 
     public Community() {
     }
 
-    public Community(String name) {
+    public Community(String name, Community_Account community_account) {
         this.name = name;
+        this.community_account = community_account;
     }
 
-    public Community(long community_id, String name) {
-        this.id = community_id;
+    public Community(long id, String name, Community_Account community_account) {
+        this.id = id;
         this.name = name;
+        this.community_account = community_account;
     }
 
     public long getId() {
@@ -49,11 +59,19 @@ public class Community {
         this.name = name;
     }
 
+    public Community_Account getCommunity_account() {
+        return community_account;
+    }
+
+    public void setCommunity_account(Community_Account community_account) {
+        this.community_account = community_account;
+    }
     @Override
     public String toString() {
         return "Community{" +
-                "community_id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+                  "id=" + id +
+                  ", name='" + name + '\'' +
+                  ", community_account=" + community_account +
+                  '}';
     }
 }

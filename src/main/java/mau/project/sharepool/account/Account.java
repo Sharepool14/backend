@@ -2,8 +2,10 @@ package mau.project.sharepool.account;
 
 import mau.project.sharepool.address.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.community_account.Community_Account;
 import mau.project.sharepool.login.Login;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -23,7 +25,12 @@ public class Account {
     private int id;
     private String firstname;
     private String lastname;
-
+    @OneToMany
+    @JoinColumns({
+              @JoinColumn(name = "community_account_accountId", referencedColumnName = "accountId"),
+              @JoinColumn(name = "community_account_communityId", referencedColumnName = "communityId")
+    })
+    private List<Community_Account> community_account;
     //@JoinColumn(name = "address_id", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
@@ -36,18 +43,31 @@ public class Account {
     public Account() {
     }
 
-    public Account(String firstname, String lastname, Address address, String phone, Login login) {
+    public Account(String firstname,
+                   String lastname,
+                   List<Community_Account> community_account,
+                   Address address,
+                   String phone,
+                   Login login) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.community_account = community_account;
         this.address = address;
         this.phone = phone;
         this.login = login;
     }
 
-    public Account(int id, String firstname, String lastname, Address address, String phone, Login login) {
+    public Account(int id,
+                   String firstname,
+                   String lastname,
+                   List<Community_Account> community_account,
+                   Address address,
+                   String phone,
+                   Login login) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.community_account = community_account;
         this.address = address;
         this.phone = phone;
         this.login = login;
@@ -101,15 +121,25 @@ public class Account {
         this.login = login;
     }
 
+
+    public List<Community_Account> getCommunity_account() {
+        return community_account;
+    }
+
+    public void setCommunity_account(List<Community_Account> community_account) {
+        this.community_account = community_account;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", address=" + address +
-                ", phone='" + phone + '\'' +
-                ", login=" + login +
-                '}';
+                  "id=" + id +
+                  ", firstname='" + firstname + '\'' +
+                  ", lastname='" + lastname + '\'' +
+                  ", community_account=" + community_account +
+                  ", address=" + address +
+                  ", phone='" + phone + '\'' +
+                  ", login=" + login +
+                  '}';
     }
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "community_account")
-@IdClass(Community_Account_ID.class)
+@IdClass(Community_Account_PK.class)
 public class Community_Account implements Serializable {
      @Id
      private long accountId;
@@ -25,15 +25,6 @@ public class Community_Account implements Serializable {
 
      public Community_Account(int role) {
           this.role = role;
-     }
-
-     @Override
-     public String toString() {
-          return "Community_Account{" +
-                    "accountId=" + accountId +
-                    ", communityId=" + communityId +
-                    ", role=" + role +
-                    '}';
      }
 
      public long getAccountId() {
@@ -58,5 +49,14 @@ public class Community_Account implements Serializable {
 
      public void setRole(int role) {
           this.role = role;
+     }
+
+     @Override
+     public String toString() {
+          return "Community_Account{" +
+                    "accountId=" + accountId +
+                    ", communityId=" + communityId +
+                    ", role=" + role +
+                    '}';
      }
 }
