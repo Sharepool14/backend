@@ -44,6 +44,7 @@ public class LoginService implements UserDetailsService {
 
     public int create_account(Login login) {
         try {
+            login.setPassword(passwordEncoder.encode(login.getPassword()));
             loginRepo.save(login);
             return 1;
         } catch (DataIntegrityViolationException e){
