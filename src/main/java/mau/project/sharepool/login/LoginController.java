@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/users/")
 public class LoginController {
     private final LoginService loginService;
 
@@ -29,7 +29,7 @@ public class LoginController {
         return loginService.getAll();
     }
 
-    @PostMapping("create_account")
+    @PostMapping("register")
     public ResponseEntity<String> createAccount(@RequestBody Login login) {
         switch (loginService.create_account(login)) {
             case 1 -> {
