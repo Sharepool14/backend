@@ -2,6 +2,8 @@ package mau.project.sharepool.community_account;
 
 import mau.project.sharepool.community.Community;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,11 @@ public class Community_AccountService {
           this.repository = repository;
      }
 
-     public List<Community> listUsersCommunities() {
-          return repository.findAll();
+     public List<Community> listUsersCommunities(String account_id) {
+          Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+          if (!authentication.getName().equals(account_id)){
+               return null;
+          }
+          return repository.findCommunitiesByCommunity_account(account_id);
      }
 }

@@ -23,10 +23,6 @@ public class Community {
     private long id;
     private String name;
     @ManyToOne
-    @JoinColumns({
-              @JoinColumn(name = "community_account_accountId", referencedColumnName = "accountId"),
-              @JoinColumn(name = "community_account_communityId", referencedColumnName = "communityId")
-    })
     private Community_Account community_account;
 
     public Community() {

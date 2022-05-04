@@ -1,61 +1,77 @@
 package mau.project.sharepool.community_account;
 
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.community.Community;
+import mau.project.sharepool.role.Role;
+
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "community_account")
-@IdClass(Community_Account_PK.class)
-public class Community_Account implements Serializable {
-     @Id
-     private long accountId;
-     @Id
-     private long communityId;
-     private int role;
+//@IdClass(Community_Account_PK.class)
+public class Community_Account  {
 
+     @EmbeddedId
+     private Community_Account_PK pk;
+
+     @ManyToOne
+     @MapsId("account_id")
+     @JoinColumn(name = "account_id")
+     private Account account;
+
+     @ManyToOne
+     @MapsId("community_id")
+     @JoinColumn(name = "community_id")
+
+     private Community community;
+
+     @OneToOne
+
+     private Role role;
+
+
+     public Community_Account(Account account, Community community, Role role) {
+          this.account = account;
+          this.community = community;
+          this.role = role;
+     }
+
+     public Community_Account(Role role) {
+          this.role = role;
+     }
 
      public Community_Account() {
      }
 
-     public Community_Account(long accountId, long communityId, int role) {
-          this.accountId = accountId;
-          this.communityId = communityId;
-          this.role = role;
+     public Account getAccount() {
+          return account;
      }
 
-     public Community_Account(int role) {
-          this.role = role;
+     public void setAccount(Account account) {
+          this.account = account;
      }
 
-     public long getAccountId() {
-          return accountId;
+     public Community getCommunity() {
+          return community;
      }
 
-     public void setAccountId(long accountId) {
-          this.accountId = accountId;
+     public void setCommunity(Community community) {
+          this.community = community;
      }
 
-     public long getCommunityId() {
-          return communityId;
-     }
-
-     public void setCommunityId(long communityId) {
-          this.communityId = communityId;
-     }
-
-     public int getRole() {
+     public Role getRole() {
           return role;
      }
 
-     public void setRole(int role) {
+     public void setRole(Role role) {
           this.role = role;
      }
 
      @Override
      public String toString() {
           return "Community_Account{" +
-                    "accountId=" + accountId +
-                    ", communityId=" + communityId +
+                    "account=" + account +
+                    ", community=" + community +
                     ", role=" + role +
                     '}';
      }
