@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping (path = "user/{id}/community")
+@RequestMapping (path = "user/{id}/")
 public class Community_AccountController {
      private final Community_AccountService service;
 
@@ -17,7 +17,7 @@ public class Community_AccountController {
           this.service = service;
      }
 
-     @GetMapping(path = "user/{id}/community" )
+     @GetMapping(path = "community" )
      public List listUsersCommunities(){
           return service.listUsersCommunities();
      }
