@@ -1,117 +1,88 @@
 package mau.project.sharepool.account;
 
-import mau.project.sharepool.address.Address;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import mau.project.sharepool.address.Address;
-import mau.project.sharepool.login.Login;
+import mau.project.sharepool.UserDetails.UserDetails;
+
+import javax.persistence.Entity;
+
 import javax.persistence.*;
-import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
 @Entity
 @Table(name = "account")
 public class Account {
-
     @Id
     @SequenceGenerator(
             name = "account_id_seq",
             sequenceName = "account_id_seq",
-            allocationSize = 1)
-
+            allocationSize = 1
+    )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "account_id_seq"
     )
 
-    private int id;
-    private String firstname;
-    private String lastname;
+    private Long id;
+    private String username;
+    private String password;
 
-    //@JoinColumn(name = "address_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
-    private String phone;
-    @OneToOne(mappedBy = "account")
-    @JsonIgnore
-    private Login login;
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_details_id", referencedColumnName = "id")
+    private UserDetails userDetails;
 
     public Account() {
     }
 
-    public Account(String firstname, String lastname, Address address, String phone, Login login) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.phone = phone;
-        this.login = login;
+    public Account(String username, String password, UserDetails userDetails) {
+        this.username = username;
+        this.password = password;
+        this.userDetails = userDetails;
     }
 
-    public Account(int id, String firstname, String lastname, Address address, String phone, Login login) {
+    public Account(Long id, String username, String password, UserDetails userDetails) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.phone = phone;
-        this.login = login;
+        this.username = username;
+        this.password = password;
+        this.userDetails = userDetails;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Address getAddress() {
-        return address;
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", address=" + address +
-                ", phone='" + phone + '\'' +
-                ", login=" + login +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userDetails=" + userDetails +
                 '}';
     }
 }
