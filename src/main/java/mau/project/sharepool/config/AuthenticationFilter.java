@@ -56,7 +56,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         Account account = (Account) authResult.getPrincipal();
         Algorithm algo = Algorithm.HMAC256("secret".getBytes());
         String access_token = JWT.create()
-                .withSubject(account.getUsername())
+                .withSubject(account.getId().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + Integer.MAX_VALUE))
                 .withIssuer("Share Pool")
                 .withClaim("roles",account.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -68,10 +68,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withIssuer("Share Pool")
                 .sign(algo);
 
-        Map<String, String>  tokens = new HashMap<>();
-        tokens.put("access_token",access_token);
-        tokens.put("refresh_token",refresh_token);
+        Map<String, String>  jsonResponse = new HashMap<>();
+
+        jsonResponse.put("username",account.getUsername());
+        jsonResponse.put("id",account.getId().toString());
+        jsonResponse.put("access_token",access_token);
+        jsonResponse.put("refresh_token",refresh_token);
         response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+        new ObjectMapper().writeValue(response.getOutputStream(), jsonResponse);
     }
 }

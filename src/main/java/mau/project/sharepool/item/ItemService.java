@@ -26,6 +26,7 @@ public class ItemService {
 
     public List<Item> itemsBy(String account_id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
         if(authentication.getName().equals(account_id)){
             System.out.println("You are " + account_id);
         } else {

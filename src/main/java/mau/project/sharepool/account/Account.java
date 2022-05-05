@@ -4,6 +4,7 @@ import mau.project.sharepool.UserDetails.UserDetails;
 import mau.project.sharepool.community.Community;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.Entity;
 
@@ -35,13 +36,13 @@ public class Account implements org.springframework.security.core.userdetails.Us
     Set<CommunityAccount> communityAccounts;
 
     @Transient
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<SimpleGrantedAuthority> authorities;
 
 
     public Account() {
     }
 
-    public Account(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public Account(String username, String password, Collection<SimpleGrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -60,7 +61,7 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.userDetails = userDetails;
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -102,7 +103,7 @@ public class Account implements org.springframework.security.core.userdetails.Us
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     public String getPassword() {
