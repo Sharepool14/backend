@@ -19,8 +19,10 @@ public class Community_AccountController {
           this.service = service;
      }
 
+     /*
      @GetMapping(path = "community" )
      public List<Community> listUsersCommunities(@PathVariable("account_id") String account_id){
           return service.listUsersCommunities(account_id);
      }
+     */
 }
