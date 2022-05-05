@@ -17,7 +17,7 @@ public class Community_AccountService {
           this.repository = repository;
      }
 
-     /*
+
      public List<Community> listUsersCommunities(String account_id) {
           Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
           if (!authentication.getName().equals(account_id)){
@@ -25,5 +25,5 @@ public class Community_AccountService {
           }
           return repository.findByAccount_Login_Username(account_id);
      }
-     */
+
 }

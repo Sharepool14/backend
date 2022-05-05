@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface Community_AccountRepository extends JpaRepository<Community, Long> {
      //List<Community> find(String community_account);
-     //List<Community> findByAccount_Login_Username(String username);
+     List<Community> findByAccount_Login_Username(String username);
 }
