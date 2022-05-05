@@ -1,14 +1,19 @@
 package mau.project.sharepool.account;
 
 import mau.project.sharepool.UserDetails.UserDetails;
+import mau.project.sharepool.community.Community;
+import mau.project.sharepool.communityaccount.CommunityAccount;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
-public class Account {
+public class Account implements org.springframework.security.core.userdetails.UserDetails {
     @Id
     @SequenceGenerator(
             name = "account_id_seq",
@@ -23,12 +28,23 @@ public class Account {
     private Long id;
     private String username;
     private String password;
-
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
     private UserDetails userDetails;
+    @OneToMany(mappedBy = "account")
+    Set<CommunityAccount> communityAccounts;
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
+
 
     public Account() {
+    }
+
+    public Account(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     public Account(String username, String password, UserDetails userDetails) {
@@ -44,6 +60,10 @@ public class Account {
         this.userDetails = userDetails;
     }
 
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,8 +76,33 @@ public class Account {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {

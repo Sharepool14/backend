@@ -5,9 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping (path = "/api/community")
+@RequestMapping (path = "/user/{account_id}/community")
 public class CommunityController {
     private final CommunityService service;
 
@@ -32,6 +33,11 @@ public class CommunityController {
     public ResponseEntity delete(@RequestBody Long id){
         service.deleteACommunity(id);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping
+    public Set<Community> accountCommunties() {
+        return service.getAccountCommunties(19L);
     }
 
 

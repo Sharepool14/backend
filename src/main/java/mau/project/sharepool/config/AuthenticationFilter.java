@@ -3,6 +3,7 @@ package mau.project.sharepool.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mau.project.sharepool.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,17 +53,17 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        User user = (User) authResult.getPrincipal();
+        Account account = (Account) authResult.getPrincipal();
         Algorithm algo = Algorithm.HMAC256("secret".getBytes());
         String access_token = JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(account.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + Integer.MAX_VALUE))
                 .withIssuer("Share Pool")
-                .withClaim("roles",user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .withClaim("roles",account.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algo);
 
         String refresh_token = JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(account.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10*60*2000))
                 .withIssuer("Share Pool")
                 .sign(algo);
