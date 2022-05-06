@@ -1,6 +1,8 @@
 package mau.project.sharepool.loanpost;
 
 
+import mau.project.sharepool.item.Item;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,24 +23,27 @@ public class Loan_Post {
     private long id;
     private Date start_date;
     private Date return_date;
-    private int item_id;
+
+    @ManyToOne
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    private Item item;
     private int community_id;
 
     public Loan_Post() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, int item_id, int community_id) {
+    public Loan_Post(Date start_date, Date return_date, Item item, int community_id) {
         this.start_date = start_date;
         this.return_date = return_date;
-        this.item_id = item_id;
+        this.item = item;
         this.community_id = community_id;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, int item_id, int community_id) {
+    public Loan_Post(long id, Date start_date, Date return_date, Item item, int community_id) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
-        this.item_id = item_id;
+        this.item = item;
         this.community_id = community_id;
     }
 
@@ -66,12 +71,12 @@ public class Loan_Post {
         this.return_date = return_date;
     }
 
-    public int getItem_id() {
-        return item_id;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItem_id(int item_id) {
-        this.item_id = item_id;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public int getCommunity_id() {
@@ -88,7 +93,7 @@ public class Loan_Post {
                 "id=" + id +
                 ", start_date=" + start_date +
                 ", return_date=" + return_date +
-                ", item_id=" + item_id +
+                ", item_id=" + item +
                 ", community_id=" + community_id +
                 '}';
     }

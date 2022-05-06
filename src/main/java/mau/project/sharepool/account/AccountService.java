@@ -54,7 +54,6 @@ public class AccountService implements UserDetailsService {
     }
 
     public void changeAccount(UserInformation userDetails, Long account_id) {
-
         if(AccountID.get() == account_id){
             Account account = accountRepository.getById(account_id);
             userDetails.setId(account.getUserInformation().getId());

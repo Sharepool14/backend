@@ -3,8 +3,10 @@ package mau.project.sharepool.item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.category.Category;
+import mau.project.sharepool.loanpost.Loan_Post;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "item")
@@ -32,6 +34,9 @@ public class Item {
     @OneToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    @OneToMany(mappedBy = "item")
+    private Set<Loan_Post> loan_post;
 
     public Item() {
 
