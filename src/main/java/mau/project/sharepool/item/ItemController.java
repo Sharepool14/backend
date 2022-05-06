@@ -1,5 +1,6 @@
 package mau.project.sharepool.item;
 
+import mau.project.sharepool.account.Account;
 import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,6 @@ public class ItemController {
         this.itemService = service;
     }
 
-    @PostMapping(path = "add")
-    public void addItem(Item item){
-        itemService.addItem(item);
-    }
-
     @PostMapping("/item/create")
     public void addItemBy(@RequestBody Item item, @PathVariable Long account_id) {
         if (account_id.equals(AccountID.get())) {
@@ -29,8 +25,10 @@ public class ItemController {
     }
 
     @PostMapping("items/{item_id}")
-    public void changeItem(){
-
+    public void changeItem(@RequestBody Item item, Account account, @PathVariable Long account_id, @PathVariable Long item_id){
+        if(AccountID.get().equals(account_id)){
+            itemService.changeItem(item, item_id);
+        }
     }
 
     @DeleteMapping("items/{item_id}")

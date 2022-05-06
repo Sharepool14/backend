@@ -18,10 +18,6 @@ public class ItemService {
         this.accountRepository = accountRepository;
     }
 
-    public void addItem(Item item){
-        itemRepository.save(item);
-    }
-
     public Set<Item> itemsBy(long account_id) {
         if(AccountID.get() == account_id){
             return itemRepository.findAllByAccountId(account_id);
@@ -30,14 +26,18 @@ public class ItemService {
         }
     }
 
-    public void newItemBy(Item item, Long account_id) {
-        itemRepository.save(item);
-    }
-
     public void addItemBy(Item item, Long account_id) {
         Account account = accountRepository.getById(account_id);
         item.setAccount_id(account);
         account.getItems().add(item);
         accountRepository.save(account);
+    }
+
+    public void changeItem(Item item, Long item_id) {
+        Item item1 = itemRepository.getById(item_id);
+        item1.setName(item.getName());
+        item1.setDescription(item.getDescription());
+        item1.setCategory(item.getCategory());
+        itemRepository.save(item1);
     }
 }
