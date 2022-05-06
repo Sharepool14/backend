@@ -1,38 +1,43 @@
 package mau.project.sharepool.item;
 
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.account.AccountRepository;
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class ItemService {
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public ItemService(ItemRepository itemRepository){
+    public ItemService(ItemRepository itemRepository, AccountRepository accountRepository){
         this.itemRepository = itemRepository;
+        this.accountRepository = accountRepository;
     }
 
-    public List<Item> getItems(){
-        return itemRepository.findAll();
-    }
-
-    public void addItem(Item item){
-        itemRepository.save(item);
-    }
-
-    public List<Item> itemsBy(String account_id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        if(authentication.getName().equals(account_id)){
-            System.out.println("You are " + account_id);
+    public Set<Item> itemsBy(long account_id) {
+        if(AccountID.get() == account_id){
+            return itemRepository.findAllByAccountId(account_id);
         } else {
-            System.out.println("You failed!");
+           return null;
         }
-        return //itemRepository.findById(account_id);
-        itemRepository.findAll();
+    }
+
+    public void addItemBy(Item item, Long account_id) {
+        Account account = accountRepository.getById(account_id);
+        item.setAccount_id(account);
+        account.getItems().add(item);
+        accountRepository.save(account);
+    }
+
+    public void changeItem(Item item, Long item_id) {
+        Item item1 = itemRepository.getById(item_id);
+        item1.setName(item.getName());
+        item1.setDescription(item.getDescription());
+        item1.setCategory(item.getCategory());
+        itemRepository.save(item1);
     }
 }

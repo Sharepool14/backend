@@ -1,12 +1,16 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.community.Community;
+import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.item.Item;
+import mau.project.sharepool.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user/")
@@ -49,5 +53,16 @@ public class AccountController {
                 return null;
             }
         }
+    }
+    @GetMapping("{account_id}")
+    public Account getAccount(@PathVariable Long account_id){
+        if (AccountID.get() == account_id) {
+            return loginService.getAccount(account_id);
+        } else  return null;
+    }
+
+    @PostMapping("{account_id}")
+    public void changeAccount(@RequestBody UserDetails userDetails, @PathVariable Long account_id){
+        loginService.changeAccount(userDetails, account_id);
     }
 }
