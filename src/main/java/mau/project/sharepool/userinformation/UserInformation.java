@@ -1,11 +1,12 @@
-package mau.project.sharepool.userdetails;
+package mau.project.sharepool.userinformation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class UserInformation {
 
     @Id
     @SequenceGenerator(
@@ -25,13 +26,14 @@ public class UserDetails {
     private String city;
     private String zipcode;
     private String street;
-    @OneToOne(mappedBy = "userDetails")
+    @OneToOne(mappedBy = "userInformation")
+    @JsonIgnore
     private Account account;
 
-    public UserDetails() {
+    public UserInformation() {
     }
 
-    public UserDetails(String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
@@ -41,7 +43,7 @@ public class UserDetails {
         this.account = account;
     }
 
-    public UserDetails(int id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(int id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

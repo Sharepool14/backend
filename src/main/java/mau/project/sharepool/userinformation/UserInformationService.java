@@ -1,29 +1,29 @@
-package mau.project.sharepool.userdetails;
+package mau.project.sharepool.userinformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserDetailsService {
-    private UserDetailsRepository accountRepository;
+public class UserInformationService {
+    private UserInformationRepository accountRepository;
 
     @Autowired
-    public UserDetailsService(UserDetailsRepository accountRepository) {
+    public UserInformationService(UserInformationRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public List<UserDetails> getAccounts() {
+    public List<UserInformation> getAccounts() {
         int i = accountRepository.test(5);
         System.out.println(i);
         return accountRepository.findAll();
     }
 
-    public void addAccount(UserDetails account) {
+    public void addAccount(UserInformation account) {
         accountRepository.save(account);
     }
 
-    public Optional<UserDetails> accountBy(Long account_id){
+    public Optional<UserInformation> accountBy(Long account_id){
         return accountRepository.findById(account_id);
     }
 }

@@ -1,9 +1,8 @@
 package mau.project.sharepool.account;
 
-import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.config.AccountID;
-import mau.project.sharepool.item.Item;
 import mau.project.sharepool.item.ItemRepository;
+import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -55,12 +53,12 @@ public class AccountService implements UserDetailsService {
         }
     }
 
-    public void changeAccount(mau.project.sharepool.userdetails.UserDetails userDetails, Long account_id) {
+    public void changeAccount(UserInformation userDetails, Long account_id) {
 
         if(AccountID.get() == account_id){
             Account account = accountRepository.getById(account_id);
-            userDetails.setId(account.getUserDetails().getId());
-            account.setUserDetails(userDetails);
+            userDetails.setId(account.getUserInformation().getId());
+            account.setUserInformation(userDetails);
             accountRepository.save(account);
         }
     }
