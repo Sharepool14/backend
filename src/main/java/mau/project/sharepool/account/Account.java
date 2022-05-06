@@ -1,13 +1,12 @@
 package mau.project.sharepool.account;
 
-import mau.project.sharepool.UserDetails.UserDetails;
-import mau.project.sharepool.community.Community;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.item.Item;
+import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import javax.persistence.Entity;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
@@ -29,12 +28,18 @@ public class Account implements org.springframework.security.core.userdetails.Us
     private Long id;
     private String username;
     private String password;
+
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
-    private UserDetails userDetails;
+    private UserInformation userInformation;
+
     @OneToMany(mappedBy = "account")
     Set<CommunityAccount> communityAccounts;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    Set<Item> items;
+
+    @JsonIgnore
     @Transient
     private Collection<SimpleGrantedAuthority> authorities;
 
@@ -48,17 +53,19 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.authorities = authorities;
     }
 
-    public Account(String username, String password, UserDetails userDetails) {
+    public Account(String username, String password, UserInformation userDetails, Set<Item> items) {
         this.username = username;
         this.password = password;
-        this.userDetails = userDetails;
+        this.userInformation = userDetails;
+        this.items = items;
     }
 
-    public Account(Long id, String username, String password, UserDetails userDetails) {
+    public Account(Long id, String username, String password, UserInformation userDetails, Set<Item> items) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.userDetails = userDetails;
+        this.userInformation = userDetails;
+        this.items = items;
     }
 
     public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
@@ -114,12 +121,20 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.password = password;
     }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
+    public UserInformation getUserInformation() {
+        return userInformation;
     }
 
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setUserInformation(UserInformation userDetails) {
+        this.userInformation = userDetails;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     @Override
@@ -128,7 +143,8 @@ public class Account implements org.springframework.security.core.userdetails.Us
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", userDetails=" + userDetails +
+                ", userDetails=" + userInformation +
+                ", items=" + items +
                 '}';
     }
 }

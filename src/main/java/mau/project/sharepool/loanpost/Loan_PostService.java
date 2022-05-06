@@ -1,4 +1,4 @@
-package mau.project.sharepool.loan_post;
+package mau.project.sharepool.loanpost;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
