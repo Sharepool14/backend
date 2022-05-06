@@ -1,34 +1,53 @@
 package mau.project.sharepool.account;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
-@RequestMapping (path = "/api/account")
+@RequestMapping("/user/")
 public class AccountController {
-    private final AccountService service;
+    private final AccountService loginService;
 
     @Autowired
-    public AccountController(AccountService service) {
-        this.service = service;
+    public AccountController(AccountService loginService) {
+        this.loginService = loginService;
     }
 
-    @GetMapping(path = "all") // Get = hämtar info
-    public List getAccounts() {
-        return service.getAccounts();
+    @GetMapping("account/{id}")
+    public Optional<Account> getLogin(@PathVariable("id") Long l) {
+        System.out.println(l);
+        return loginService.single(l);
     }
 
-    @PostMapping(path = "signup")
-    public void addAccount(@RequestBody Account account) {
-        System.out.println("sign up!");
-        service.addAccount(account);
+    @GetMapping("accounts")
+    public List<Account> getAll() {
+        return loginService.getAll();
     }
 
-    @GetMapping("{account_id}")
-    public Optional<Account> accountBy(@PathVariable("account_id") Long account_id){
-        return service.accountBy(account_id);
+    @PostMapping(value="register", produces = "application/json",consumes="application/json")
+    public ResponseEntity<String> createAccount(@RequestBody Account login) {
+        System.out.println(login.getUserDetails().getFirstname());
+        switch (loginService.create_account(login)) {
+            case 1 -> {
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("application/json",
+                        "Value-accountCreation");
+                return ResponseEntity.ok().headers(responseHeaders).body("Success.");
+            }
+            case 2 -> {
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("application/json",
+                        "Value-accountCreation");
+                return ResponseEntity.ok().headers(responseHeaders).body("Something went wrong.");
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 }

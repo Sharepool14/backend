@@ -1,12 +1,9 @@
 package mau.project.sharepool.item;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import mau.project.sharepool.account.Account;
+import mau.project.sharepool.UserDetails.UserDetails;
 import mau.project.sharepool.category.Category;
-import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "item")
@@ -27,7 +24,7 @@ public class Item {
     private long id;
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private Account account;
+    private UserDetails account;
     private String name;
     private String description;
     @OneToOne
@@ -38,14 +35,14 @@ public class Item {
 
     }
 
-    public Item(Account account, String name, String description, Category category) {
+    public Item(UserDetails account, String name, String description, Category category) {
         this.account = account;
         this.name = name;
         this.description = description;
         this.category = category;
     }
 
-    public Item(long id, Account account, String name, String description, Category category) {
+    public Item(long id, UserDetails account, String name, String description, Category category) {
         this.id = id;
         this.account = account;
         this.name = name;
@@ -61,11 +58,11 @@ public class Item {
         this.id = id;
     }
 
-    public Account getAccount() {
+    public UserDetails getAccount() {
         return account;
     }
 
-    public void setAccount_id(Account account) {
+    public void setAccount_id(UserDetails account) {
         this.account = account;
     }
 
