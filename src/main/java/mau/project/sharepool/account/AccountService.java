@@ -38,7 +38,6 @@ public class AccountService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account login = loginRepo.findByUsername(username);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(String.valueOf(login.getId())));
         login.setAuthorities(authorities);
         return login;
     }
