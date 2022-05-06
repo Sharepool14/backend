@@ -48,6 +48,11 @@ public class CommunityController {
 
     }
 
+    @PostMapping(path = "{communityID}/{postID}")
+    public void updatePost(){
+
+    }
+
     @PostMapping(path = "deleteAll")
     public ResponseEntity deleteAll(){
         service.deleteAllCommunities();
