@@ -20,6 +20,13 @@ public class ItemController {
         itemService.addItem(item);
     }
 
+    @PostMapping("/item/create")
+    public void addItemBy(@RequestBody Item item, @PathVariable Long account_id) {
+        if (AccountID.get().equals(account_id)) {
+            itemService.addItemBy(item, account_id);
+        }
+    }
+
     @PostMapping("items/{item_id}")
     public void changeItem(){
 

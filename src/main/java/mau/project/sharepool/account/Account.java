@@ -1,5 +1,6 @@
 package mau.project.sharepool.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.item.Item;
 import mau.project.sharepool.userdetails.UserDetails;
 import mau.project.sharepool.communityaccount.CommunityAccount;
@@ -30,14 +31,18 @@ public class Account implements org.springframework.security.core.userdetails.Us
     private Long id;
     private String username;
     private String password;
+    @JsonIgnore
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
     private UserDetails userDetails;
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
     Set<CommunityAccount> communityAccounts;
-    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     Set<Item> items;
 
+    @JsonIgnore
     @Transient
     private Collection<SimpleGrantedAuthority> authorities;
 
