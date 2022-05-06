@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping (path = "/api/accepted_loan")
+@RequestMapping (path = "/user/accepted_loan")
 
 public class Accepted_loanController {
     private final Accepted_loanService accepted_loanService;

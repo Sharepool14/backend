@@ -1,11 +1,12 @@
 package mau.project.sharepool.community;
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccount;
+import mau.project.sharepool.communityaccount.CommunityAccountKey;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class CommunityService {
     private CommunityRepository communityRepository;
     private CommunityAccountRepository communityAccountRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     public CommunityService(CommunityRepository communityRepository, CommunityAccountRepository communityAccountRepository){
@@ -41,5 +43,21 @@ public class CommunityService {
         return communityAccountRepository.findAllByAccountId(id).stream()
                 .map(CommunityAccount::getCommunity)
                 .collect(Collectors.toSet());
+    }
+
+    public int createCommunity(Community community, Long accountID) {
+        try {
+            System.out.println("Start");
+            communityRepository.save(community);
+            Account account = new Account();
+            //CommunityAccountKey id = new CommunityAccountKey(accountID, community);
+            account.setId(accountID);
+            communityAccountRepository.save(new CommunityAccount(account, community, 3));
+            System.out.println("Slut");
+            return 1;
+        } catch (Exception e){
+            e.printStackTrace();
+            return 2;
+        }
     }
 }

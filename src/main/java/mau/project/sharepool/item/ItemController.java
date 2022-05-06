@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/item")
+@RequestMapping(path = "/user/item")
 public class ItemController {
     private final ItemService service;
 

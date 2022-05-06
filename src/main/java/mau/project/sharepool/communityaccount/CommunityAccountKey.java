@@ -21,6 +21,7 @@ public class CommunityAccountKey implements Serializable {
         this.community_id = community_id;
     }
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,6 +29,7 @@ public class CommunityAccountKey implements Serializable {
         CommunityAccountKey that = (CommunityAccountKey) o;
         return Objects.equals(account_id, that.account_id) && Objects.equals(community_id, that.community_id);
     }
+    */
 
     @Override
     public int hashCode() {
