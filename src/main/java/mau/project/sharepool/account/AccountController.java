@@ -56,7 +56,7 @@ public class AccountController {
     }
     @GetMapping("{account_id}")
     public Account getAccount(@PathVariable Long account_id){
-        if (AccountID.get().equals(String.valueOf(account_id))) {
+        if (AccountID.get() == account_id) {
             return loginService.getAccount(account_id);
         } else  return null;
     }

@@ -23,7 +23,7 @@ public class ItemService {
     }
 
     public Set<Item> itemsBy(long account_id) {
-        if(AccountID.get().equals(String.valueOf(account_id))){
+        if(AccountID.get() == account_id){
             return itemRepository.findAllByAccountId(account_id);
         } else {
            return null;
@@ -36,6 +36,7 @@ public class ItemService {
 
     public void addItemBy(Item item, Long account_id) {
         Account account = accountRepository.getById(account_id);
+        item.setAccount_id(account);
         account.getItems().add(item);
         accountRepository.save(account);
     }

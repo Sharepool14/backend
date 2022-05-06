@@ -22,7 +22,8 @@ public class ItemController {
 
     @PostMapping("/item/create")
     public void addItemBy(@RequestBody Item item, @PathVariable Long account_id) {
-        if (AccountID.get().equals(account_id)) {
+        if (account_id.equals(AccountID.get())) {
+            System.out.println("!");
             itemService.addItemBy(item, account_id);
         }
     }
@@ -39,7 +40,7 @@ public class ItemController {
 
     @GetMapping("items")
     public Set<Item> getItems(@PathVariable("account_id") long account_id) {
-        if (AccountID.get().equals(String.valueOf(account_id))){
+        if (AccountID.get() == account_id){
             return itemService.itemsBy(account_id);
         } else return null;
     }
