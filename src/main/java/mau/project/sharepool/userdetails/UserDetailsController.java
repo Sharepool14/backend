@@ -8,11 +8,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping (path = "/api/account")
-public class UserDetailsRepositoryController {
+public class UserDetailsController {
     private final UserDetailsService service;
 
     @Autowired
-    public UserDetailsRepositoryController(UserDetailsService service) {
+    public UserDetailsController(UserDetailsService service) {
         this.service = service;
     }
 
