@@ -16,9 +16,9 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> getItems(){
+   /* public List<Item> getItems(){
         return itemRepository.findAll();
-    }
+    } */
 
     public void addItem(Item item){
         itemRepository.save(item);

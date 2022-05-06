@@ -27,5 +27,14 @@ public class ItemController {
         return service.itemsBy(account_id);
     }
 
+    @PostMapping("{account_id}/items/{item_id}")
+    public void changeItem(){
+
+    }
+
+    @DeleteMapping("{account_id}/items/{item_id}")
+    public void deleteItem(){
+
+    }
 
 }

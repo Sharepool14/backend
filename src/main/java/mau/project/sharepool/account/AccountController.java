@@ -60,14 +60,10 @@ public class AccountController {
         loginService.changeAccount(userDetails, account_id);
     }
 
-    /**
-     * Fix this
-     */
-   /* @GetMapping("{account_id}/items")
-    public Set<Item> getItems(@PathVariable("account_id") String account_id){
-        if (AccountID.get().equals(account_id)) {
-            return loginService.getItems(Long.parseLong(account_id));
-        }
-        else return null;
-    } */
+    @GetMapping("{account_id}/items")
+    public Set<Item> getItems(@PathVariable("account_id") Long account_id) {
+        if (AccountID.get().equals(String.valueOf(account_id))){
+            return loginService.getItems(account_id);
+        } else return null;
+    }
 }

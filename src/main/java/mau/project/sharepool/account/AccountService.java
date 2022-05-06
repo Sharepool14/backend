@@ -3,6 +3,7 @@ package mau.project.sharepool.account;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.item.Item;
+import mau.project.sharepool.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,10 +19,12 @@ import java.util.stream.Collectors;
 @Service
 public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
+    private ItemRepository itemRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountService(AccountRepository loginRepo, PasswordEncoder passwordEncoder) {
+    public AccountService(ItemRepository itemRepository, AccountRepository loginRepo, PasswordEncoder passwordEncoder) {
+        this.itemRepository = itemRepository;
         this.accountRepository = loginRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -62,9 +65,7 @@ public class AccountService implements UserDetailsService {
         }
     }
 
-  /*  public Set<Item> getItems(Long id) {
-        return accountRepository.findAllById(id).stream(); // This needs to be fixed
-                .map()
-                .collect(Collectors.toSet());
-    } */
+   public Set<Item> getItems(long id) {
+        return itemRepository.findAllByAccountId((long) id);
+    }
 }
