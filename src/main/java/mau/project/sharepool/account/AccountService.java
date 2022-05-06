@@ -1,8 +1,11 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,6 +52,16 @@ public class AccountService implements UserDetailsService {
             return 1;
         } catch (DataIntegrityViolationException e){
             return 2;
+        }
+    }
+
+    public void changeAccount(mau.project.sharepool.userdetails.UserDetails userDetails, Long account_id) {
+        System.out.println("1");
+        if(AccountID.get().equals(account_id)){
+            System.out.println("2");
+            Account account = loginRepo.getById(account_id);
+            account.setUserDetails(userDetails);
+            loginRepo.save(account);
         }
     }
 }

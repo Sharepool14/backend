@@ -1,5 +1,6 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,10 @@ public class AccountController {
                 return null;
             }
         }
+    }
+
+    @PostMapping("{account_id}")
+    public void changeAccount(@RequestBody UserDetails userDetails, @PathVariable Long account_id){
+        loginService.changeAccount(userDetails, account_id);
     }
 }
