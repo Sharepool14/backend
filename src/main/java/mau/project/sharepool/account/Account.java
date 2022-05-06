@@ -1,7 +1,9 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.item.Item;
 import mau.project.sharepool.userdetails.UserDetails;
 import mau.project.sharepool.communityaccount.CommunityAccount;
+import org.aspectj.weaver.ast.Literal;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -33,6 +35,8 @@ public class Account implements org.springframework.security.core.userdetails.Us
     private UserDetails userDetails;
     @OneToMany(mappedBy = "account")
     Set<CommunityAccount> communityAccounts;
+    @OneToMany(mappedBy = "account")
+    Set<Item> items;
 
     @Transient
     private Collection<SimpleGrantedAuthority> authorities;
@@ -47,17 +51,19 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.authorities = authorities;
     }
 
-    public Account(String username, String password, UserDetails userDetails) {
+    public Account(String username, String password, UserDetails userDetails, Set<Item> items) {
         this.username = username;
         this.password = password;
         this.userDetails = userDetails;
+        this.items = items;
     }
 
-    public Account(Long id, String username, String password, UserDetails userDetails) {
+    public Account(Long id, String username, String password, UserDetails userDetails, Set<Item> items) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.userDetails = userDetails;
+        this.items = items;
     }
 
     public void setAuthorities(Collection<SimpleGrantedAuthority> authorities) {
@@ -121,6 +127,14 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.userDetails = userDetails;
     }
 
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -128,6 +142,7 @@ public class Account implements org.springframework.security.core.userdetails.Us
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", userDetails=" + userDetails +
+                ", items=" + items +
                 '}';
     }
 }

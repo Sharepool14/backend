@@ -1,6 +1,8 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,10 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -60,4 +61,10 @@ public class AccountService implements UserDetailsService {
             accountRepository.save(account);
         }
     }
+
+  /*  public Set<Item> getItems(Long id) {
+        return accountRepository.findAllById(id).stream(); // This needs to be fixed
+                .map()
+                .collect(Collectors.toSet());
+    } */
 }
