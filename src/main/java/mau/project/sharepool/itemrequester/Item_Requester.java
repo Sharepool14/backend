@@ -1,4 +1,4 @@
-package mau.project.sharepool.item_requester;
+package mau.project.sharepool.itemrequester;
 
 import javax.persistence.*;
 

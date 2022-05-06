@@ -1,10 +1,11 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class AccountController {
 
     @PostMapping(value="register", produces = "application/json",consumes="application/json")
     public ResponseEntity<String> createAccount(@RequestBody Account login) {
-        System.out.println(login.getUserDetails().getFirstname());
+        System.out.println(login.getUserInformation().getFirstname());
         switch (loginService.create_account(login)) {
             case 1 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
@@ -49,5 +50,16 @@ public class AccountController {
                 return null;
             }
         }
+    }
+    @GetMapping("{account_id}")
+    public Account getAccount(@PathVariable Long account_id){
+        if (AccountID.get() == account_id) {
+            return loginService.getAccount(account_id);
+        } else  return null;
+    }
+
+    @PostMapping("{account_id}")
+    public void changeAccount(@RequestBody UserInformation userDetails, @PathVariable Long account_id){
+        loginService.changeAccount(userDetails, account_id);
     }
 }

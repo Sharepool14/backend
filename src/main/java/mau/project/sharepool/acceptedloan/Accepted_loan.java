@@ -1,8 +1,8 @@
-package mau.project.sharepool.accepted_loan;
+package mau.project.sharepool.acceptedloan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mau.project.sharepool.item.Item;
-import mau.project.sharepool.item_requester.Item_Requester;
+import mau.project.sharepool.itemrequester.Item_Requester;
 
 import javax.persistence.*;
 

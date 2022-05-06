@@ -1,29 +1,44 @@
 package mau.project.sharepool.item;
 
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @RestController
-@RequestMapping(path = "/user/item")
+@RequestMapping(path = "/user/{account_id}")
 public class ItemController {
-    private final ItemService service;
+    private final ItemService itemService;
 
     @Autowired
     public ItemController(ItemService service){
-        this.service = service;
+        this.itemService = service;
     }
 
-    @PostMapping(path = "add")
-    public void addItem(Item item){
-        service.addItem(item);
+    @PostMapping("/item/create")
+    public void addItemBy(@RequestBody Item item, @PathVariable Long account_id) {
+        if (AccountID.get().equals(account_id)) {
+            itemService.addItemBy(item, account_id);
+        }
     }
 
-    @GetMapping("{account_id}/get")
-    public List<Item> itemsBy(@PathVariable("account_id") String account_id) {
-        System.out.println(account_id);
-        return service.itemsBy(account_id);
+    @PostMapping("items/{item_id}")
+    public void changeItem(@RequestBody Item item, Account account, @PathVariable Long account_id, @PathVariable Long item_id){
+        if(AccountID.get().equals(account_id)){
+            itemService.changeItem(item, item_id);
+        }
+    }
+
+    @DeleteMapping("items/{item_id}")
+    public void deleteItem(){
+
+    }
+
+    @GetMapping("items")
+    public Set<Item> getItems(@PathVariable("account_id") long account_id) {
+        if (AccountID.get() == account_id){
+            return itemService.itemsBy(account_id);
+        } else return null;
     }
 }

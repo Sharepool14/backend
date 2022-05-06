@@ -1,4 +1,4 @@
-package mau.project.sharepool.loan_post;
+package mau.project.sharepool.loanpost;
 
 
 import javax.persistence.*;

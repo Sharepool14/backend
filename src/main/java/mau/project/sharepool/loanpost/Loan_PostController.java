@@ -1,16 +1,17 @@
-package mau.project.sharepool.item_requester;
+package mau.project.sharepool.loanpost;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/user/item_requester")
-public class Item_RequesterController {
-    private final Item_RequesterService service;
+@RequestMapping("/user/loan_post")
+public class Loan_PostController {
+
+    private final Loan_PostService service;
 
     @Autowired
-    public Item_RequesterController(Item_RequesterService service){
+    public Loan_PostController(Loan_PostService service) {
         this.service = service;
     }
 }

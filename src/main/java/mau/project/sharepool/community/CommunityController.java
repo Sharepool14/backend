@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,9 +81,9 @@ public class CommunityController {
     }
 
     @GetMapping
-    public Set<Community> accountCommunities(@PathVariable("account_id") String account_id ) {
-        if (AccountID.get().equals(account_id)) {
-            return service.getAccountCommunties(Long.parseLong(account_id));
+    public Set<Community> accountCommunities(@PathVariable("account_id") Long account_id ) {
+        if (account_id.equals(AccountID.get())) {
+            return service.getAccountCommunties(account_id);
         }
         else return null;
     }

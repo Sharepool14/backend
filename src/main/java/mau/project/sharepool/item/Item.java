@@ -1,6 +1,7 @@
 package mau.project.sharepool.item;
 
-import mau.project.sharepool.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.account.Account;
 import mau.project.sharepool.category.Category;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class Item {
     private long id;
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private UserDetails account;
+    @JsonIgnore
+    private Account account;
     private String name;
     private String description;
     @OneToOne
@@ -35,14 +37,14 @@ public class Item {
 
     }
 
-    public Item(UserDetails account, String name, String description, Category category) {
+    public Item(Account account, String name, String description, Category category) {
         this.account = account;
         this.name = name;
         this.description = description;
         this.category = category;
     }
 
-    public Item(long id, UserDetails account, String name, String description, Category category) {
+    public Item(long id, Account account, String name, String description, Category category) {
         this.id = id;
         this.account = account;
         this.name = name;
@@ -58,11 +60,11 @@ public class Item {
         this.id = id;
     }
 
-    public UserDetails getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount_id(UserDetails account) {
+    public void setAccount_id(Account account) {
         this.account = account;
     }
 
