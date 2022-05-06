@@ -30,4 +30,8 @@ public class Loan_PostService {
     public List<Loan_Post> all() {
         return loan_postRepository.findAll();
     }
+
+    public void deletePost(Long postID) {
+        loan_postRepository.deleteById(postID);
+    }
 }

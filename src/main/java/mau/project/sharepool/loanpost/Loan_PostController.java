@@ -27,4 +27,9 @@ public class Loan_PostController {
     public void updatePost(@RequestBody Loan_Post loan_post) {
         service.updatePost(loan_post);
     }
+
+    @DeleteMapping(path = "{communityID}/{postID}")
+    public void deletePost(@PathVariable Long postID) {
+        service.deletePost(postID);
+    }
 }
