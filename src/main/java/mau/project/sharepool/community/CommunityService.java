@@ -49,11 +49,11 @@ public class CommunityService {
         try {
             System.out.println("Start");
             communityRepository.save(community);
+            System.out.println(community.getId());
             Account account = new Account();
-            //CommunityAccountKey id = new CommunityAccountKey(accountID, community);
             account.setId(accountID);
+            //CommunityAccountKey id = new CommunityAccountKey(accountID, community);
             communityAccountRepository.save(new CommunityAccount(account, community, 3));
-            System.out.println("Slut");
             return 1;
         } catch (Exception e){
             e.printStackTrace();
