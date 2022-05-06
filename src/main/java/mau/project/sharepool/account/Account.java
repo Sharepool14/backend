@@ -1,7 +1,6 @@
 package mau.project.sharepool.account;
 
-import mau.project.sharepool.UserDetails.UserDetails;
-import mau.project.sharepool.community.Community;
+import mau.project.sharepool.userdetails.UserDetails;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
