@@ -1,4 +1,4 @@
-package mau.project.sharepool.UserDetails;
+package mau.project.sharepool.userdetails;
 
 import mau.project.sharepool.account.Account;
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package mau.project.sharepool.item;
 
-import mau.project.sharepool.UserDetails.UserDetails;
+import mau.project.sharepool.userdetails.UserDetails;
 import mau.project.sharepool.category.Category;
 
 import javax.persistence.*;

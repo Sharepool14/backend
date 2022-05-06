@@ -1,4 +1,4 @@
-package mau.project.sharepool.accepted_loan;
+package mau.project.sharepool.acceptedloan;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
