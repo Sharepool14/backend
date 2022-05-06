@@ -66,6 +66,6 @@ public class AccountService implements UserDetailsService {
     }
 
    public Set<Item> getItems(long id) {
-        return itemRepository.findAllByAccountId((long) id);
+        return itemRepository.findAllByAccountId(id);
     }
 }

@@ -1,11 +1,9 @@
 package mau.project.sharepool.item;
 
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class ItemService {
@@ -16,23 +14,15 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-   /* public List<Item> getItems(){
-        return itemRepository.findAll();
-    } */
-
     public void addItem(Item item){
         itemRepository.save(item);
     }
 
-    public List<Item> itemsBy(String account_id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        if(authentication.getName().equals(account_id)){
-            System.out.println("You are " + account_id);
+    public Set<Item> itemsBy(long account_id) {
+        if(AccountID.get().equals(String.valueOf(account_id))){
+            return itemRepository.findAllByAccountId(account_id);
         } else {
-            System.out.println("You failed!");
+           return null;
         }
-        return //itemRepository.findById(account_id);
-        itemRepository.findAll();
     }
 }
