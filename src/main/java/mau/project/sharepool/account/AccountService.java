@@ -56,9 +56,7 @@ public class AccountService implements UserDetailsService {
     }
 
     public void changeAccount(mau.project.sharepool.userdetails.UserDetails userDetails, Long account_id) {
-        System.out.println("1");
-        if(AccountID.get().equals(account_id)){
-            System.out.println("2");
+        if(AccountID.get().equals(String.valueOf(account_id))){
             Account account = loginRepo.getById(account_id);
             account.setUserDetails(userDetails);
             loginRepo.save(account);
