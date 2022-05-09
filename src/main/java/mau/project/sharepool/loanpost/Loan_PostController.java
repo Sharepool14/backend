@@ -32,4 +32,9 @@ public class Loan_PostController {
     public void deletePost(@PathVariable Long postID) {
         service.deletePost(postID);
     }
+
+    @PostMapping(path = "communities/{communityID}/post/create")
+    public void createPost(@RequestBody Loan_Post loan_post, @PathVariable Long communityID){
+        service.createPost(loan_post, communityID);
+    }
 }

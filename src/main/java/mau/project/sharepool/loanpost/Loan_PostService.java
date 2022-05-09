@@ -34,4 +34,8 @@ public class Loan_PostService {
     public void deletePost(Long postID) {
         loan_postRepository.deleteById(postID);
     }
+
+    public void createPost(Loan_Post loan_post, Long communityID) {
+
+    }
 }
