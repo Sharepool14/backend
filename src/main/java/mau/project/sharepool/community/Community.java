@@ -1,6 +1,7 @@
 package mau.project.sharepool.community;
 
 import mau.project.sharepool.communityaccount.CommunityAccount;
+import mau.project.sharepool.loanpost.Loan_Post;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,7 +26,10 @@ public class Community {
     private long id;
     private String name;
     @OneToMany(mappedBy = "community")
-    Set<CommunityAccount> communityAccounts;
+    private Set<CommunityAccount> communityAccounts;
+
+    @OneToMany(mappedBy = "community")
+    private Set<Loan_Post> loan_posts;
 
     public Community() {
     }

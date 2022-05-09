@@ -1,5 +1,9 @@
 package mau.project.sharepool.itemrequester;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.loanpost.Loan_Post;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,21 +22,28 @@ public class Item_Requester {
     )
 
     private long id;
-    private int account_id;
-    private int loan_post_id;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "loan_post_id", referencedColumnName = "id")
+    private Loan_Post loan_post;
 
     public Item_Requester() {
     }
 
-    public Item_Requester(int account_id, int loan_post_id) {
-        this.account_id = account_id;
-        this.loan_post_id = loan_post_id;
+    public Item_Requester(Account account, Loan_Post loan_post) {
+        this.account = account;
+        this.loan_post = loan_post;
     }
 
-    public Item_Requester(long id, int account_id, int loan_post_id) {
+    public Item_Requester(long id, Account account, Loan_Post loan_post) {
         this.id = id;
-        this.account_id = account_id;
-        this.loan_post_id = loan_post_id;
+        this.account = account;
+        this.loan_post = loan_post;
     }
 
     public long getId() {
@@ -43,28 +54,28 @@ public class Item_Requester {
         this.id = id;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public int getLoan_post_id() {
-        return loan_post_id;
+    public Loan_Post getLoan_post() {
+        return loan_post;
     }
 
-    public void setLoan_post_id(int loan_post_id) {
-        this.loan_post_id = loan_post_id;
+    public void setLoan_post(Loan_Post loan_post) {
+        this.loan_post = loan_post;
     }
 
     @Override
     public String toString() {
         return "Item_Requester{" +
                 "id=" + id +
-                ", account_id=" + account_id +
-                ", loan_post_id=" + loan_post_id +
+                ", account_id=" + account +
+                ", loan_post_id=" + loan_post +
                 '}';
     }
 }

@@ -1,10 +1,14 @@
 package mau.project.sharepool.loanpost;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.community.Community;
 import mau.project.sharepool.item.Item;
+import mau.project.sharepool.itemrequester.Item_Requester;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "loan_post")
@@ -27,24 +31,31 @@ public class Loan_Post {
     @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
-    private int community_id;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    private Community community;
+
+    @OneToMany(mappedBy = "loan_post")
+    private Set<Item_Requester> item_requester;
 
     public Loan_Post() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, Item item, int community_id) {
+    public Loan_Post(Date start_date, Date return_date, Item item, Community community) {
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
-        this.community_id = community_id;
+        this.community = community;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, Item item, int community_id) {
+    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
-        this.community_id = community_id;
+        this.community = community;
     }
 
     public long getId() {
@@ -79,12 +90,12 @@ public class Loan_Post {
         this.item = item;
     }
 
-    public int getCommunity_id() {
-        return community_id;
+    public Community getCommunity_id() {
+        return community;
     }
 
     public void setCommunity_id(int community_id) {
-        this.community_id = community_id;
+        this.community = community;
     }
 
     @Override
@@ -94,7 +105,7 @@ public class Loan_Post {
                 ", start_date=" + start_date +
                 ", return_date=" + return_date +
                 ", item_id=" + item +
-                ", community_id=" + community_id +
+                ", community=" + community +
                 '}';
     }
 }

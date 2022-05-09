@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user/loan_post")
@@ -19,8 +20,13 @@ public class Loan_PostController {
     }
 
     @GetMapping(path = "test")
-    public List<Loan_Post> all(){
+    public List<Loan_Post> all() {
         return service.all();
+    }
+
+    @GetMapping(path = "{communityID}/posts")
+    public List<Loan_Post> communitiesPost(@PathVariable Long communityID) {
+        return service.communitiesPost(communityID);
     }
 
     @PostMapping(path = "{communityID}/{postID}")
@@ -33,8 +39,15 @@ public class Loan_PostController {
         service.deletePost(postID);
     }
 
+
+    @GetMapping("{communityID}/posts/{postID}")
+    public Loan_Post getSpecificPost(@PathVariable Long communityID, @PathVariable Long postID) {
+        return service.getSpecificPost(communityID, postID);
+    }
+
     @PostMapping(path = "communities/{communityID}/post/create")
     public void createPost(@RequestBody Loan_Post loan_post, @PathVariable Long communityID){
         service.createPost(loan_post, communityID);
     }
 }
+

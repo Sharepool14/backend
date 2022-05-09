@@ -2,6 +2,7 @@ package mau.project.sharepool.community;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,11 @@ public class CommunityService {
             e.printStackTrace();
             return 2;
         }
+    }
+
+    public Community getACommunity(Long community_id) {
+        if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), community_id)) {
+            return communityRepository.getById(community_id);
+        } else return null;
     }
 }
