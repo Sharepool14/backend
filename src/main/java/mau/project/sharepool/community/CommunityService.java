@@ -37,7 +37,6 @@ public class CommunityService {
     public int createCommunity(Community community, Long accountID) {
         try {
             communityRepository.save(community);
-            System.out.println(community.getId());
             Account account = new Account();
             account.setId(accountID);
             communityAccountRepository.save(new CommunityAccount(account, community, 3));
@@ -46,5 +45,11 @@ public class CommunityService {
             e.printStackTrace();
             return 2;
         }
+    }
+
+    public Set<Account> getMembersInCommunity(Long community_id) {
+        return communityAccountRepository.findAllByCommunityId(community_id).stream()
+                  .map(CommunityAccount::getAccount)
+                  .collect(Collectors.toSet());
     }
 }
