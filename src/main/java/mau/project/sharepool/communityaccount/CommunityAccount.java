@@ -7,8 +7,13 @@ import javax.persistence.*;
 @Entity
 @Table
 public class CommunityAccount {
+    /*private final String STANDARD_USER = 1;
+    private final String INVETER = 1;
+    private final String MODERATOR = 3;
+    private final String OWNER = 4;*/
+
     @EmbeddedId
-    CommunityAccountKey id;
+    CommunityAccountKey id = new CommunityAccountKey();
 
     @ManyToOne
     @MapsId("account_id")

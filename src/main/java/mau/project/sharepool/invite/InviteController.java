@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping (path = "/api/invite")
+@RequestMapping (path = "/user/invite")
 public class InviteController {
     private final InviteService service;
 

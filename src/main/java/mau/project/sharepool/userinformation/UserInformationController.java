@@ -1,18 +1,20 @@
 package mau.project.sharepool.userinformation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 
 @RestController
 @RequestMapping (path = "/api/account")
+
 public class UserInformationController {
     private final UserInformationService service;
 
     @Autowired
     public UserInformationController(UserInformationService service) {
+
         this.service = service;
     }
 

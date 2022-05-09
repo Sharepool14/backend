@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user/loan_post")
 public class Loan_PostController {
     private final Loan_PostService service;
 
