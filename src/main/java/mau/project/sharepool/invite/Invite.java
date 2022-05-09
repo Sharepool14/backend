@@ -1,5 +1,9 @@
 package mau.project.sharepool.invite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.community.Community;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,24 +22,33 @@ public class Invite {
     )
 
     private long id;
-    private int inviter;
-    private int invited;
-    private int community_id;
+
+    @ManyToOne
+    @JoinColumn(name = "inviter")
+    private Account inviter;
+
+    @ManyToOne
+    @JoinColumn(name = "invited")
+    private Account invited;
+
+    @ManyToOne
+    @JoinColumn(name = "community_id")
+    private Community community;
 
     public Invite() {
     }
 
-    public Invite(int inviter, int invited, int community_id) {
+    public Invite(Account inviter, Account invited, Community community) {
         this.inviter = inviter;
         this.invited = invited;
-        this.community_id = community_id;
+        this.community = community;
     }
 
-    public Invite(long id, int inviter, int invited, int community_id) {
+    public Invite(long id, Account inviter, Account invited, Community community) {
         this.id = id;
         this.inviter = inviter;
         this.invited = invited;
-        this.community_id = community_id;
+        this.community = community;
     }
 
     public long getId() {
@@ -46,28 +59,28 @@ public class Invite {
         this.id = id;
     }
 
-    public int getInviter() {
+    public Account getInviter() {
         return inviter;
     }
 
-    public void setInviter(int inviter) {
+    public void setInviter(Account inviter) {
         this.inviter = inviter;
     }
 
-    public int getInvited() {
+    public Account getInvited() {
         return invited;
     }
 
-    public void setInvited(int invited) {
+    public void setInvited(Account invited) {
         this.invited = invited;
     }
 
-    public int getCommunity_id() {
-        return community_id;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setCommunity_id(int community_id) {
-        this.community_id = community_id;
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 
     @Override
@@ -76,7 +89,7 @@ public class Invite {
                 "id=" + id +
                 ", inviter=" + inviter +
                 ", invited=" + invited +
-                ", community_id=" + community_id +
+                ", community=" + community +
                 '}';
     }
 }

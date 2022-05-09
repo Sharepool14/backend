@@ -1,5 +1,7 @@
 package mau.project.sharepool.invite;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import mau.project.sharepool.account.Views;
 import mau.project.sharepool.community.CommunityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,4 +33,8 @@ public class InviteController {
         service.deleteAInvite(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+
+
+
 }

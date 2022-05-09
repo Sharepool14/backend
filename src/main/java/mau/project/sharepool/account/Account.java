@@ -2,6 +2,7 @@ package mau.project.sharepool.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.item.Item;
 import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;
@@ -10,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -45,6 +47,12 @@ public class Account implements org.springframework.security.core.userdetails.Us
     @JsonIgnore
     @Transient
     private Collection<SimpleGrantedAuthority> authorities;
+
+    @OneToMany(mappedBy = "inviter")
+    private List<Invite> inviter;
+
+    @OneToMany(mappedBy = "invited")
+    private List<Invite> invited;
 
     public Account() {
     }
