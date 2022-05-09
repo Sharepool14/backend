@@ -19,7 +19,11 @@ public class Loan_PostService {
         this.communityAccountRepository = communityAccountRepository;
     }
 
-    public void updatePost(Loan_Post loan_post) {
+    public List<Loan_Post> all() {
+        return loan_postRepository.findAll();
+    }
+
+    public void updatePost(Loan_Post loan_post, Long communityID) {
         Loan_Post loan_post1 = loan_postRepository.getById(loan_post.getId());
         loan_post1.setStart_date(loan_post.getStart_date());
         loan_post1.setReturn_date(loan_post.getReturn_date());
@@ -27,12 +31,10 @@ public class Loan_PostService {
         loan_postRepository.save(loan_post1);
     }
 
-    public List<Loan_Post> all() {
-        return loan_postRepository.findAll();
-    }
-
-    public void deletePost(Long postID) {
-        loan_postRepository.deleteById(postID);
+    public void deletePost(Long postID, Long communityID) {
+        if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)) {
+            loan_postRepository.deleteById(postID);
+        }
     }
 
     public List<Loan_Post> communitiesPost(Long communityID) {

@@ -20,34 +20,32 @@ public class Loan_PostController {
     }
 
     @GetMapping(path = "test")
-    public List<Loan_Post> all() {
+    public List<Loan_Post> all(){
         return service.all();
     }
 
     @GetMapping(path = "{communityID}/posts")
-    public List<Loan_Post> communitiesPost(@PathVariable Long communityID) {
+    public List<Loan_Post> communitiesPost(@PathVariable Long communityID){
         return service.communitiesPost(communityID);
     }
 
     @PostMapping(path = "{communityID}/{postID}")
-    public void updatePost(@RequestBody Loan_Post loan_post) {
-        service.updatePost(loan_post);
+    public void updatePost(@RequestBody Loan_Post loan_post, @PathVariable Long communityID) {
+        service.updatePost(loan_post, communityID);
     }
 
     @DeleteMapping(path = "{communityID}/{postID}")
-    public void deletePost(@PathVariable Long postID) {
-        service.deletePost(postID);
-    }
-
-
-    @GetMapping("{communityID}/posts/{postID}")
-    public Loan_Post getSpecificPost(@PathVariable Long communityID, @PathVariable Long postID) {
-        return service.getSpecificPost(communityID, postID);
+    public void deletePost(@PathVariable Long postID, @PathVariable Long communityID) {
+        service.deletePost(postID, communityID);
     }
 
     @PostMapping(path = "communities/{communityID}/post/create")
     public void createPost(@RequestBody Loan_Post loan_post, @PathVariable Long communityID){
         service.createPost(loan_post, communityID);
     }
-}
 
+    @GetMapping("{communityID}/posts/{postID}")
+    public Loan_Post getSpecificPost(@PathVariable Long communityID, @PathVariable Long postID) {
+        return service.getSpecificPost(communityID, postID);
+    }
+}
