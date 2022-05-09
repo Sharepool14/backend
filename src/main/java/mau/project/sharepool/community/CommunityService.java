@@ -24,16 +24,8 @@ public class CommunityService {
         return communityRepository.findAll();
     }
 
-    public void addToCommunity(Community community){
-        communityRepository.save(community);
-    }
-
     public void deleteACommunity(Long id){
         communityRepository.deleteById(id);
-    }
-
-    public void deleteAllCommunities(){
-        communityRepository.deleteAll();
     }
 
     public Set<Community> getAccountCommunities(Long id) {

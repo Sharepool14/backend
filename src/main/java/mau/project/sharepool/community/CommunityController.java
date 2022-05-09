@@ -25,12 +25,6 @@ public class CommunityController {
         return service.getCommunities();
     }
 
-    @PostMapping(path = "add")
-    public ResponseEntity add(@RequestBody Community community){
-        service.addToCommunity(community);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
     /**
      * @auth Anthon Haväng
      * @param newCommunity
@@ -64,22 +58,16 @@ public class CommunityController {
     }
 
     @PostMapping(path = "delete")
-    public ResponseEntity delete(@RequestBody Long id){
+    public ResponseEntity deleteYourCommunity(@RequestBody Long id){
         service.deleteACommunity(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping
-    public Set<Community> accountCommunities(@PathVariable("account_id") Long account_id ) {
+    public Set<Community> getUsersCommunities(@PathVariable("account_id") Long account_id ) {
         if (account_id.equals(AccountID.get())) {
             return service.getAccountCommunities(account_id);
         }
         else return null;
-    }
-
-    @PostMapping(path = "deleteAll")
-    public ResponseEntity deleteAll(){
-        service.deleteAllCommunities();
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
