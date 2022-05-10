@@ -10,5 +10,7 @@ import java.util.Set;
 public interface CommunityAccountRepository extends JpaRepository<CommunityAccount, Long> {
     Set<CommunityAccount> findAllByAccountId(Long id);
 
+    boolean existsByAccount_idAndCommunity_id(Long account_id, Long community_id);
+
      Set<CommunityAccount> findAllByCommunityId(Long communityID);
 }

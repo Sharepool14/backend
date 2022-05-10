@@ -3,6 +3,8 @@ package mau.project.sharepool.account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.item.Item;
+import mau.project.sharepool.itemrequester.Item_Requester;
+import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,6 +43,9 @@ public class Account implements org.springframework.security.core.userdetails.Us
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     Set<Item> items;
+
+    @OneToMany(mappedBy = "account")
+    Set<Item_Requester> item_requesters;
 
     @JsonIgnore
     @Transient

@@ -80,4 +80,9 @@ public class CommunityController {
         }
         else return null;
     }
+
+    @GetMapping("{community_id}")
+    public Community getCommunity(@PathVariable Long community_id){
+        return service.getACommunity(community_id);
+    }
 }
