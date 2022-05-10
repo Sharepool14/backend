@@ -30,19 +30,19 @@ public class AccountController {
         return loginService.getAll();
     }
 
-    @PostMapping(value="register", produces = "application/json",consumes="application/json")
+    @PostMapping(value="register")
     public ResponseEntity<String> createAccount(@RequestBody Account login) {
         System.out.println(login.getUserInformation().getFirstname());
         switch (loginService.create_account(login)) {
             case 1 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("application/json",
+                responseHeaders.set("application-json",
                         "Value-accountCreation");
                 return ResponseEntity.ok().headers(responseHeaders).body("Success.");
             }
             case 2 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("application/json",
+                responseHeaders.set("application-json",
                         "Value-accountCreation");
                 return ResponseEntity.ok().headers(responseHeaders).body("Something went wrong.");
             }
