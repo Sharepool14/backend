@@ -31,4 +31,10 @@ public class InviteController {
         service.deleteAInvite(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping
+    public List<InviteDTO> communitiesInvites(){
+        return service.getSpecificInvite();
+    }
+
 }
