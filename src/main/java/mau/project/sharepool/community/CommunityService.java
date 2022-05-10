@@ -29,8 +29,8 @@ public class CommunityService {
         communityRepository.deleteById(id);
     }
 
-    public Set<Community> getAccountCommunities(Long id) {
-        return communityAccountRepository.findAllByAccountId(id).stream()
+    public Set<Community> getAccountCommunities() {
+        return communityAccountRepository.findAllByAccountId(AccountID.get()).stream()
                 .map(CommunityAccount::getCommunity)
                 .collect(Collectors.toSet());
     }

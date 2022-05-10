@@ -18,12 +18,8 @@ public class ItemService {
         this.accountRepository = accountRepository;
     }
 
-    public Set<Item> itemsBy(long account_id) {
-        if(AccountID.get() == account_id){
-            return itemRepository.findAllByAccountId(account_id);
-        } else {
-           return null;
-        }
+    public Set<Item> itemsBy() {
+        return itemRepository.findAllByAccountId(AccountID.get());
     }
 
     public void addItemBy(Item item, Long account_id) {

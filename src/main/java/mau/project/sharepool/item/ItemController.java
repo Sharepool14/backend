@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping(path = "/user/{account_id}")
+@RequestMapping(path = "/user/items")
 public class ItemController {
     private final ItemService itemService;
 
@@ -35,10 +35,8 @@ public class ItemController {
 
     }
 
-    @GetMapping("items")
-    public Set<Item> getItems(@PathVariable("account_id") long account_id) {
-        if (AccountID.get() == account_id){
-            return itemService.itemsBy(account_id);
-        } else return null;
+    @GetMapping
+    public Set<Item> getItems() {
+        return itemService.itemsBy();
     }
 }

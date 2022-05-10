@@ -8,14 +8,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Set;
-
 import mau.project.sharepool.account.Views;
 
 @RestController
-//@RequestMapping (path = "/user/{account_id}/community")
 public class CommunityController {
     private final CommunityService service;
 
@@ -73,12 +70,9 @@ public class CommunityController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping
-    public Set<Community> getUsersCommunities(@PathVariable("account_id") Long account_id ) {
-        if (account_id.equals(AccountID.get())) {
-            return service.getAccountCommunities(account_id);
-        }
-        else return null;
+    @GetMapping(path = "/user/community")
+    public Set<Community> getUsersCommunities() {
+        return service.getAccountCommunities();
     }
 
     @GetMapping("{community_id}")
