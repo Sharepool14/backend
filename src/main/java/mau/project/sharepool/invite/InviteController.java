@@ -1,14 +1,10 @@
 package mau.project.sharepool.invite;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import mau.project.sharepool.account.Views;
-import mau.project.sharepool.community.CommunityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,7 +16,9 @@ public class InviteController {
     public InviteController(InviteService service){ this.service = service;}
 
     @GetMapping(path = "all")
-    public List getCommunities(){ return service.getInvites();}
+    public void getCommunities(){
+
+    }
 
     @PostMapping (path = "add")
     public ResponseEntity add(@RequestBody Invite invite){
@@ -33,8 +31,4 @@ public class InviteController {
         service.deleteAInvite(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-
-
-
 }
