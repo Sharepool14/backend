@@ -19,7 +19,6 @@ public class InviteService {
     public List<InviteDTO> getSpecificInvite() {
         List<Invite> invites = inviteRepository.findAllByInvitedId(AccountID.get());
         List<InviteDTO> inviteDTO = new ArrayList<>();
-
         invites.stream()
                 .forEach(invite -> {
                     InviteDTO dto = new InviteDTO();

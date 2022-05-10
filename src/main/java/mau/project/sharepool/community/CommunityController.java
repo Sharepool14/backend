@@ -79,4 +79,9 @@ public class CommunityController {
     public Community getCommunity(@PathVariable Long community_id){
         return service.getACommunity(community_id);
     }
+
+    @PostMapping("communities/{community_id}/members/invite/{username}")
+    public void invite(@PathVariable Long community_id, @PathVariable String username) {
+        service.createInvite(community_id,username);
+    }
 }
