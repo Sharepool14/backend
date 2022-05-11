@@ -4,6 +4,7 @@ import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,5 +42,12 @@ public class InviteService {
 
     public void deleteAInvite(Long id) {
         inviteRepository.deleteById(id);
+    }
+
+    public void handleInvite(Long invite_id) {
+        if (inviteRepository.existsByIdAndInvitedId(invite_id,AccountID.get())) {
+            Invite invite = inviteRepository.getById(invite_id);
+            inviteRepository.test2(true,invite.getInvited().getId(),invite.getCommunity().getId());
+        }
     }
 }

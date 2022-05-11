@@ -1,6 +1,8 @@
-
 package mau.project.sharepool.userinformation;
 
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.account.AccountRepository;
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -8,24 +10,24 @@ import java.util.Optional;
 
 @Service
 public class UserInformationService {
-    private UserInformationRepository accountRepository;
+    private UserInformationRepository userInformationRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    public UserInformationService(UserInformationRepository accountRepository) {
+    public UserInformationService(UserInformationRepository userInformationRepository, AccountRepository accountRepository) {
+        this.userInformationRepository = userInformationRepository;
         this.accountRepository = accountRepository;
     }
 
     public List<UserInformation> getAccounts() {
-        int i = accountRepository.test(5);
-        System.out.println(i);
-        return accountRepository.findAll();
+        return userInformationRepository.findAll();
     }
 
     public void addAccount(UserInformation account) {
-        accountRepository.save(account);
+        userInformationRepository.save(account);
     }
 
-    public Optional<UserInformation> accountBy(Long account_id){
-        return accountRepository.findById(account_id);
+    public Optional<Account> accountBy(){
+        return accountRepository.findById(AccountID.get());
     }
 }
