@@ -23,8 +23,9 @@ public class UserInformationService {
         return userInformationRepository.findAll();
     }
 
-    public void addAccount(UserInformation account) {
-        userInformationRepository.save(account);
+    public void userInformation(UserInformation userInformation) {
+        userInformation.setId(AccountID.get());
+        userInformationRepository.save(userInformation);
     }
 
     public Optional<Account> accountBy(){

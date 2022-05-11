@@ -18,4 +18,9 @@ public class UserInformationController {
     public UserInformation accountBy(){
         return service.accountBy().get().getUserInformation();
     }
+
+    @PostMapping
+    public void editUserInformation(@RequestBody UserInformation userInformation) {
+        service.userInformation(userInformation);
+    }
 }

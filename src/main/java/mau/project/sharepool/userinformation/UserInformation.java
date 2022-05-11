@@ -19,7 +19,7 @@ public class UserInformation {
             generator = "user_details_id_seq"
     )
 
-    private int id;
+    private Long id;
     private String firstname;
     private String lastname;
     private String phone;
@@ -43,7 +43,7 @@ public class UserInformation {
         this.account = account;
     }
 
-    public UserInformation(int id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(Long id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -54,11 +54,11 @@ public class UserInformation {
         this.account = account;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

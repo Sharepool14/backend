@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserInformationRepository extends JpaRepository<UserInformation, Long> {
-
+    UserInformation getByAccountId(Long account_id);
 }
