@@ -37,7 +37,6 @@ public class Account implements org.springframework.security.core.userdetails.Us
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
-    @JsonIgnore
     private UserInformation userInformation;
 
     @OneToMany(mappedBy = "account")
@@ -68,18 +67,18 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.authorities = authorities;
     }
 
-    public Account(String username, String password, UserInformation userDetails, Set<Item> items) {
+    public Account(String username, String password, UserInformation userInformation) {
         this.username = username;
         this.password = password;
-        this.userInformation = userDetails;
-        this.items = items;
+        this.userInformation = userInformation;
+        //this.items = items;
     }
 
-    public Account(Long id, String username, String password, UserInformation userDetails, Set<Item> items) {
+    public Account(Long id, String username, String password, UserInformation userInformation, Set<Item> items) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.userInformation = userDetails;
+        this.userInformation = userInformation;
         this.items = items;
     }
 

@@ -8,4 +8,5 @@ public interface InviteRepository extends JpaRepository<Invite, Long> {
 
     List<Invite> findAllByInvitedId(Long id);
 
+
 }

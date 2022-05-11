@@ -1,24 +1,37 @@
 package mau.project.sharepool.community;
 import mau.project.sharepool.account.Account;
+import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.invite.Invite;
+import mau.project.sharepool.invite.InviteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class CommunityService {
-    private CommunityRepository communityRepository;
-    private CommunityAccountRepository communityAccountRepository;
+    private final CommunityRepository communityRepository;
+    private final CommunityAccountRepository communityAccountRepository;
+    private final InviteRepository inviteRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public CommunityService(CommunityRepository communityRepository, CommunityAccountRepository communityAccountRepository){
+    public CommunityService(
+            CommunityRepository communityRepository,
+            CommunityAccountRepository communityAccountRepository,
+            InviteRepository inviteRepository,
+            AccountRepository accountRepository){
+
+        this.inviteRepository = inviteRepository;
         this.communityRepository = communityRepository;
         this.communityAccountRepository = communityAccountRepository;
+        this.accountRepository = accountRepository;
     }
 
     public List<Community> getCommunities(){
@@ -29,8 +42,8 @@ public class CommunityService {
         communityRepository.deleteById(id);
     }
 
-    public Set<Community> getAccountCommunities(Long id) {
-        return communityAccountRepository.findAllByAccountId(id).stream()
+    public Set<Community> getAccountCommunities() {
+        return communityAccountRepository.findAllByAccountId(AccountID.get()).stream()
                 .map(CommunityAccount::getCommunity)
                 .collect(Collectors.toSet());
     }
@@ -58,5 +71,23 @@ public class CommunityService {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), community_id)) {
             return communityRepository.getById(community_id);
         } else return null;
+    }
+
+    public void createInvite(Long community_id, String username) {
+        if (communityAccountRepository.existsByAccountIdAndCommunityIdAndRoleGreaterThan(AccountID.get(),community_id,1)) {
+            Account account = accountRepository.findByUsername(username);
+            if (account != null) {
+
+                Account inviter = new Account();
+                inviter.setId(AccountID.get());
+
+                Account invitee = new Account();
+                invitee.setId(account.getId());
+
+                Community community = new Community();
+                community.setId(community_id);
+                inviteRepository.save(new Invite(inviter,invitee,community));
+            }
+        }
     }
 }

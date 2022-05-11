@@ -11,6 +11,10 @@ public interface CommunityAccountRepository extends JpaRepository<CommunityAccou
     Set<CommunityAccount> findAllByAccountId(Long id);
 
     boolean existsByAccount_idAndCommunity_id(Long account_id, Long community_id);
+    boolean existsByAccountIdAndCommunityIdAndRoleGreaterThan(Long account_id, Long community_id, int role);
+
+
+
 
      Set<CommunityAccount> findAllByCommunityId(Long communityID);
 }
