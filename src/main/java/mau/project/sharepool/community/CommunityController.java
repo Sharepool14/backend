@@ -2,7 +2,6 @@ package mau.project.sharepool.community;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,35 +32,29 @@ public class CommunityController {
     }
 
     /**
-     * @auth Anthon Haväng
+     * @auth Anthon Haväng, Hugo Lindstedt
      * @param newCommunity
-     * @param account_id
      * @return returns a HttpStatus for front-end.
      * HttpHeaders is left behind unused to remain as a template for further use.
      */
-    @PostMapping(path = "/user/{account_id}/community/create")
-    public ResponseEntity<HttpStatus> createCommunity(@RequestBody Community newCommunity, @PathVariable("account_id") Long account_id){
+    @PostMapping(path = "/user/community/create")
+    public ResponseEntity<HttpStatus> createCommunity(@RequestBody Community newCommunity) {
         HttpHeaders responseHeaders = new HttpHeaders();
+        switch (service.createCommunity(newCommunity)) {
+            case 1 -> {
+                responseHeaders.set("application/json", "Value-accountCreation");
+                return ResponseEntity.ok(HttpStatus.OK);
+            }
 
-        if (AccountID.get().equals(account_id)){
-            System.out.println("If-sats");
-            switch (service.createCommunity(newCommunity, account_id)){
-                //Success
-                case 1 -> {
-                    responseHeaders.set("application/json", "Value-accountCreation");
-                    return ResponseEntity.ok(HttpStatus.OK);
-                }
-                //Wrong format
-                case 2 -> {
-                    responseHeaders.set("application/json", "Value-accountCreation");
-                    return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-                }
-                default -> {
-                    return null;
-                }
+            case 2 -> {
+                responseHeaders.set("application/json", "Value-accountCreation");
+                return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+            }
+
+            default -> {
+                return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
             }
         }
-        return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(path = "/user/{account_id}/community/delete")

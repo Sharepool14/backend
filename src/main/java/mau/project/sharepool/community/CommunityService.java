@@ -48,11 +48,11 @@ public class CommunityService {
                 .collect(Collectors.toSet());
     }
 
-    public int createCommunity(Community community, Long accountID) {
+    public int createCommunity(Community community) {
         try {
             communityRepository.save(community);
             Account account = new Account();
-            account.setId(accountID);
+            account.setId(AccountID.get());
             communityAccountRepository.save(new CommunityAccount(account, community, 3));
             return 1;
         } catch (Exception e){

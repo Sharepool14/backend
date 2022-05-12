@@ -37,4 +37,8 @@ public class InviteController {
         return service.getSpecificInvite();
     }
 
+    @PostMapping(path = "{invite_id}")
+    public void acceptInvite(@PathVariable Long invite_id) {
+        service.handleInvite(invite_id);
+    }
 }
