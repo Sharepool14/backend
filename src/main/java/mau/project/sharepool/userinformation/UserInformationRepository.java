@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserInformationRepository extends JpaRepository<UserInformation, Long> {
-
-    @Procedure("test")
-    public int test(int i);
+    UserInformation getByAccountId(Long account_id);
 }
