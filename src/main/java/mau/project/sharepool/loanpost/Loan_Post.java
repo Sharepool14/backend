@@ -37,25 +37,31 @@ public class Loan_Post {
     @JoinColumn(name = "community_id", referencedColumnName = "id")
     private Community community;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "loan_post")
     private Set<Item_Requester> item_requester;
+    private boolean visible;
 
     public Loan_Post() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, Item item, Community community) {
+    public Loan_Post(Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
+        this.item_requester = item_requester;
+        this.visible = visible;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community) {
+    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
+        this.item_requester = item_requester;
+        this.visible = visible;
     }
 
     public long getId() {
@@ -90,12 +96,28 @@ public class Loan_Post {
         this.item = item;
     }
 
-    public Community getCommunity_id() {
+    public Community getCommunity() {
         return community;
     }
 
-    public void setCommunity_id(int community_id) {
+    public void setCommunity(Community community) {
         this.community = community;
+    }
+
+    public Set<Item_Requester> getItem_requester() {
+        return item_requester;
+    }
+
+    public void setItem_requester(Set<Item_Requester> item_requester) {
+        this.item_requester = item_requester;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     @Override
@@ -104,8 +126,10 @@ public class Loan_Post {
                 "id=" + id +
                 ", start_date=" + start_date +
                 ", return_date=" + return_date +
-                ", item_id=" + item +
+                ", item=" + item +
                 ", community=" + community +
+                ", item_requester=" + item_requester +
+                ", visible=" + visible +
                 '}';
     }
 }

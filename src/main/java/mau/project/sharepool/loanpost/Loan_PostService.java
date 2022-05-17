@@ -27,7 +27,7 @@ public class Loan_PostService {
         Set<CommunityAccount> communites = communityAccountRepository.findAllByAccountId(AccountID.get());
         communites.stream()
                 .forEach(communityAccount -> communtiesIDs.add(communityAccount.getCommunity().getId()));
-        return loan_postRepository.findAllByCommunity_idIn(communtiesIDs);
+        return loan_postRepository.findAllByCommunity_idInAndVisibleIsTrue(communtiesIDs);
     }
 
     public void updatePost(Loan_Post loan_post, Long communityID) {

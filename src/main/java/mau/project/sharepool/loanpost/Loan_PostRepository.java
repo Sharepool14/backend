@@ -12,4 +12,7 @@ public interface Loan_PostRepository extends JpaRepository<Loan_Post, Long> {
     List<Loan_Post> findAllByCommunity_id(Long communityID);
 
     List<Loan_Post> findAllByCommunity_idIn(List<Long> community_id);
+    List<Loan_Post> findAllByCommunity_idInAndVisibleIsTrue(List<Long> community_id);
+    //List<Loan_Post> findAllByCommunity_idInAAndVisibleIsTrue(List<Long> community_id);
+
 }
