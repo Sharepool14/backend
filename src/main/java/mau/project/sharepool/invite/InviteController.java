@@ -41,4 +41,9 @@ public class InviteController {
     public void acceptInvite(@PathVariable Long invite_id) {
         service.handleInvite(invite_id);
     }
+
+    @DeleteMapping(path = "{invite_id}")
+    public void deleteInvite(@PathVariable Long invite_id) {
+        service.handleInvite(invite_id);
+    }
 }
