@@ -10,4 +10,6 @@ import java.util.Set;
 @Repository
 public interface Loan_PostRepository extends JpaRepository<Loan_Post, Long> {
     List<Loan_Post> findAllByCommunity_id(Long communityID);
+
+    List<Loan_Post> findAllByCommunity_idIn(List<Long> community_id);
 }

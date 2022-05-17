@@ -2,10 +2,12 @@ package mau.project.sharepool.community;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.account.Account;
+import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +62,8 @@ public class CommunityController {
     @PostMapping(path = "/user/{account_id}/community/delete")
     public ResponseEntity deleteYourCommunity(@RequestBody Long id){
         service.deleteACommunity(id);
+
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

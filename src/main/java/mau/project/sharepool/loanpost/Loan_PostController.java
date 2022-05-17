@@ -19,7 +19,7 @@ public class Loan_PostController {
         this.service = service;
     }
 
-    @GetMapping(path = "test")
+    @GetMapping
     public List<Loan_Post> all(){
         return service.all();
     }

@@ -1,5 +1,8 @@
 package mau.project.sharepool.account;
 
+import mau.project.sharepool.community.Community;
+import mau.project.sharepool.communityaccount.CommunityAccount;
+import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.item.ItemRepository;
 import mau.project.sharepool.userinformation.UserInformation;
@@ -17,11 +20,13 @@ import java.util.*;
 @Service
 public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
+    private final CommunityAccountRepository communityAccountRepository;
     private ItemRepository itemRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountService(ItemRepository itemRepository, AccountRepository loginRepo, PasswordEncoder passwordEncoder) {
+    public AccountService(ItemRepository itemRepository, AccountRepository loginRepo, PasswordEncoder passwordEncoder, CommunityAccountRepository communityAccountRepository) {
+        this.communityAccountRepository = communityAccountRepository;
         this.itemRepository = itemRepository;
         this.accountRepository = loginRepo;
         this.passwordEncoder = passwordEncoder;
@@ -38,7 +43,10 @@ public class AccountService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByUsername(username);
+        Set<CommunityAccount> mebership = communityAccountRepository.findAllByAccountId(account.getId());
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        mebership.stream()
+                        .forEach(communityAccount ->authorities.add(new SimpleGrantedAuthority(String.valueOf(communityAccount.getCommunity().getId()))) );
         account.setAuthorities(authorities);
         return account;
     }
@@ -64,5 +72,12 @@ public class AccountService implements UserDetailsService {
 
     public Account getAccount(Long account_id) {
         return accountRepository.getById(account_id);
+    }
+
+    public Account ad() {
+        List<Integer> inList = new ArrayList<>();
+        inList.add(19);
+        //inList.add(37);
+        return accountRepository.test(inList);
     }
 }
