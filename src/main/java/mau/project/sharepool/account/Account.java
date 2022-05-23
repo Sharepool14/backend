@@ -20,18 +20,10 @@ import java.util.Set;
 @Table(name = "account")
 public class Account implements org.springframework.security.core.userdetails.UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "account_id_seq",
-            sequenceName = "account_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "account_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonView(Views.response.class)
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -152,6 +144,14 @@ public class Account implements org.springframework.security.core.userdetails.Us
 
     public void setItems(Set<Item> items) {
         this.items = items;
+    }
+
+    public Set<Loan_Post> getLoanPosts() {
+        return loanPosts;
+    }
+
+    public void setLoanPosts(Set<Loan_Post> loanPosts) {
+        this.loanPosts = loanPosts;
     }
 
     @Override

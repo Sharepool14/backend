@@ -68,6 +68,14 @@ public class Community {
         this.name = name;
     }
 
+    public Set<Loan_Post> getLoan_posts() {
+        return loan_posts;
+    }
+
+    public void setLoan_posts(Set<Loan_Post> loan_posts) {
+        this.loan_posts = loan_posts;
+    }
+
     @Override
     public String toString() {
         return "Community{" +

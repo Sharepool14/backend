@@ -3,6 +3,7 @@ package mau.project.sharepool.community;
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.loanpost.Loan_Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -80,5 +81,10 @@ public class CommunityController {
     @PostMapping("communities/{community_id}/members/invite/{username}")
     public void invite(@PathVariable Long community_id, @PathVariable String username) {
         service.createInvite(community_id,username);
+    }
+
+    @GetMapping("community/{community_id}/posts")
+    public Set<Loan_Post> getThisCommunitysPosts(@PathVariable Long community_id){
+        return service.getThisCommunitysPosts(community_id);
     }
 }

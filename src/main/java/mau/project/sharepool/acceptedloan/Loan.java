@@ -43,8 +43,17 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(long id, boolean accepted, boolean returned) {
+    public Loan(Account reqeuster, Loan_Post loan_post, boolean accepted, boolean returned) {
+        this.reqeuster = reqeuster;
+        this.loan_post = loan_post;
+        this.accepted = accepted;
+        this.returned = returned;
+    }
+
+    public Loan(long id, Account reqeuster, Loan_Post loan_post, boolean accepted, boolean returned) {
         this.id = id;
+        this.reqeuster = reqeuster;
+        this.loan_post = loan_post;
         this.accepted = accepted;
         this.returned = returned;
     }

@@ -6,6 +6,7 @@ import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.invite.InviteRepository;
+import mau.project.sharepool.loanpost.Loan_Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,5 +90,11 @@ public class CommunityService {
                 inviteRepository.save(new Invite(inviter,invitee,community));
             }
         }
+    }
+
+    public Set<Loan_Post> getThisCommunitysPosts(Long communityID) {
+        if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)){
+           return communityRepository.getById(communityID).getLoan_posts();
+        } else return null;
     }
 }

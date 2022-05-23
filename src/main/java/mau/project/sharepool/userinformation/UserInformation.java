@@ -9,16 +9,7 @@ import javax.persistence.*;
 public class UserInformation {
 
     @Id
-    @SequenceGenerator(
-            name = "user_details_id_seq",
-            sequenceName = "user_details_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_details_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;

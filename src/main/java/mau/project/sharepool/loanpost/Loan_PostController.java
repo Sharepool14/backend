@@ -48,4 +48,6 @@ public class Loan_PostController {
     public Loan_Post getSpecificPost(@PathVariable Long communityID, @PathVariable Long postID) {
         return service.getSpecificPost(communityID, postID);
     }
+
+    
 }

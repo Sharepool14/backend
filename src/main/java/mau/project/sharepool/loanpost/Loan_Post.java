@@ -122,7 +122,7 @@ public class Loan_Post {
                 ", return_date=" + return_date +
                 ", item=" + item +
                 ", community=" + community +
-                ", account=" + account +
+                ", account=" + account.getId() +
                 ", visible=" + visible +
                 '}';
     }
