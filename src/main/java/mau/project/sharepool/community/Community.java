@@ -36,6 +36,9 @@ public class Community {
     @OneToMany(mappedBy = "community" )
     private Set<Invite> invites;
 
+    @OneToMany(mappedBy = "community")
+    private Set<Loan_Post> posts;
+
     public Community() {
     }
 

@@ -2,9 +2,10 @@ package mau.project.sharepool.loanpost;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.account.Account;
 import mau.project.sharepool.community.Community;
 import mau.project.sharepool.item.Item;
-import mau.project.sharepool.itemrequester.Item_Requester;
+//import mau.project.sharepool.itemrequester.Item_Requester;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,33 +35,34 @@ public class Loan_Post {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @JoinColumn
     private Community community;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(mappedBy = "loan_post")
-    private Set<Item_Requester> item_requester;
+    private Set<Item_Requester> item_requester;*/
+
+    @ManyToOne
+    private Account account;
     private boolean visible;
 
     public Loan_Post() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
+    public Loan_Post(Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
-        this.item_requester = item_requester;
         this.visible = visible;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
+    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
-        this.item_requester = item_requester;
         this.visible = visible;
     }
 
@@ -104,14 +106,6 @@ public class Loan_Post {
         this.community = community;
     }
 
-    public Set<Item_Requester> getItem_requester() {
-        return item_requester;
-    }
-
-    public void setItem_requester(Set<Item_Requester> item_requester) {
-        this.item_requester = item_requester;
-    }
-
     public boolean isVisible() {
         return visible;
     }
@@ -128,7 +122,7 @@ public class Loan_Post {
                 ", return_date=" + return_date +
                 ", item=" + item +
                 ", community=" + community +
-                ", item_requester=" + item_requester +
+                ", account=" + account +
                 ", visible=" + visible +
                 '}';
     }
