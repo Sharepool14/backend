@@ -41,7 +41,7 @@ public class Account implements org.springframework.security.core.userdetails.Us
     @OneToMany(mappedBy = "account")
     Set<Loan_Post> loanPosts;
 
-    @OneToMany
+    @OneToMany(mappedBy = "account")
     Set<Loan> loans;
 
     @JsonIgnore
