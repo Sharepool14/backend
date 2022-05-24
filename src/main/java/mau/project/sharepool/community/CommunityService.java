@@ -121,6 +121,7 @@ public class CommunityService {
      * @param communityID
      */
     public void leaveCommunity(Long communityID) {
+
         if (communityAccountRepository.getById(AccountID.get()).getAccount().getLoans().isEmpty()){
             communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
         } else if (loanRepository.existsAllByAccount_IdAndReturnedIsFalse(AccountID.get())){

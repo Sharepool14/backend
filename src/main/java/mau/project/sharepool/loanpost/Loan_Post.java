@@ -33,7 +33,7 @@ public class Loan_Post {
     @OneToMany(mappedBy = "loan_post")
     private Set<Item_Requester> item_requester;*/
 
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     private Account account;
     private boolean visible;
 
