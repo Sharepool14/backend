@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "community")
 public class Community {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     @OneToMany(mappedBy = "community")

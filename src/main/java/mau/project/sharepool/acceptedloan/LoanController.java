@@ -29,4 +29,9 @@ public class LoanController {
     public void requestLoan(@PathVariable Long postID){
         loanService.requestLoan(postID);
     }
+
+    @DeleteMapping("your/{loan_id}")
+    public void deleteYourReq(@PathVariable Long loan_id){
+        loanService.deleteYourReq(loan_id);
+    }
 }

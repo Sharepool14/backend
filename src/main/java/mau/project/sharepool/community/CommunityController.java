@@ -100,7 +100,7 @@ public class CommunityController {
      * @author Anthon Haväng
      * @param community_id
      */
-    @PostMapping("/user/communtiy/{community_id/leave")
+    @PostMapping("/user/communtiy/{community_id}/leave")
     public void leaveCommunity(@PathVariable Long community_id){
         service.leaveCommunity(community_id);
     }

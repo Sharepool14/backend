@@ -45,4 +45,10 @@ public class LoanService {
        loan.setAccepted(true);
        loanRepository.save(loan);
     }
+
+    public void deleteYourReq(Long loan_id) {
+        if(!loanRepository.getById(loan_id).isAccepted() && loanRepository.getById(loan_id).getRequester().equals(AccountID.get())){
+            loanRepository.deleteById(loan_id);
+        }
+    }
 }

@@ -17,16 +17,7 @@ import java.util.Set;
 public class Item {
 
     @Id
-    @SequenceGenerator(
-            name = "item_id_seq",
-            sequenceName = "item_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "item_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
