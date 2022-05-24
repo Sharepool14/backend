@@ -1,5 +1,6 @@
 package mau.project.sharepool.acceptedloan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.loanpost.Loan_Post;
@@ -13,7 +14,7 @@ public class Loan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne @JsonIgnore
     private Account requester;
 
     @OneToOne
@@ -21,7 +22,7 @@ public class Loan {
 
     private boolean accepted;
 
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     private Account account;
 
     @JsonProperty("returned")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping (path = "/user/loan")
+@RequestMapping (path = "/user/loan/")
 
 public class LoanController {
     private final LoanService loanService;
@@ -29,6 +29,7 @@ public class LoanController {
 
     @PostMapping("{postID}/request")
     public void requestLoan(@PathVariable Long postID){
+        System.out.println("!!!");
         loanService.requestLoan(postID);
     }
 

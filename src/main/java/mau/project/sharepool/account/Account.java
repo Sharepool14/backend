@@ -32,10 +32,10 @@ public class Account implements org.springframework.security.core.userdetails.Us
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
     private UserInformation userInformation;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account") @JsonIgnore
     Set<CommunityAccount> communityAccounts;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL) @JsonIgnore
     Set<Item> items;
 
     @OneToMany(mappedBy = "account")

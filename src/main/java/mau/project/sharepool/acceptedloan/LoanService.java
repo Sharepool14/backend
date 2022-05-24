@@ -1,6 +1,7 @@
 package mau.project.sharepool.acceptedloan;
 
 import mau.project.sharepool.account.Account;
+import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.loanpost.Loan_Post;
@@ -9,18 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class LoanService {
     private LoanRepository loanRepository;
     private CommunityAccountRepository communityAccountRepository;
     private Loan_PostRepository loan_postRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    public LoanService(LoanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, Loan_PostRepository loan_postRepository){
+    public LoanService(LoanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, Loan_PostRepository loan_postRepository, AccountRepository accountRepository){
         this.loanRepository = accepted_loanRepository;
         this.communityAccountRepository = communityAccountRepository;
         this.loan_postRepository = loan_postRepository;
+        this.accountRepository = accountRepository;
     }
 
     public void requestLoan(Long postID) {
@@ -53,6 +57,10 @@ public class LoanService {
     }
 
     public Set<Loan> getMyLoanOrReq() {
+        return loanRepository.findAllByRequesterId(AccountID.get());
+    }
+
+    public Set<Loan> userLoans() {
         return loanRepository.findAllByRequesterId(AccountID.get());
     }
 }
