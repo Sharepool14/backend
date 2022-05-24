@@ -14,17 +14,7 @@ import java.util.Set;
 @Table(name = "community")
 public class Community {
 
-    @Id
-    @SequenceGenerator(
-            name = "community_id_seq",
-            sequenceName = "community_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "community_id_seq"
-    )
-
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
     @OneToMany(mappedBy = "community")

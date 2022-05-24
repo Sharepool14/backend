@@ -15,22 +15,13 @@ import java.util.Set;
 @Table(name = "loan_post")
 public class Loan_Post {
     @Id
-    @SequenceGenerator(
-            name = "loan_post_id_seq",
-            sequenceName = "loan_post_id_seq",
-            allocationSize = 1
-    )
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "loan_post_id_seq"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private Date start_date;
     private Date return_date;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    //@JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 
     @JsonIgnore
@@ -114,6 +105,7 @@ public class Loan_Post {
         this.visible = visible;
     }
 
+
     @Override
     public String toString() {
         return "Loan_Post{" +
@@ -122,7 +114,7 @@ public class Loan_Post {
                 ", return_date=" + return_date +
                 ", item=" + item +
                 ", community=" + community +
-                ", account=" + account.getId() +
+                ", account=" + account +
                 ", visible=" + visible +
                 '}';
     }

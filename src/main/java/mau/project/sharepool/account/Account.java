@@ -2,6 +2,7 @@ package mau.project.sharepool.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import mau.project.sharepool.acceptedloan.Loan;
 import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.item.Item;
 //import mau.project.sharepool.itemrequester.Item_Requester;
@@ -37,11 +38,11 @@ public class Account implements org.springframework.security.core.userdetails.Us
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     Set<Item> items;
 
-   /* @OneToMany(mappedBy = "account")
-    Set<Item_Requester> item_requesters;*/
-
     @OneToMany(mappedBy = "account")
     Set<Loan_Post> loanPosts;
+
+    @OneToMany
+    Set<Loan> loans;
 
     @JsonIgnore
     @Transient
@@ -152,6 +153,38 @@ public class Account implements org.springframework.security.core.userdetails.Us
 
     public void setLoanPosts(Set<Loan_Post> loanPosts) {
         this.loanPosts = loanPosts;
+    }
+
+    public Set<CommunityAccount> getCommunityAccounts() {
+        return communityAccounts;
+    }
+
+    public void setCommunityAccounts(Set<CommunityAccount> communityAccounts) {
+        this.communityAccounts = communityAccounts;
+    }
+
+    public Set<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Set<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public List<Invite> getInviter() {
+        return inviter;
+    }
+
+    public void setInviter(List<Invite> inviter) {
+        this.inviter = inviter;
+    }
+
+    public List<Invite> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<Invite> invited) {
+        this.invited = invited;
     }
 
     @Override

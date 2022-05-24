@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Accepted_loanService {
-    private Accepted_loanRepository accepted_loanRepository;
+public class LoanService {
+    private LoanRepository loanRepository;
     private CommunityAccountRepository communityAccountRepository;
     private Loan_PostRepository loan_postRepository;
 
     @Autowired
-    public Accepted_loanService(Accepted_loanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, Loan_PostRepository loan_postRepository){
-        this.accepted_loanRepository = accepted_loanRepository;
+    public LoanService(LoanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, Loan_PostRepository loan_postRepository){
+        this.loanRepository = accepted_loanRepository;
         this.communityAccountRepository = communityAccountRepository;
         this.loan_postRepository = loan_postRepository;
     }
@@ -27,7 +27,7 @@ public class Accepted_loanService {
             Account account = new Account();
             account.setId(AccountID.get());
             Loan loan = new Loan(account, loan_post, false, false);
-            accepted_loanRepository.save(loan);
+            loanRepository.save(loan);
         }
     }
 }
