@@ -20,9 +20,9 @@ public class Accepted_loanController {
         accepted_loanService.rejectLoan(loan_id);
     }
 
-    @PostMapping
-    public void acceptLoan(){
-
+    @PostMapping("{loan_id}")
+    public void acceptLoan(@PathVariable Long loan_id){
+        accepted_loanService.acceptLoan(loan_id);
     }
 
     @PostMapping("{postID}/request")
