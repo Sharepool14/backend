@@ -2,6 +2,7 @@ package mau.project.sharepool.acceptedloan;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,4 +35,9 @@ public class LoanController {
     public void deleteYourReq(@PathVariable Long loan_id){
         loanService.deleteYourReq(loan_id);
     }
+
+   /* @PostMapping("{loan_id}/return")
+    public void returnLoan(@PathVariable Long loan_id){
+        loanService.returnLoan(loan_id);
+    } */
 }

@@ -105,6 +105,13 @@ public class Loan_Post {
         this.visible = visible;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     @Override
     public String toString() {
