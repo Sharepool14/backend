@@ -32,7 +32,7 @@ public class LoanService {
     }
 
     public void rejectLoan(Long loan_id) {
-        accepted_loanRepository.deleteById(loan_id);
+        loanRepository.deleteById(loan_id);
     }
 
     /***
@@ -40,9 +40,9 @@ public class LoanService {
      * @param loan_id
      */
     public void acceptLoan(Long loan_id) {
-       Loan loan = accepted_loanRepository.getById(loan_id);
+       Loan loan = loanRepository.getById(loan_id);
        loan.getLoan_post().setVisible(false);
        loan.setAccepted(true);
-       accepted_loanRepository.save(loan);
+       loanRepository.save(loan);
     }
 }

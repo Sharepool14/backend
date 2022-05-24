@@ -17,12 +17,12 @@ public class LoanController {
 
     @DeleteMapping("{loan_id}")
     public void rejectLoan(@PathVariable Long loan_id){
-        accepted_loanService.rejectLoan(loan_id);
+        loanService.rejectLoan(loan_id);
     }
 
     @PostMapping("{loan_id}")
     public void acceptLoan(@PathVariable Long loan_id){
-        accepted_loanService.acceptLoan(loan_id);
+        loanService.acceptLoan(loan_id);
     }
 
     @PostMapping("{postID}/request")
