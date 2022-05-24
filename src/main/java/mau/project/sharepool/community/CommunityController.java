@@ -2,13 +2,11 @@ package mau.project.sharepool.community;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.loanpost.Loan_Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +26,11 @@ public class CommunityController {
         return service.getCommunities();
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param community_id
+     * @return
+     */
     @GetMapping(path = "communities/{communityID}/members")
     @JsonView(Views.response.class)
     public Set<Account> getMembersInCommunity(@PathVariable("communityID") Long community_id){
@@ -83,8 +86,22 @@ public class CommunityController {
         service.createInvite(community_id,username);
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param community_id
+     * @return
+     */
     @GetMapping("community/{community_id}/posts")
     public Set<Loan_Post> getThisCommunitysPosts(@PathVariable Long community_id){
         return service.getThisCommunitysPosts(community_id);
+    }
+
+    /**
+     * @author Anthon Haväng
+     * @param community_id
+     */
+    @PostMapping("/user/communtiy/{community_id/leave")
+    public void leaveCommunity(@PathVariable Long community_id){
+        service.leaveCommunity(community_id);
     }
 }

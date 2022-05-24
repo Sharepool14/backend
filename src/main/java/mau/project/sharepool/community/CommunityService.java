@@ -1,4 +1,5 @@
 package mau.project.sharepool.community;
+import mau.project.sharepool.acceptedloan.LoanRepository;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccount;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,18 +21,21 @@ public class CommunityService {
     private final CommunityAccountRepository communityAccountRepository;
     private final InviteRepository inviteRepository;
     private final AccountRepository accountRepository;
+    private final LoanRepository loanRepository;
 
     @Autowired
     public CommunityService(
             CommunityRepository communityRepository,
             CommunityAccountRepository communityAccountRepository,
             InviteRepository inviteRepository,
-            AccountRepository accountRepository){
+            AccountRepository accountRepository,
+            LoanRepository loanRepository){
 
         this.inviteRepository = inviteRepository;
         this.communityRepository = communityRepository;
         this.communityAccountRepository = communityAccountRepository;
         this.accountRepository = accountRepository;
+        this.loanRepository = loanRepository;
     }
 
     public List<Community> getCommunities(){
@@ -49,6 +52,11 @@ public class CommunityService {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param community
+     * @return
+     */
     public int createCommunity(Community community) {
         try {
             communityRepository.save(community);
@@ -62,6 +70,11 @@ public class CommunityService {
         }
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param community_id
+     * @return
+     */
     public Set<Account> getMembersInCommunity(Long community_id) {
         return communityAccountRepository.findAllByCommunityId(community_id).stream()
                   .map(CommunityAccount::getAccount)
@@ -92,9 +105,26 @@ public class CommunityService {
         }
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param communityID
+     * @return
+     */
     public Set<Loan_Post> getThisCommunitysPosts(Long communityID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)){
            return communityRepository.getById(communityID).getLoan_posts();
         } else return null;
+    }
+
+    /**
+     * @author Anthon Haväng
+     * @param communityID
+     */
+    public void leaveCommunity(Long communityID) {
+        if (communityAccountRepository.getById(AccountID.get()).getAccount().getLoans().isEmpty()){
+            communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
+        } else if (loanRepository.existsAllByAccount_IdAndReturnedIsFalse(AccountID.get())){
+            communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
+        }
     }
 }

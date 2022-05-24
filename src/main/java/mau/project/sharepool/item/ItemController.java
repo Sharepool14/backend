@@ -11,6 +11,10 @@ import java.util.Set;
 public class ItemController {
     private final ItemService itemService;
 
+    /**
+     * @author Anthon Haväng
+     * @param service
+     */
     @Autowired
     public ItemController(ItemService service){
         this.itemService = service;
