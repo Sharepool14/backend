@@ -3,6 +3,7 @@ package mau.project.sharepool.loanpost;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.item.Item;
 import mau.project.sharepool.userinformation.UserInformation;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,13 +11,15 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/user/loan_post")
+@RequestMapping("/user/loan_post/")
 public class Loan_PostController {
     private final Loan_PostService service;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public Loan_PostController(Loan_PostService service) {
+    public Loan_PostController(Loan_PostService service, ModelMapper modelMapper) {
         this.service = service;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -25,7 +28,7 @@ public class Loan_PostController {
     }
 
     @GetMapping(path = "{communityID}/posts")
-    public List<Loan_Post> communitiesPost(@PathVariable Long communityID){
+    public List<LoanPostDTO> communitiesPost(@PathVariable Long communityID){
         return service.communitiesPost(communityID);
     }
 
@@ -40,8 +43,8 @@ public class Loan_PostController {
     }
 
     @PostMapping(path = "communities/{communityID}/post/create")
-    public void createPost(@RequestBody Loan_Post loan_post, @PathVariable Long communityID){
-        service.createPost(loan_post, communityID);
+    public void createPost(@RequestBody CreatePostDTO createPostDTO){
+        service.createPost(createPostDTO);
     }
 
     @GetMapping("{communityID}/posts/{postID}")
