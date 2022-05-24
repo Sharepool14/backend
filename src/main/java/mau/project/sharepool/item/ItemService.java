@@ -12,6 +12,11 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final AccountRepository accountRepository;
 
+    /**
+     * @author Anthon Haväng
+     * @param itemRepository
+     * @param accountRepository
+     */
     @Autowired
     public ItemService(ItemRepository itemRepository, AccountRepository accountRepository){
         this.itemRepository = itemRepository;

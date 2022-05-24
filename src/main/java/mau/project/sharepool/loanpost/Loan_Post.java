@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "loan_post")
 public class Loan_Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date start_date;
     private Date return_date;

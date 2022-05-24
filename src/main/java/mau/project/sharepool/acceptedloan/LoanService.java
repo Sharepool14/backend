@@ -8,7 +8,6 @@ import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.loanpost.Loan_PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -62,5 +61,11 @@ public class LoanService {
 
     public Set<Loan> userLoans() {
         return loanRepository.findAllByRequesterId(AccountID.get());
+    }
+
+    public void deleteYourReq(Long loan_id) {
+        if(!loanRepository.getById(loan_id).isAccepted() && loanRepository.getById(loan_id).getRequester().equals(AccountID.get())){
+            loanRepository.deleteById(loan_id);
+        }
     }
 }

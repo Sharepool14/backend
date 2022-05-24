@@ -187,6 +187,9 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.invited = invited;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     @Override
     public String toString() {
         return "Account{" +

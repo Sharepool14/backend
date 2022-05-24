@@ -11,19 +11,13 @@ import java.util.Set;
 @Entity
 @Table(name = "item")
 
+/**
+ * @author Anthon Haväng
+ */
 public class Item {
 
     @Id
-    @SequenceGenerator(
-            name = "item_id_seq",
-            sequenceName = "item_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "item_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
@@ -38,10 +32,20 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private Set<Loan_Post> loan_post;
 
+    /**
+     * @author Anthon Haväng
+     */
     public Item() {
 
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param account
+     * @param name
+     * @param description
+     * @param category
+     */
     public Item(Account account, String name, String description, Category category) {
         this.account = account;
         this.name = name;
@@ -49,6 +53,14 @@ public class Item {
         this.category = category;
     }
 
+    /**
+     * @author Anthon Haväng
+     * @param id
+     * @param account
+     * @param name
+     * @param description
+     * @param category
+     */
     public Item(long id, Account account, String name, String description, Category category) {
         this.id = id;
         this.account = account;
@@ -57,10 +69,16 @@ public class Item {
         this.category = category;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public void setId(long id) {
         this.id = id;
     }
@@ -73,18 +91,30 @@ public class Item {
         this.account = account;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -93,10 +123,16 @@ public class Item {
         return category;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public void setCategory(Category category) {
         this.category = category;
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     @Override
     public String toString() {
         return "Item{" +

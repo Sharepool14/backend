@@ -1,9 +1,7 @@
 package mau.project.sharepool.acceptedloan;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Set;
 
 @RestController
@@ -29,7 +27,6 @@ public class LoanController {
 
     @PostMapping("{postID}/request")
     public void requestLoan(@PathVariable Long postID){
-        System.out.println("!!!");
         loanService.requestLoan(postID);
     }
 
@@ -41,5 +38,10 @@ public class LoanController {
     @GetMapping("myLoanOrReq")
     public Set<Loan> getMyLoanOrReq(){
         return loanService.getMyLoanOrReq();
+    }
+
+    @DeleteMapping("your/{loan_id}")
+    public void deleteYourReq(@PathVariable Long loan_id){
+        loanService.deleteYourReq(loan_id);
     }
 }

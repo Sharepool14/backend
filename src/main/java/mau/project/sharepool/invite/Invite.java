@@ -11,16 +11,7 @@ import javax.persistence.*;
 public class Invite {
 
     @Id
-    @SequenceGenerator(
-            name = "invite_id_seq",
-            sequenceName = "invite_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "invite_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
