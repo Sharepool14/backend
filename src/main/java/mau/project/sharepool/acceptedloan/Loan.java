@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "Loan")
 public class Loan {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne
