@@ -30,4 +30,8 @@ public class Accepted_loanService {
             accepted_loanRepository.save(loan);
         }
     }
+
+    public void rejectLoan(Long loan_id) {
+        accepted_loanRepository.deleteById(loan_id);
+    }
 }
