@@ -30,4 +30,19 @@ public class LoanService {
             loanRepository.save(loan);
         }
     }
+
+    public void rejectLoan(Long loan_id) {
+        accepted_loanRepository.deleteById(loan_id);
+    }
+
+    /***
+     * Sets visible to false for the loan_post and saves loan with accepted = true
+     * @param loan_id
+     */
+    public void acceptLoan(Long loan_id) {
+       Loan loan = accepted_loanRepository.getById(loan_id);
+       loan.getLoan_post().setVisible(false);
+       loan.setAccepted(true);
+       accepted_loanRepository.save(loan);
+    }
 }

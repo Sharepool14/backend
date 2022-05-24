@@ -2,10 +2,7 @@ package mau.project.sharepool.acceptedloan;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping (path = "/user/loan")
@@ -16,6 +13,16 @@ public class LoanController {
     @Autowired
     public LoanController(LoanService accepted_loanService){
         this.loanService = accepted_loanService;
+    }
+
+    @DeleteMapping("{loan_id}")
+    public void rejectLoan(@PathVariable Long loan_id){
+        accepted_loanService.rejectLoan(loan_id);
+    }
+
+    @PostMapping("{loan_id}")
+    public void acceptLoan(@PathVariable Long loan_id){
+        accepted_loanService.acceptLoan(loan_id);
     }
 
     @PostMapping("{postID}/request")
