@@ -8,6 +8,8 @@ import mau.project.sharepool.loanpost.Loan_PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class LoanService {
     private LoanRepository loanRepository;
@@ -44,5 +46,13 @@ public class LoanService {
        loan.getLoan_post().setVisible(false);
        loan.setAccepted(true);
        loanRepository.save(loan);
+    }
+
+    public Set<Loan> getPendingLoanReqFromOthers() {
+        return loanRepository.findAllByAccountId(AccountID.get());
+    }
+
+    public Set<Loan> getMyLoanOrReq() {
+        return loanRepository.findAllByRequesterId(AccountID.get());
     }
 }

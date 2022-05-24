@@ -4,6 +4,8 @@ package mau.project.sharepool.acceptedloan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping (path = "/user/loan")
 
@@ -28,5 +30,15 @@ public class LoanController {
     @PostMapping("{postID}/request")
     public void requestLoan(@PathVariable Long postID){
         loanService.requestLoan(postID);
+    }
+
+    @GetMapping("othersInvite")
+    public Set<Loan> getPendingLoanReqFromOthers(){
+        return loanService.getPendingLoanReqFromOthers();
+    }
+
+    @GetMapping("myLoanOrReq")
+    public Set<Loan> getMyLoanOrReq(){
+        return loanService.getMyLoanOrReq();
     }
 }

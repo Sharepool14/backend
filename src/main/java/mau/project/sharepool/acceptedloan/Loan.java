@@ -30,16 +30,16 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Account reqeuster, Loan_Post loan_post, boolean accepted, boolean returned) {
-        this.requester = reqeuster;
+    public Loan(Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
+        this.requester = requester;
         this.loan_post = loan_post;
         this.accepted = accepted;
         this.returned = returned;
     }
 
-    public Loan(long id, Account reqeuster, Loan_Post loan_post, boolean accepted, boolean returned) {
+    public Loan(long id, Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
         this.id = id;
-        this.requester = reqeuster;
+        this.requester = requester;
         this.loan_post = loan_post;
         this.accepted = accepted;
         this.returned = returned;
@@ -89,7 +89,7 @@ public class Loan {
     public String toString() {
         return "Loan{" +
                 "id=" + id +
-                ", reqeuster=" + requester +
+                ", requester =" + requester +
                 ", loan_post=" + loan_post +
                 ", accepted=" + accepted +
                 ", returned=" + returned +
