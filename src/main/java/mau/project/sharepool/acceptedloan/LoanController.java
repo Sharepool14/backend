@@ -2,6 +2,8 @@ package mau.project.sharepool.acceptedloan;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -31,12 +33,12 @@ public class LoanController {
     }
 
     @GetMapping("othersInvite")
-    public Set<Loan> getPendingLoanReqFromOthers(){
+    public List<LoanDTO> getPendingLoanReqFromOthers(){
         return loanService.getPendingLoanReqFromOthers();
     }
 
     @GetMapping("myLoanOrReq")
-    public Set<Loan> getMyLoanOrReq(){
+    public List<LoanDTO> getMyLoanOrReq(){
         return loanService.getMyLoanOrReq();
     }
 
