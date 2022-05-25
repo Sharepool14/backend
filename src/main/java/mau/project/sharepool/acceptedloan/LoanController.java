@@ -44,4 +44,9 @@ public class LoanController {
     public void deleteYourReq(@PathVariable Long loan_id){
         loanService.deleteYourReq(loan_id);
     }
+
+    @PostMapping("{loan_id}/return")
+    public void returnLoan(@PathVariable Long loan_id){
+        loanService.itemReturned(loan_id);
+    }
 }
