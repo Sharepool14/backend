@@ -24,17 +24,16 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(String firstname, String lastname, String phone, String city, String zipcode, String street) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.city = city;
         this.zipcode = zipcode;
         this.street = street;
-        this.account = account;
     }
 
-    public UserInformation(Long id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(Long id, String firstname, String lastname, String phone, String city, String zipcode, String street) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -42,7 +41,6 @@ public class UserInformation {
         this.city = city;
         this.zipcode = zipcode;
         this.street = street;
-        this.account = account;
     }
 
     public Long getId() {
@@ -111,15 +109,14 @@ public class UserInformation {
 
     @Override
     public String toString() {
-        return "UserDetails{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", city='" + city + '\'' +
-                ", zipcode='" + zipcode + '\'' +
-                ", street='" + street + '\'' +
-                ", account=" + account +
-                '}';
+        return "UserInformation{" +
+                  "id=" + id +
+                  ", firstname='" + firstname + '\'' +
+                  ", lastname='" + lastname + '\'' +
+                  ", phone='" + phone + '\'' +
+                  ", city='" + city + '\'' +
+                  ", zipcode='" + zipcode + '\'' +
+                  ", street='" + street + '\'' +
+                  '}';
     }
 }

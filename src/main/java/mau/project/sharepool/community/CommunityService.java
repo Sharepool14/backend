@@ -11,6 +11,7 @@ import mau.project.sharepool.loanpost.Loan_Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -120,11 +121,16 @@ public class CommunityService {
      * @author Anthon Haväng
      * @param communityID
      */
+    @Transactional
     public void leaveCommunity(Long communityID) {
+        communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
+        /*
         if (communityAccountRepository.getById(AccountID.get()).getAccount().getLoans().isEmpty()){
             communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
         } else if (loanRepository.existsAllByAccount_IdAndReturnedIsFalse(AccountID.get())){
             communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
         }
+
+         */
     }
 }
