@@ -68,4 +68,12 @@ public class LoanService {
             loanRepository.deleteById(loan_id);
         }
     }
+
+    public void itemReturned(Long loan_id) {
+        if(loanRepository.getById(loan_id).getAccount().getId().equals(AccountID.get())){
+            Loan loan = loanRepository.getById(loan_id);
+            loan.setReturned(true);
+            loanRepository.save(loan);
+        }
+    }
 }
