@@ -27,9 +27,9 @@ public class ItemService {
         return itemRepository.findAllByAccountId(AccountID.get());
     }
 
-    public void addItemBy(Item item, Long account_id) {
-        Account account = accountRepository.getById(account_id);
-        item.setAccount_id(account);
+    public void addItemBy(Item item) {
+        Account account = accountRepository.getById(AccountID.get());
+        item.setAccount(accountRepository.getById(AccountID.get()));
         account.getItems().add(item);
         accountRepository.save(account);
     }
