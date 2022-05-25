@@ -4,10 +4,15 @@ import mau.project.sharepool.account.Account;
 import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
+import mau.project.sharepool.invite.Invite;
+import mau.project.sharepool.invite.InviteDTO;
 import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.loanpost.Loan_PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,16 +56,36 @@ public class LoanService {
        loanRepository.save(loan);
     }
 
-    public Set<Loan> getPendingLoanReqFromOthers() {
-        return loanRepository.findAllByAccountId(AccountID.get());
+    public List<LoanDTO> getPendingLoanReqFromOthers() {
+        List<Loan> loans = loanRepository.findAllByAccountId(AccountID.get());
+        List <LoanDTO> loanDTOS = new ArrayList<>();
+        loans.stream()
+                .forEach(loan -> {
+                    LoanDTO dto = new LoanDTO();
+                    dto.setId(loan.getId());
+                    dto.setAccepted(loan.isAccepted());
+                    dto.setReturned(loan.isReturned());
+                    dto.setItemOwnerName(loan.getAccount().getUsername());
+                    dto.setRequesterName(loan.getRequester().getUsername());
+                    dto.setLoan_post_id(loan.getLoan_post().getId());
+                });
+        return loanDTOS;
     }
 
-    public Set<Loan> getMyLoanOrReq() {
-        return loanRepository.findAllByRequesterId(AccountID.get());
-    }
-
-    public Set<Loan> userLoans() {
-        return loanRepository.findAllByRequesterId(AccountID.get());
+    public List<LoanDTO> getMyLoanOrReq() {
+        List<Loan> loans = loanRepository.findAllByRequesterId(AccountID.get());
+        List<LoanDTO> loanDTOS = new ArrayList<>();
+        loans.stream()
+                .forEach(loan -> {
+                    LoanDTO dto = new LoanDTO();
+                    dto.setId(loan.getId());
+                    dto.setAccepted(loan.isAccepted());
+                    dto.setReturned(loan.isReturned());
+                    dto.setItemOwnerName(loan.getAccount().getUsername());
+                    dto.setRequesterName(loan.getRequester().getUsername());
+                    dto.setLoan_post_id(loan.getLoan_post().getId());
+                });
+        return loanDTOS;
     }
 
     public void deleteYourReq(Long loan_id) {
