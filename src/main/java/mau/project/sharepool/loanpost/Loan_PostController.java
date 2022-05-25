@@ -6,7 +6,6 @@ import mau.project.sharepool.userinformation.UserInformation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -14,12 +13,10 @@ import java.util.Set;
 @RequestMapping("/user/loan_post/")
 public class Loan_PostController {
     private final Loan_PostService service;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public Loan_PostController(Loan_PostService service, ModelMapper modelMapper) {
+    public Loan_PostController(Loan_PostService service) {
         this.service = service;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping

@@ -50,11 +50,6 @@ public class SharepoolApplication {
 	}
 
 	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-
-	@Bean
 	@Autowired
 	public CommandLineRunner commandLineRunner(
 			AccountRepository accountRepository,
