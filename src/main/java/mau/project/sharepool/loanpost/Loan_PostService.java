@@ -1,10 +1,13 @@
 package mau.project.sharepool.loanpost;
 
+import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +23,11 @@ public class Loan_PostService {
     }
 
     public List<Loan_Post> all() {
-        return loan_postRepository.findAll();
+        List<Long> communtiesIDs = new ArrayList<>();
+        Set<CommunityAccount> communites = communityAccountRepository.findAllByAccountId(AccountID.get());
+        communites.stream()
+                .forEach(communityAccount -> communtiesIDs.add(communityAccount.getCommunity().getId()));
+        return loan_postRepository.findAllByCommunity_idInAndVisibleIsTrue(communtiesIDs);
     }
 
     public void updatePost(Loan_Post loan_post, Long communityID) {

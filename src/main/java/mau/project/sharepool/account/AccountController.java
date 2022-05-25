@@ -5,6 +5,7 @@ import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -61,5 +62,11 @@ public class AccountController {
     @PostMapping("{account_id}")
     public void changeAccount(@RequestBody UserInformation userDetails, @PathVariable Long account_id){
         loginService.changeAccount(userDetails, account_id);
+    }
+
+    @GetMapping("test")
+    public Account test() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        return loginService.ad();
     }
 }
