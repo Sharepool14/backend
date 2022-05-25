@@ -55,9 +55,7 @@ public class InviteService {
         if (inviteRepository.existsByIdAndInvitedId(invite_id,account_id)) {
             Account account = new Account();
             account.setId(account_id);
-            Community community = new Community();
-            community.setId(account_id);
-            communityAccountRepository.save(new CommunityAccount(account,community,1));
+            communityAccountRepository.save(new CommunityAccount(account,inviteRepository.getById(invite_id).getCommunity(),1));
             inviteRepository.deleteById(invite_id);
         }
     }
