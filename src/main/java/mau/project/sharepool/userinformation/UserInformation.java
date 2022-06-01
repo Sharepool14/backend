@@ -109,15 +109,14 @@ public class UserInformation {
 
     @Override
     public String toString() {
-        return "UserDetails{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", city='" + city + '\'' +
-                ", zipcode='" + zipcode + '\'' +
-                ", street='" + street + '\'' +
-                ", account=" + account +
-                '}';
+        return "UserInformation{" +
+                  "id=" + id +
+                  ", firstname='" + firstname + '\'' +
+                  ", lastname='" + lastname + '\'' +
+                  ", phone='" + phone + '\'' +
+                  ", city='" + city + '\'' +
+                  ", zipcode='" + zipcode + '\'' +
+                  ", street='" + street + '\'' +
+                  '}';
     }
 }
