@@ -48,38 +48,4 @@ public class SharepoolApplication {
 			}
 		};
 	}
-
-	@Bean
-	@Autowired
-	public CommandLineRunner commandLineRunner(
-			AccountRepository accountRepository,
-			ItemRepository itemRepository,
-			CategoryRepository categoryRepository,
-			CommunityRepository communityRepository,
-			CommunityAccountRepository communityAccountRepository) {
-
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				List<Account> accounts = new ArrayList<>();
-				accounts.add(new Account("hugo@outlook.com","$2a$10$RVY94awLCW2zv6VVYxtu3.yN.93p7pLyEslv.VloRavZJ/vAkcmNC",new UserInformation("Hugo","Lindstedt","0123-1240","Eslöv","41231","Gata 1")));
-				accounts.add(new Account("anton@outlook.com","$2a$10$RVY94awLCW2zv6VVYxtu3.yN.93p7pLyEslv.VloRavZJ/vAkcmNC",new UserInformation("anton","Lindstedt","0123-1240","Eslöv","41231","Gata 1")));
-				accounts.add(new Account("lisa@outlook.com","$2a$10$RVY94awLCW2zv6VVYxtu3.yN.93p7pLyEslv.VloRavZJ/vAkcmNC",new UserInformation("lisa","Lindstedt","0123-1240","Eslöv","41231","Gata 1")));
-				accounts.add(new Account("theo@outlook.com","$2a$10$RVY94awLCW2zv6VVYxtu3.yN.93p7pLyEslv.VloRavZJ/vAkcmNC",new UserInformation("theo","Lindstedt","0123-1240","Eslöv","41231","Gata 1")));
-
-				Category category = categoryRepository.save(new Category("Category 1"));
-				Community c1 = communityRepository.save(new Community("Community 1"));
-				Community c2 = communityRepository.save(new Community("Community 2"));
-
-				accounts.stream().forEach(account -> {
-					Account a = accountRepository.save(account);
-					itemRepository.save(new Item(a,a.getUserInformation().getFirstname()+ " Item","Description",category));
-				});
-
-				communityAccountRepository.save(new CommunityAccount(accounts.get(1),c1,3));
-				communityAccountRepository.save(new CommunityAccount(accounts.get(2),c2,3));
-
-			}
-		};
-	}
 }

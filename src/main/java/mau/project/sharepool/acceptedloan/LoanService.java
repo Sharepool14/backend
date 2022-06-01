@@ -68,6 +68,7 @@ public class LoanService {
                     dto.setItemOwnerName(loan.getAccount().getUsername());
                     dto.setRequesterName(loan.getRequester().getUsername());
                     dto.setLoan_post_id(loan.getLoan_post().getId());
+                    loanDTOS.add(dto);
                 });
         return loanDTOS;
     }
@@ -84,6 +85,7 @@ public class LoanService {
                     dto.setItemOwnerName(loan.getAccount().getUsername());
                     dto.setRequesterName(loan.getRequester().getUsername());
                     dto.setLoan_post_id(loan.getLoan_post().getId());
+                    loanDTOS.add(dto);
                 });
         return loanDTOS;
     }
