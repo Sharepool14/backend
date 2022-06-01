@@ -20,8 +20,8 @@ public class Loan_PostController {
     }
 
     @GetMapping
-    public List<Loan_Post> all(){
-        return service.all();
+    public List<LoanPostDTO> all(){
+        return service.getUserPosts();
     }
 
     @GetMapping(path = "{communityID}/posts")

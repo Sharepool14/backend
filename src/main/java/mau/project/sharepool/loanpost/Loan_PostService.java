@@ -9,6 +9,8 @@ import mau.project.sharepool.item.Item;
 import mau.project.sharepool.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -98,5 +100,25 @@ public class Loan_PostService {
         } else {
             System.out.println("You are not a member or this item dont belong to you");
         }
+    }
+
+    @GetMapping
+    public List<LoanPostDTO> getUserPosts() {
+        List<LoanPostDTO> posts = new ArrayList<>();
+        loan_postRepository.findAllByAccountId(AccountID.get()).stream()
+                .forEach(loan_post -> {
+                    posts.add(new LoanPostDTO(
+                            loan_post.getId(),
+                            loan_post.getStart_date(),
+                            loan_post.getReturn_date(),
+                            loan_post.getCommunity().getName(),
+                            loan_post.getItem().getName(),
+                            loan_post.getAccount().getUsername(),
+                            loan_post.getItem().getDescription()
+                    ));
+
+                });
+
+        return posts;
     }
 }
