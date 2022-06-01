@@ -4,27 +4,23 @@ import mau.project.sharepool.account.Account;
 import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
-import mau.project.sharepool.invite.Invite;
-import mau.project.sharepool.invite.InviteDTO;
-import mau.project.sharepool.loanpost.Loan_Post;
-import mau.project.sharepool.loanpost.Loan_PostRepository;
+import mau.project.sharepool.loanpost.LoanPost;
+import mau.project.sharepool.loanpost.LoanPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class LoanService {
     private LoanRepository loanRepository;
     private CommunityAccountRepository communityAccountRepository;
-    private Loan_PostRepository loan_postRepository;
+    private LoanPostRepository loan_postRepository;
     private AccountRepository accountRepository;
 
     @Autowired
-    public LoanService(LoanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, Loan_PostRepository loan_postRepository, AccountRepository accountRepository){
+    public LoanService(LoanRepository accepted_loanRepository, CommunityAccountRepository communityAccountRepository, LoanPostRepository loan_postRepository, AccountRepository accountRepository){
         this.loanRepository = accepted_loanRepository;
         this.communityAccountRepository = communityAccountRepository;
         this.loan_postRepository = loan_postRepository;
@@ -32,11 +28,13 @@ public class LoanService {
     }
 
     public void requestLoan(Long postID) {
-        Loan_Post loan_post = loan_postRepository.getById(postID);
+        LoanPost loan_post = loan_postRepository.getById(postID);
         if(communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(),loan_post.getCommunity().getId())){
-            Account account = new Account();
-            account.setId(AccountID.get());
-            Loan loan = new Loan(account, loan_post, false, false);
+            Account owner = new Account();
+            owner.setId(loan_post.getAccount().getId());
+            Account requester = new Account();
+            requester.setId(AccountID.get());
+            Loan loan = new Loan(owner,requester, loan_post, false, false);
             loanRepository.save(loan);
         }
     }
@@ -68,6 +66,7 @@ public class LoanService {
                     dto.setItemOwnerName(loan.getAccount().getUsername());
                     dto.setRequesterName(loan.getRequester().getUsername());
                     dto.setLoan_post_id(loan.getLoan_post().getId());
+                    loanDTOS.add(dto);
                 });
         return loanDTOS;
     }
@@ -84,6 +83,7 @@ public class LoanService {
                     dto.setItemOwnerName(loan.getAccount().getUsername());
                     dto.setRequesterName(loan.getRequester().getUsername());
                     dto.setLoan_post_id(loan.getLoan_post().getId());
+                    loanDTOS.add(dto);
                 });
         return loanDTOS;
     }
