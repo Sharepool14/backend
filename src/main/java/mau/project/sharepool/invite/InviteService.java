@@ -1,5 +1,9 @@
 package mau.project.sharepool.invite;
 
+import mau.project.sharepool.account.Account;
+import mau.project.sharepool.community.Community;
+import mau.project.sharepool.communityaccount.CommunityAccount;
+import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +15,12 @@ import java.util.List;
 @Service
 public class InviteService {
     private InviteRepository inviteRepository;
+    private CommunityAccountRepository communityAccountRepository;
 
     @Autowired
-    public InviteService(InviteRepository inviteRepository){
+    public InviteService(InviteRepository inviteRepository,CommunityAccountRepository communityAccountRepository){
         this.inviteRepository = inviteRepository;
+        this.communityAccountRepository = communityAccountRepository;
     }
 
     public List<InviteDTO> getSpecificInvite() {
@@ -45,9 +51,12 @@ public class InviteService {
     }
 
     public void handleInvite(Long invite_id) {
-        if (inviteRepository.existsByIdAndInvitedId(invite_id,AccountID.get())) {
-            Invite invite = inviteRepository.getById(invite_id);
-            inviteRepository.test2(true,invite.getInvited().getId(),invite.getCommunity().getId());
+        Long account_id = AccountID.get();
+        if (inviteRepository.existsByIdAndInvitedId(invite_id,account_id)) {
+            Account account = new Account();
+            account.setId(account_id);
+            communityAccountRepository.save(new CommunityAccount(account,inviteRepository.getById(invite_id).getCommunity(),1));
+            inviteRepository.deleteById(invite_id);
         }
     }
 }

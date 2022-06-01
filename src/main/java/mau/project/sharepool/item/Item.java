@@ -87,7 +87,7 @@ public class Item {
         return account;
     }
 
-    public void setAccount_id(Account account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 

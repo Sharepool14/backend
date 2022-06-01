@@ -89,9 +89,13 @@ public class CommunityService {
     }
 
     public void createInvite(Long community_id, String username) {
+
         if (communityAccountRepository.existsByAccountIdAndCommunityIdAndRoleGreaterThan(AccountID.get(),community_id,1)) {
             Account account = accountRepository.findByUsername(username);
+            System.out.println(account.getUsername());
+            System.out.println("!!");
             if (account != null) {
+                System.out.println("!!!");
 
                 Account inviter = new Account();
                 inviter.setId(AccountID.get());
@@ -123,14 +127,11 @@ public class CommunityService {
      */
     @Transactional
     public void leaveCommunity(Long communityID) {
-        communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
-        /*
+      
         if (communityAccountRepository.getById(AccountID.get()).getAccount().getLoans().isEmpty()){
             communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
         } else if (loanRepository.existsAllByAccount_IdAndReturnedIsFalse(AccountID.get())){
             communityAccountRepository.deleteByAccount_IdAndCommunity_Id(AccountID.get(), communityID);
-        }
-
-         */
+        }      
     }
 }
