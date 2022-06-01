@@ -1,7 +1,7 @@
 package mau.project.sharepool.account;
 
 import mau.project.sharepool.config.AccountID;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -73,7 +73,7 @@ public class AccountController {
     }
 
     @GetMapping("posts")
-    public Set<Loan_Post> getYourPosts(){
+    public Set<LoanPost> getYourPosts(){
         return accountService.getYourPosts();
     }
 

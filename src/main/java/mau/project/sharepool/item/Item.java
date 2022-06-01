@@ -3,7 +3,7 @@ package mau.project.sharepool.item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.category.Category;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class Item {
     private Category category;
 
     @OneToMany(mappedBy = "item")
-    private Set<Loan_Post> loan_post;
+    private Set<LoanPost> loan_post;
 
     /**
      * @author Anthon Haväng

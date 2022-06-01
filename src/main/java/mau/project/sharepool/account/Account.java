@@ -6,7 +6,7 @@ import mau.project.sharepool.acceptedloan.Loan;
 import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.item.Item;
 //import mau.project.sharepool.itemrequester.Item_Requester;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,7 +39,7 @@ public class Account implements org.springframework.security.core.userdetails.Us
     Set<Item> items;
 
     @OneToMany(mappedBy = "account")
-    Set<Loan_Post> loanPosts;
+    Set<LoanPost> loanPosts;
 
     @OneToMany(mappedBy = "account")
     Set<Loan> loans;
@@ -147,11 +147,11 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.items = items;
     }
 
-    public Set<Loan_Post> getLoanPosts() {
+    public Set<LoanPost> getLoanPosts() {
         return loanPosts;
     }
 
-    public void setLoanPosts(Set<Loan_Post> loanPosts) {
+    public void setLoanPosts(Set<LoanPost> loanPosts) {
         this.loanPosts = loanPosts;
     }
 

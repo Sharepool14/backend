@@ -2,7 +2,7 @@ package mau.project.sharepool.community;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -92,7 +92,7 @@ public class CommunityController {
      * @return
      */
     @GetMapping("community/{community_id}/posts")
-    public Set<Loan_Post> getThisCommunitysPosts(@PathVariable Long community_id){
+    public Set<LoanPost> getThisCommunitysPosts(@PathVariable Long community_id){
         return service.getThisCommunitysPosts(community_id);
     }
 

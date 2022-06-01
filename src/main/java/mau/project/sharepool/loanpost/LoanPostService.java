@@ -14,19 +14,19 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class Loan_PostService {
-    private final Loan_PostRepository loan_postRepository;
+public class LoanPostService {
+    private final LoanPostRepository loan_postRepository;
     private final CommunityAccountRepository communityAccountRepository;
     private final ItemRepository itemRepository;
 
     @Autowired
-    private Loan_PostService(Loan_PostRepository loan_postRepository, CommunityAccountRepository communityAccountRepository,ItemRepository itemRepository) {
+    private LoanPostService(LoanPostRepository loan_postRepository, CommunityAccountRepository communityAccountRepository, ItemRepository itemRepository) {
         this.loan_postRepository = loan_postRepository;
         this.communityAccountRepository = communityAccountRepository;
         this.itemRepository = itemRepository;
     }
 
-    public List<Loan_Post> all() {
+    public List<LoanPost> all() {
         List<Long> communtiesIDs = new ArrayList<>();
         Set<CommunityAccount> communites = communityAccountRepository.findAllByAccountId(AccountID.get());
         communites.stream()
@@ -34,8 +34,8 @@ public class Loan_PostService {
         return loan_postRepository.findAllByCommunity_idInAndVisibleIsTrue(communtiesIDs);
     }
 
-    public void updatePost(Loan_Post loan_post, Long communityID) {
-        Loan_Post loan_post1 = loan_postRepository.getById(loan_post.getId());
+    public void updatePost(LoanPost loan_post, Long communityID) {
+        LoanPost loan_post1 = loan_postRepository.getById(loan_post.getId());
         loan_post1.setStart_date(loan_post.getStart_date());
         loan_post1.setReturn_date(loan_post.getReturn_date());
         loan_post1.setItem(loan_post.getItem());
@@ -68,7 +68,7 @@ public class Loan_PostService {
         } else return null;
     }
 
-    public Loan_Post getSpecificPost(Long communityID, Long postID) {
+    public LoanPost getSpecificPost(Long communityID, Long postID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)) {
             return loan_postRepository.getById(postID);
         } else return null;
@@ -82,7 +82,7 @@ public class Loan_PostService {
                 itemRepository.existsByIdAndAccountId(createPostDTO.getItem_id(), account_id)
                 && !loan_postRepository.existsByAccountIdAndItemIdAndVisibleIsTrueAndCommunityId(account_id,createPostDTO.getItem_id(),createPostDTO.getCommunity_id())) {
 
-            Loan_Post post = new Loan_Post();
+            LoanPost post = new LoanPost();
             Account account = c.getAccount();
             Community community = c.getCommunity();
             Item item = new Item();

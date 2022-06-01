@@ -9,11 +9,10 @@ import mau.project.sharepool.item.Item;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "loan_post")
-public class Loan_Post {
+public class LoanPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -37,10 +36,10 @@ public class Loan_Post {
     private Account account;
     private boolean visible;
 
-    public Loan_Post() {
+    public LoanPost() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, Item item, Community community, boolean visible) {
+    public LoanPost(Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
@@ -48,7 +47,7 @@ public class Loan_Post {
         this.visible = visible;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, boolean visible) {
+    public LoanPost(long id, Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;

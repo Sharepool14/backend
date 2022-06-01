@@ -1,13 +1,12 @@
 package mau.project.sharepool.community;
 
 import mau.project.sharepool.communityaccount.CommunityAccount;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 import mau.project.sharepool.invite.Invite;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -21,13 +20,13 @@ public class Community {
     private Set<CommunityAccount> communityAccounts;
 
     @OneToMany(mappedBy = "community")
-    private Set<Loan_Post> loan_posts;
+    private Set<LoanPost> loan_posts;
 
     @OneToMany(mappedBy = "community" )
     private Set<Invite> invites;
 
     @OneToMany(mappedBy = "community")
-    private Set<Loan_Post> posts;
+    private Set<LoanPost> posts;
 
     public Community() {
     }
@@ -58,11 +57,11 @@ public class Community {
         this.name = name;
     }
 
-    public Set<Loan_Post> getLoan_posts() {
+    public Set<LoanPost> getLoan_posts() {
         return loan_posts;
     }
 
-    public void setLoan_posts(Set<Loan_Post> loan_posts) {
+    public void setLoan_posts(Set<LoanPost> loan_posts) {
         this.loan_posts = loan_posts;
     }
 

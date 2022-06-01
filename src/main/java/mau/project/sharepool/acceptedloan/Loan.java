@@ -3,7 +3,7 @@ package mau.project.sharepool.acceptedloan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.loanpost.Loan_Post;
+import mau.project.sharepool.loanpost.LoanPost;
 
 import javax.persistence.*;
 
@@ -18,7 +18,7 @@ public class Loan {
     private Account requester;
 
     @OneToOne
-    private Loan_Post loan_post;
+    private LoanPost loan_post;
 
     private boolean accepted;
 
@@ -31,14 +31,15 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
+    public Loan(Account owner, Account requester, LoanPost loan_post, boolean accepted, boolean returned) {
         this.requester = requester;
+        this.account = owner;
         this.loan_post = loan_post;
         this.accepted = accepted;
         this.returned = returned;
     }
 
-    public Loan(long id, Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
+    public Loan(long id, Account requester, LoanPost loan_post, boolean accepted, boolean returned) {
         this.id = id;
         this.requester = requester;
         this.loan_post = loan_post;
@@ -62,11 +63,11 @@ public class Loan {
         this.requester = reqeuster;
     }
 
-    public Loan_Post getLoan_post() {
+    public LoanPost getLoan_post() {
         return loan_post;
     }
 
-    public void setLoan_post(Loan_Post loan_post) {
+    public void setLoan_post(LoanPost loan_post) {
         this.loan_post = loan_post;
     }
 
