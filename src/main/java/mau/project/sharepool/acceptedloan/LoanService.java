@@ -36,7 +36,9 @@ public class LoanService {
         if(communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(),loan_post.getCommunity().getId())){
             Account account = new Account();
             account.setId(AccountID.get());
-            Loan loan = new Loan(account, loan_post, false, false);
+            Account owner = new Account();
+            owner.setId(loan_post.getAccount().getId());
+            Loan loan = new Loan(owner,account, loan_post, false, false);
             loanRepository.save(loan);
         }
     }
