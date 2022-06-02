@@ -7,6 +7,7 @@ public class LoanDTO {
     private String itemOwnerName;
     private String requesterName;
     private Long loan_post_id;
+    private Long community_id;
 
     public LoanDTO() {
     }
@@ -18,6 +19,14 @@ public class LoanDTO {
         this.itemOwnerName = itemOwnerName;
         this.requesterName = requesterName;
         this.loan_post_id = loan_post_id;
+    }
+
+    public Long getCommunity_id() {
+        return community_id;
+    }
+
+    public void setCommunity_id(Long community_id) {
+        this.community_id = community_id;
     }
 
     public Long getId() {
