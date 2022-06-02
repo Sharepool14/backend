@@ -39,9 +39,10 @@ public class Loan {
         this.returned = returned;
     }
 
-    public Loan(long id, Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
+    public Loan(long id, Account owner, Account requester, Loan_Post loan_post, boolean accepted, boolean returned) {
         this.id = id;
         this.requester = requester;
+        this.account = owner;
         this.loan_post = loan_post;
         this.accepted = accepted;
         this.returned = returned;
