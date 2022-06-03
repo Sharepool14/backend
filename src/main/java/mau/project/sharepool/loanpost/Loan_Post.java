@@ -2,9 +2,10 @@ package mau.project.sharepool.loanpost;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import mau.project.sharepool.account.Account;
 import mau.project.sharepool.community.Community;
 import mau.project.sharepool.item.Item;
-import mau.project.sharepool.itemrequester.Item_Requester;
+//import mau.project.sharepool.itemrequester.Item_Requester;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,53 +15,45 @@ import java.util.Set;
 @Table(name = "loan_post")
 public class Loan_Post {
     @Id
-    @SequenceGenerator(
-            name = "loan_post_id_seq",
-            sequenceName = "loan_post_id_seq",
-            allocationSize = 1
-    )
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "loan_post_id_seq"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date start_date;
     private Date return_date;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    //@JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @JoinColumn
     private Community community;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(mappedBy = "loan_post")
-    private Set<Item_Requester> item_requester;
+    private Set<Item_Requester> item_requester;*/
+
+    @ManyToOne @JsonIgnore
+    private Account account;
     private boolean visible;
 
     public Loan_Post() {
     }
 
-    public Loan_Post(Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
+    public Loan_Post(Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
-        this.item_requester = item_requester;
         this.visible = visible;
     }
 
-    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, Set<Item_Requester> item_requester, boolean visible) {
+    public Loan_Post(long id, Date start_date, Date return_date, Item item, Community community, boolean visible) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
         this.item = item;
         this.community = community;
-        this.item_requester = item_requester;
         this.visible = visible;
     }
 
@@ -104,20 +97,20 @@ public class Loan_Post {
         this.community = community;
     }
 
-    public Set<Item_Requester> getItem_requester() {
-        return item_requester;
-    }
-
-    public void setItem_requester(Set<Item_Requester> item_requester) {
-        this.item_requester = item_requester;
-    }
-
     public boolean isVisible() {
         return visible;
     }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -128,7 +121,7 @@ public class Loan_Post {
                 ", return_date=" + return_date +
                 ", item=" + item +
                 ", community=" + community +
-                ", item_requester=" + item_requester +
+                ", account=" + account +
                 ", visible=" + visible +
                 '}';
     }

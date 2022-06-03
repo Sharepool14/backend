@@ -11,16 +11,18 @@ import java.util.Set;
 public class ItemController {
     private final ItemService itemService;
 
+    /**
+     * @author Anthon Haväng
+     * @param service
+     */
     @Autowired
     public ItemController(ItemService service){
         this.itemService = service;
     }
 
     @PostMapping("/item/create")
-    public void addItemBy(@RequestBody Item item, @PathVariable Long account_id) {
-        if (AccountID.get().equals(account_id)) {
-            itemService.addItemBy(item, account_id);
-        }
+    public void addItemBy(@RequestBody Item item) {
+            itemService.addItemBy(item);
     }
 
     @PostMapping("items/{item_id}")

@@ -8,16 +8,7 @@ import javax.persistence.*;
 public class Image {
 
     @Id
-    @SequenceGenerator(
-            name = "image_id_seq",
-            sequenceName = "image_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "image_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String path;
     private int item_id;
