@@ -9,16 +9,7 @@ import javax.persistence.*;
 public class UserInformation {
 
     @Id
-    @SequenceGenerator(
-            name = "user_details_id_seq",
-            sequenceName = "user_details_id_seq",
-            allocationSize = 1)
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_details_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;
@@ -33,17 +24,16 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(String firstname, String lastname, String phone, String city, String zipcode, String street) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.city = city;
         this.zipcode = zipcode;
         this.street = street;
-        this.account = account;
     }
 
-    public UserInformation(Long id, String firstname, String lastname, String phone, String city, String zipcode, String street, Account account) {
+    public UserInformation(Long id, String firstname, String lastname, String phone, String city, String zipcode, String street) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -51,7 +41,6 @@ public class UserInformation {
         this.city = city;
         this.zipcode = zipcode;
         this.street = street;
-        this.account = account;
     }
 
     public Long getId() {
@@ -120,15 +109,14 @@ public class UserInformation {
 
     @Override
     public String toString() {
-        return "UserDetails{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", city='" + city + '\'' +
-                ", zipcode='" + zipcode + '\'' +
-                ", street='" + street + '\'' +
-                ", account=" + account +
-                '}';
+        return "UserInformation{" +
+                  "id=" + id +
+                  ", firstname='" + firstname + '\'' +
+                  ", lastname='" + lastname + '\'' +
+                  ", phone='" + phone + '\'' +
+                  ", city='" + city + '\'' +
+                  ", zipcode='" + zipcode + '\'' +
+                  ", street='" + street + '\'' +
+                  '}';
     }
 }

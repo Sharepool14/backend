@@ -5,6 +5,9 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author Anthon Haväng
+ */
 @Embeddable
 public class CommunityAccountKey implements Serializable {
     @Column(name = "account_id")
@@ -13,9 +16,15 @@ public class CommunityAccountKey implements Serializable {
     @Column(name = "community_id")
     Long community_id;
 
+    /**
+     * @author Anthon Haväng
+     */
     public CommunityAccountKey() {
     }
 
+    /**
+     * @author Anthon Haväng
+     */
     public CommunityAccountKey(Long account_id, Long community_id) {
         this.account_id = account_id;
         this.community_id = community_id;
@@ -31,6 +40,9 @@ public class CommunityAccountKey implements Serializable {
     }
     */
 
+    /**
+     * @author Anthon Haväng
+     */
     @Override
     public int hashCode() {
         return Objects.hash(account_id, community_id);

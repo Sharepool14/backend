@@ -2,9 +2,10 @@ package mau.project.sharepool.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import mau.project.sharepool.acceptedloan.Loan;
 import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.item.Item;
-import mau.project.sharepool.itemrequester.Item_Requester;
+//import mau.project.sharepool.itemrequester.Item_Requester;
 import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;
@@ -20,18 +21,10 @@ import java.util.Set;
 @Table(name = "account")
 public class Account implements org.springframework.security.core.userdetails.UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "account_id_seq",
-            sequenceName = "account_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "account_id_seq"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonView(Views.response.class)
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -39,14 +32,17 @@ public class Account implements org.springframework.security.core.userdetails.Us
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
     private UserInformation userInformation;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account") @JsonIgnore
     Set<CommunityAccount> communityAccounts;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL) @JsonIgnore
     Set<Item> items;
 
     @OneToMany(mappedBy = "account")
-    Set<Item_Requester> item_requesters;
+    Set<Loan_Post> loanPosts;
+
+    @OneToMany(mappedBy = "account")
+    Set<Loan> loans;
 
     @JsonIgnore
     @Transient
@@ -151,6 +147,49 @@ public class Account implements org.springframework.security.core.userdetails.Us
         this.items = items;
     }
 
+    public Set<Loan_Post> getLoanPosts() {
+        return loanPosts;
+    }
+
+    public void setLoanPosts(Set<Loan_Post> loanPosts) {
+        this.loanPosts = loanPosts;
+    }
+
+    public Set<CommunityAccount> getCommunityAccounts() {
+        return communityAccounts;
+    }
+
+    public void setCommunityAccounts(Set<CommunityAccount> communityAccounts) {
+        this.communityAccounts = communityAccounts;
+    }
+
+    public Set<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Set<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public List<Invite> getInviter() {
+        return inviter;
+    }
+
+    public void setInviter(List<Invite> inviter) {
+        this.inviter = inviter;
+    }
+
+    public List<Invite> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<Invite> invited) {
+        this.invited = invited;
+    }
+
+    /**
+     * @author Anthon Haväng
+     */
     @Override
     public String toString() {
         return "Account{" +

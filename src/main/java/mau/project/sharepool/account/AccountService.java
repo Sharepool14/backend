@@ -5,6 +5,7 @@ import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import mau.project.sharepool.item.ItemRepository;
+import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -79,5 +80,9 @@ public class AccountService implements UserDetailsService {
         inList.add(19);
         //inList.add(37);
         return accountRepository.test(inList);
+    }
+
+    public Set<Loan_Post> getYourPosts() {
+        return accountRepository.getById(AccountID.get()).getLoanPosts();
     }
 }
