@@ -6,11 +6,16 @@ import mau.project.sharepool.userinformation.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+
+/**
+ *@author Hugo Lindstedt
+ *
+ */
 
 @RestController
 @RequestMapping("/user/")
@@ -24,7 +29,6 @@ public class AccountController {
 
     @GetMapping("account/{id}")
     public Optional<Account> getLogin(@PathVariable("id") Long l) {
-        System.out.println(l);
         return accountService.single(l);
     }
 
@@ -35,7 +39,6 @@ public class AccountController {
 
     @PostMapping(value="register")
     public ResponseEntity<String> createAccount(@RequestBody Account login) {
-        System.out.println(login.getUserInformation().getFirstname());
         switch (accountService.create_account(login)) {
             case 1 -> {
                 HttpHeaders responseHeaders = new HttpHeaders();
@@ -64,12 +67,6 @@ public class AccountController {
     @PostMapping("{account_id}")
     public void changeAccount(@RequestBody UserInformation userDetails, @PathVariable Long account_id){
         accountService.changeAccount(userDetails, account_id);
-    }
-
-    @GetMapping("test")
-    public Account test() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return accountService.ad();
     }
 
     @GetMapping("posts")
