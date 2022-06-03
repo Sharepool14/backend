@@ -52,7 +52,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(
+              HttpServletRequest request,
+              HttpServletResponse response,
+              FilterChain chain,
+              Authentication authResult) throws IOException, ServletException {
         Account account = (Account) authResult.getPrincipal();
         Algorithm algo = Algorithm.HMAC256("secret".getBytes());
         String access_token = JWT.create()

@@ -34,7 +34,6 @@ public class ItemController {
 
     @DeleteMapping("items/{item_id}")
     public void deleteItem(){
-
     }
 
     @GetMapping
