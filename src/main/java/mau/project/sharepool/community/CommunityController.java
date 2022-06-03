@@ -63,11 +63,9 @@ public class CommunityController {
         }
     }
 
-    @PostMapping(path = "/user/{account_id}/community/delete")
+    @DeleteMapping(path = "/user/{account_id}/community/delete")
     public ResponseEntity deleteYourCommunity(@RequestBody Long id){
         service.deleteACommunity(id);
-
-
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

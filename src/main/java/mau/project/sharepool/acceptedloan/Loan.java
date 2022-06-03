@@ -1,5 +1,4 @@
 package mau.project.sharepool.acceptedloan;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mau.project.sharepool.account.Account;

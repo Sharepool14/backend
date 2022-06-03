@@ -96,7 +96,6 @@ public class Loan_PostService {
             post.setAccount(account);
             post.setCommunity(community);
             loan_postRepository.save(post);
-
         } else {
             System.out.println("You are not a member or this item dont belong to you");
         }
@@ -116,9 +115,7 @@ public class Loan_PostService {
                             loan_post.getAccount().getUsername(),
                             loan_post.getItem().getDescription()
                     ));
-
                 });
-
         return posts;
     }
 }

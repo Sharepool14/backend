@@ -13,6 +13,4 @@ public interface InviteRepository extends JpaRepository<Invite, Long> {
 
     @Procedure(name = "test2")
     boolean test2(boolean a, Long account_id ,Long community_id);
-
-
 }

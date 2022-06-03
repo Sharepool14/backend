@@ -17,7 +17,6 @@ public class InviteController {
 
     @GetMapping(path = "all")
     public void getCommunities(){
-
     }
 
     @PostMapping (path = "add")

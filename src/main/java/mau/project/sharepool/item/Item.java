@@ -15,22 +15,25 @@ import java.util.Set;
  * @author Anthon Haväng
  */
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @JsonIgnore
     private Account account;
-    private String name;
-    private String description;
-    @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
 
     @OneToMany(mappedBy = "item")
     private Set<Loan_Post> loan_post;
+
+    @OneToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+
+    private Category category;
+    private String name;
+    private String description;
+
 
     /**
      * @author Anthon Haväng
