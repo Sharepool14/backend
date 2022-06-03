@@ -14,7 +14,14 @@ public class LoanPostDTO {
     public LoanPostDTO() {
     }
 
-    public LoanPostDTO(Long id, Date start_date, Date return_date, String communityName, String itemName, String borrowersName, String description) {
+    public LoanPostDTO(
+              Long id,
+              Date start_date,
+              Date return_date,
+              String communityName,
+              String itemName,
+              String borrowersName,
+              String description) {
         this.id = id;
         this.start_date = start_date;
         this.return_date = return_date;
