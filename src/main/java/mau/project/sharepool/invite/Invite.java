@@ -1,6 +1,5 @@
 package mau.project.sharepool.invite;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.community.Community;
 
