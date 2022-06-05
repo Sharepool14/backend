@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import javax.persistence.*;
 
+/**
+ * @author Hugo Lindstedt
+ * Class that represent UserDeatils table in the database.
+ */
 @Entity
 @Table(name = "user_details")
 public class UserInformation {
