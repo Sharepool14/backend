@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
+/**
+ * @author Anthon Haväng
+ * This class acts as a controller for the Item-package, to allow interaction and management by the Spring REST-API.
+ */
 @RestController
 @RequestMapping(path = "/user/items")
 public class ItemController {

@@ -7,6 +7,8 @@ import java.util.Objects;
 
 /**
  * @author Anthon Haväng
+ * This class is provides the primary key for the joined database table CommunityAccount. Because this is a joined table
+ * with two primary keys, a composite key-Java class is required to make Spring interact with it properly.
  */
 @Embeddable
 public class CommunityAccountKey implements Serializable {
@@ -18,6 +20,7 @@ public class CommunityAccountKey implements Serializable {
 
     /**
      * @author Anthon Haväng
+     * Constructor for this class.
      */
     public CommunityAccountKey() {
     }

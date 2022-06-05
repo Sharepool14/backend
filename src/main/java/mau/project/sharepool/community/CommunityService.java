@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * @author Anthon Haväng
+ */
 @Service
 public class CommunityService {
     private final CommunityRepository communityRepository;
@@ -24,6 +27,10 @@ public class CommunityService {
     private final AccountRepository accountRepository;
     private final LoanRepository loanRepository;
 
+    /**
+     * @author Anthon Haväng
+     * Constructor for this class.
+     */
     @Autowired
     public CommunityService(
             CommunityRepository communityRepository,
@@ -55,8 +62,10 @@ public class CommunityService {
 
     /**
      * @author Anthon Haväng
-     * @param community
-     * @return
+     * This method creates a community, and sets the creating user to admin/owner.
+     * @param community Saves the provided community to the database with information provided from front-end and
+     * assigns the creating user to the role of owner/admin.
+     * @return Returns 1 if the creation was a success, and return 2 if the creation failed.
      */
     public int createCommunity(Community community) {
         try {
@@ -73,8 +82,10 @@ public class CommunityService {
 
     /**
      * @author Anthon Haväng
-     * @param community_id
-     * @return
+     * This method returns a Set of accounts with members in a specific community.
+     * @param community_id Provided from front-end, used to specify which community to fetch members from in the
+     * database.
+     * @return Returns the user-accounts of the members in the specified community.
      */
     public Set<Account> getMembersInCommunity(Long community_id) {
         return communityAccountRepository.findAllByCommunityId(community_id).stream()
@@ -107,8 +118,9 @@ public class CommunityService {
 
     /**
      * @author Anthon Haväng
-     * @param communityID
-     * @return
+     * This method returns all the loan posts from a specific community.
+     * @param communityID Provided from front-end, used to specify which community to fetch from in the database.
+     * @return Returns a set of all the loan posts from the specified community.
      */
     public Set<Loan_Post> getThisCommunitysPosts(Long communityID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)){
@@ -118,7 +130,9 @@ public class CommunityService {
 
     /**
      * @author Anthon Haväng
-     * @param communityID
+     * This method is used when a user wants to leave a community they are a member in. The Spring-annotation
+     * "@Transactional" is required to refer to the joined table CommunityAccount.
+     * @param communityID Provided by the user from front-end, to specify which community they want to leave.
      */
     @Transactional
     public void leaveCommunity(Long communityID) {
