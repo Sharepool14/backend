@@ -7,9 +7,11 @@ import mau.project.sharepool.invite.Invite;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Entity
 @Table(name = "community")
 public class Community {

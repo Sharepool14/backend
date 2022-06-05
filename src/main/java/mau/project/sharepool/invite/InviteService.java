@@ -1,27 +1,37 @@
 package mau.project.sharepool.invite;
 
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.community.Community;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Service
 public class InviteService {
     private InviteRepository inviteRepository;
     private CommunityAccountRepository communityAccountRepository;
 
+    /**
+     * @author Elisabet Aronsson
+     * @param inviteRepository
+     * @param communityAccountRepository
+     */
     @Autowired
     public InviteService(InviteRepository inviteRepository,CommunityAccountRepository communityAccountRepository){
         this.inviteRepository = inviteRepository;
         this.communityAccountRepository = communityAccountRepository;
     }
+
+    /**
+     * @author Robert Korpics
+     * return inviteDTO
+     */
 
     public List<InviteDTO> getSpecificInvite() {
         List<Invite> invites = inviteRepository.findAllByInvitedId(AccountID.get());
@@ -38,14 +48,26 @@ public class InviteService {
         return inviteDTO;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @return
+     */
     public List<Invite> getInvites() {
         return inviteRepository.findAll();
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param invite
+     */
     public void addInvite(Invite invite) {
         inviteRepository.save(invite);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param id
+     */
     public void deleteAInvite(Long id) {
         inviteRepository.deleteById(id);
     }

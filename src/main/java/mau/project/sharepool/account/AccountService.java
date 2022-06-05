@@ -1,6 +1,5 @@
 package mau.project.sharepool.account;
 
-import mau.project.sharepool.community.Community;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
@@ -15,8 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
+
+/**
+ * @author Hugo Lindstedt
+ */
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -78,13 +80,6 @@ public class AccountService implements UserDetailsService {
 
     public Account getAccount(Long account_id) {
         return accountRepository.getById(account_id);
-    }
-
-    public Account ad() {
-        List<Integer> inList = new ArrayList<>();
-        inList.add(19);
-        //inList.add(37);
-        return accountRepository.test(inList);
     }
 
     public Set<Loan_Post> getYourPosts() {
