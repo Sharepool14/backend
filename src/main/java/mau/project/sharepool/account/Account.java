@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import mau.project.sharepool.acceptedloan.Loan;
 import mau.project.sharepool.invite.Invite;
 import mau.project.sharepool.item.Item;
-//import mau.project.sharepool.itemrequester.Item_Requester;
 import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.userinformation.UserInformation;
 import mau.project.sharepool.communityaccount.CommunityAccount;

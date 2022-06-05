@@ -1,12 +1,8 @@
 package mau.project.sharepool.loanpost;
-import mau.project.sharepool.config.AccountID;
-import mau.project.sharepool.item.Item;
-import mau.project.sharepool.userinformation.UserInformation;
-import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Elisabet Aronsson
@@ -74,7 +70,7 @@ public class Loan_PostController {
     }
 
     /**
-     * @author Elisabet Aronsson
+     * @author Elisabet Aronsson, Robert Korpics
      * @param communityID
      * @param postID
      * @return

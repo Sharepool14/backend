@@ -3,11 +3,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.community.Community;
 import mau.project.sharepool.item.Item;
-//import mau.project.sharepool.itemrequester.Item_Requester;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+
 
 /**
  * @author Elisabet Aronsson

@@ -95,12 +95,12 @@ public class CommunityService {
                 Account inviter = new Account();
                 inviter.setId(AccountID.get());
 
-                Account invitee = new Account();
-                invitee.setId(account.getId());
+                Account invited = new Account();
+                invited.setId(account.getId());
 
                 Community community = new Community();
                 community.setId(community_id);
-                inviteRepository.save(new Invite(inviter,invitee,community));
+                inviteRepository.save(new Invite(inviter,invited,community));
             }
         }
     }

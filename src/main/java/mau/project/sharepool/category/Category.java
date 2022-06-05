@@ -3,6 +3,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
 
+/**
+ * @author Robert Korpics
+ */
 @Entity
 @Table(name = "category")
 public class Category {
@@ -11,7 +14,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
-
     public Category() {
     }
 
