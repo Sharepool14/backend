@@ -1,14 +1,11 @@
 package mau.project.sharepool.invite;
 
 import mau.project.sharepool.account.Account;
-import mau.project.sharepool.community.Community;
 import mau.project.sharepool.communityaccount.CommunityAccount;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class InviteService {
         this.inviteRepository = inviteRepository;
         this.communityAccountRepository = communityAccountRepository;
     }
+
+    /**
+     * @author Robert Korpics
+     * return inviteDTO
+     */
 
     public List<InviteDTO> getSpecificInvite() {
         List<Invite> invites = inviteRepository.findAllByInvitedId(AccountID.get());

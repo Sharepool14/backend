@@ -1,7 +1,6 @@
 package mau.project.sharepool.loanpost;
 
 import java.util.Date;
-import java.util.Set;
 
 public class CreatePostDTO {
     private Long community_id;

@@ -4,17 +4,13 @@ import mau.project.sharepool.account.Account;
 import mau.project.sharepool.account.AccountRepository;
 import mau.project.sharepool.communityaccount.CommunityAccountRepository;
 import mau.project.sharepool.config.AccountID;
-import mau.project.sharepool.invite.Invite;
-import mau.project.sharepool.invite.InviteDTO;
 import mau.project.sharepool.loanpost.Loan_Post;
 import mau.project.sharepool.loanpost.Loan_PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 public class LoanService {

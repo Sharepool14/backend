@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Robert Korpics
+ */
+
 @RestController
 @RequestMapping (path = "/user/category")
 public class CategoryController {
@@ -16,27 +20,23 @@ public class CategoryController {
         this.service = service;
     }
 
-    // Method that fetch all the Categories
     @GetMapping(path = "all")
     public List getCategory(){
         return service.getCategories();
     }
 
-    // Add a Category to the db
     @PostMapping(path = "add")
     public ResponseEntity add(@RequestBody Category category){
         service.addToCategory(category);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // Delete specifik category from DB
     @PostMapping(path = "delete")
     public ResponseEntity delete(@RequestBody Long id){
         service.deleteCategory(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // Delete all categories from DB
     @PostMapping(path = "deleteAll")
     public ResponseEntity deleteALl(){
         service.deleteAllCategories();

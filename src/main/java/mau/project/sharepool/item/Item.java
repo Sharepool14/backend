@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.category.Category;
 import mau.project.sharepool.loanpost.Loan_Post;
-
 import javax.persistence.*;
 import java.util.Set;
 
