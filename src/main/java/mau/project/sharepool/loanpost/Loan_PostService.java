@@ -70,6 +70,7 @@ public class Loan_PostService {
         }
     }
 
+
     /**
      * @author Hugo Lindstedt
      * @param communityID
