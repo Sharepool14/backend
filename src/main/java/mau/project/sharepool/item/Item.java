@@ -12,6 +12,7 @@ import java.util.Set;
 
 /**
  * @author Anthon Haväng
+ * This class provides the mapping for the database formulated according to the Spring REST-API.
  */
 public class Item {
     @Id
@@ -43,10 +44,6 @@ public class Item {
 
     /**
      * @author Anthon Haväng
-     * @param account
-     * @param name
-     * @param description
-     * @param category
      */
     public Item(Account account, String name, String description, Category category) {
         this.account = account;
@@ -57,11 +54,6 @@ public class Item {
 
     /**
      * @author Anthon Haväng
-     * @param id
-     * @param account
-     * @param name
-     * @param description
-     * @param category
      */
     public Item(long id, Account account, String name, String description, Category category) {
         this.id = id;

@@ -14,8 +14,7 @@ public class ItemService {
 
     /**
      * @author Anthon Haväng
-     * @param itemRepository
-     * @param accountRepository
+     * Constructor for this class.
      */
     @Autowired
     public ItemService(ItemRepository itemRepository, AccountRepository accountRepository){

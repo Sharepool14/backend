@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Set;
 import mau.project.sharepool.account.Views;
 
+/**
+ * @author Anthon Haväng
+ * Controller class for CommunityController collection table.
+ */
 @RestController
 public class CommunityController {
     private final CommunityService service;
@@ -36,8 +40,9 @@ public class CommunityController {
 
     /**
      * @author Anthon Haväng
-     * @param community_id
-     * @return
+     * This method returns all the members of a specific community from the database.
+     * @param community_id Provided from front-end, used to specify which community to fetch from in the database.
+     * @return Returns all members of the specified community.
      */
     @GetMapping(path = "communities/{communityID}/members")
     @JsonView(Views.response.class)
@@ -46,10 +51,11 @@ public class CommunityController {
     }
 
     /**
-     * @auth Anthon Haväng, Hugo Lindstedt
+     * @author Anthon Haväng, Hugo Lindstedt
+     * This method is used to create a new community and add it to the database. The switch-case is used to deliver
+     * status codes for front-end depending on if the creation was successful or failed.
      * @param newCommunity
-     * @return returns a HttpStatus for front-end.
-     * HttpHeaders is left behind unused to remain as a template for further use.
+     * @return returns a HttpStatus for front-end with HTTP-status code for fail and success.
      */
     @PostMapping(path = "/user/community/create")
     public ResponseEntity<HttpStatus> createCommunity(@RequestBody Community newCommunity) {
@@ -103,9 +109,10 @@ public class CommunityController {
     }
 
     /**
-     * @author Elisabet Aronsson
-     * @param community_id
-     * @return
+     * @author Anthon Haväng, Elisabet Aronsson
+     * This method returns all the posts from a specific community from the community-table in the databse.
+     * @param community_id Provided from front-end, used to specify which community to fetch from in the database.
+     * @return Returns a Set with all the posts from the specified community.
      */
     @GetMapping("community/{community_id}/posts")
     public Set<Loan_Post> getThisCommunitysPosts(@PathVariable Long community_id){
@@ -114,7 +121,8 @@ public class CommunityController {
 
     /**
      * @author Anthon Haväng
-     * @param community_id
+     * This method is used when a user wants to leave a community.
+     * @param community_id Provided from front-end, used to specify which community the user is to be removed from.
      */
     @PostMapping("/user/communtiy/{community_id}/leave")
     public void leaveCommunity(@PathVariable Long community_id){
