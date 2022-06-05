@@ -27,6 +27,10 @@ public class ItemService {
         return itemRepository.findAllByAccountId(AccountID.get());
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param item
+     */
     public void addItemBy(Item item) {
         Account account = accountRepository.getById(AccountID.get());
         item.setAccount(accountRepository.getById(AccountID.get()));
@@ -34,6 +38,11 @@ public class ItemService {
         accountRepository.save(account);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param item
+     * @param item_id
+     */
     public void changeItem(Item item, Long item_id) {
         Item item1 = itemRepository.getById(item_id);
         item1.setName(item.getName());

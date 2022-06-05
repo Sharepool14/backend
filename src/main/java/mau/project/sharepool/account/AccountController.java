@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @RestController
 @RequestMapping("/user/")
 public class AccountController {
@@ -54,6 +57,12 @@ public class AccountController {
             }
         }
     }
+
+    /**
+     * @author Elisabet Aronsson
+     * @param account_id
+     * @return
+     */
     @GetMapping("{account_id}")
     public Account getAccount(@PathVariable Long account_id){
         if (AccountID.get() == account_id) {
@@ -61,6 +70,12 @@ public class AccountController {
         } else  return null;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param userDetails
+     * @param account_id
+     * Updates the userinformation of a user
+     */
     @PostMapping("{account_id}")
     public void changeAccount(@RequestBody UserInformation userDetails, @PathVariable Long account_id){
         accountService.changeAccount(userDetails, account_id);
@@ -72,14 +87,12 @@ public class AccountController {
         return accountService.ad();
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @return
+     */
     @GetMapping("posts")
     public Set<Loan_Post> getYourPosts(){
         return accountService.getYourPosts();
-    }
-
-   // @PostMapping("")
-    public void editLoanPost(){
-        // Man kan kan bara edit om saken inte är i
-        // accepted loans och accepted
     }
 }

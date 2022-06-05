@@ -15,12 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Service
 public class Loan_PostService {
     private final Loan_PostRepository loan_postRepository;
     private final CommunityAccountRepository communityAccountRepository;
     private final ItemRepository itemRepository;
 
+    /**
+     * @author Elisabet Aronsson
+     * @param loan_postRepository
+     * @param communityAccountRepository
+     * @param itemRepository
+     */
     @Autowired
     private Loan_PostService(Loan_PostRepository loan_postRepository, CommunityAccountRepository communityAccountRepository,ItemRepository itemRepository) {
         this.loan_postRepository = loan_postRepository;
@@ -36,6 +45,12 @@ public class Loan_PostService {
         return loan_postRepository.findAllByCommunity_idInAndVisibleIsTrue(communtiesIDs);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param loan_post
+     * @param communityID
+     * Updates the information on a post
+     */
     public void updatePost(Loan_Post loan_post, Long communityID) {
         Loan_Post loan_post1 = loan_postRepository.getById(loan_post.getId());
         loan_post1.setStart_date(loan_post.getStart_date());
@@ -44,12 +59,23 @@ public class Loan_PostService {
         loan_postRepository.save(loan_post1);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param postID
+     * @param communityID
+     */
     public void deletePost(Long postID, Long communityID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)) {
             loan_postRepository.deleteById(postID);
         }
     }
-    //Hugo L
+
+
+    /**
+     * @author Hugo Lindstedt
+     * @param communityID
+     * @return
+     */
     public List<LoanPostDTO> communitiesPost(Long communityID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)) {
             List<LoanPostDTO> posts = new ArrayList<>();
@@ -70,12 +96,22 @@ public class Loan_PostService {
         } else return null;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param communityID
+     * @param postID
+     * @return
+     */
     public Loan_Post getSpecificPost(Long communityID, Long postID) {
         if (communityAccountRepository.existsByAccount_idAndCommunity_id(AccountID.get(), communityID)) {
             return loan_postRepository.getById(postID);
         } else return null;
     }
-    //Hugo L
+
+    /**
+     * @author Hugo Lindstedt
+     * @param createPostDTO
+     */
     public void createPost(CreatePostDTO createPostDTO) {
         Long account_id = AccountID.get();
         CommunityAccount c = communityAccountRepository.findByAccountIdAndCommunityId(account_id,createPostDTO.getCommunity_id()).orElseThrow();
@@ -96,7 +132,6 @@ public class Loan_PostService {
             post.setAccount(account);
             post.setCommunity(community);
             loan_postRepository.save(post);
-
         } else {
             System.out.println("You are not a member or this item dont belong to you");
         }
@@ -116,9 +151,7 @@ public class Loan_PostService {
                             loan_post.getAccount().getUsername(),
                             loan_post.getItem().getDescription()
                     ));
-
                 });
-
         return posts;
     }
 }

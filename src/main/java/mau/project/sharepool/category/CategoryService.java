@@ -27,6 +27,4 @@ public class CategoryService {
     public void deleteAllCategories(){
         categoryRepository.deleteAll();
     }
-
-
 }
