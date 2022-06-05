@@ -5,6 +5,10 @@ import mau.project.sharepool.community.Community;
 
 import javax.persistence.*;
 
+/**
+ * @author Elisabet Aronsson
+ */
+
 @Entity
 @Table(name = "invite")
 public class Invite {

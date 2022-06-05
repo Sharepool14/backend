@@ -20,9 +20,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * @author Hugo Lindstedt
+ * Class for authenticating users againt the database. if authnetication is sucsessfull a JWT token is created and sent to
+ * the user.
+ */
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
@@ -32,6 +36,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationManager = authenticationManager;
     }
 
+    /**
+     * Tries to authenticate against the database and check if passwords match.
+     * @param request
+     * @param response
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
@@ -50,6 +61,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         return authenticationManager.authenticate(authToken);
     }
 
+    /**
+     * If password match a JWT token is generated and added to the http request.
+     * @param request
+     * @param response
+     * @param chain
+     * @param authResult
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     protected void successfulAuthentication(
               HttpServletRequest request,

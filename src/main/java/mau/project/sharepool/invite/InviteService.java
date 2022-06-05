@@ -9,11 +9,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Service
 public class InviteService {
     private InviteRepository inviteRepository;
     private CommunityAccountRepository communityAccountRepository;
 
+    /**
+     * @author Elisabet Aronsson
+     * @param inviteRepository
+     * @param communityAccountRepository
+     */
     @Autowired
     public InviteService(InviteRepository inviteRepository,CommunityAccountRepository communityAccountRepository){
         this.inviteRepository = inviteRepository;
@@ -40,14 +48,26 @@ public class InviteService {
         return inviteDTO;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @return
+     */
     public List<Invite> getInvites() {
         return inviteRepository.findAll();
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param invite
+     */
     public void addInvite(Invite invite) {
         inviteRepository.save(invite);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param id
+     */
     public void deleteAInvite(Long id) {
         inviteRepository.deleteById(id);
     }

@@ -2,6 +2,11 @@ package mau.project.sharepool.loanpost;
 
 import java.util.Date;
 
+/**
+ * The purpose of a DTO class is to pass data with multiple attributes in one shot to frontend
+ * Which enables you to costumize which attributes you want to send
+ * DTO can be a alternative to more complicates joins between tables
+ */
 public class CreatePostDTO {
     private Long community_id;
     private Long item_id;

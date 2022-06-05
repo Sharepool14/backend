@@ -8,7 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,10 @@ import java.util.Collection;
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+/**
+ * @author Hugo Lindstedt
+ * Class that checks authorization before a user tries to access an endpoint resource.
+ */
 public class AuthorizationFilter extends OncePerRequestFilter {
     public AuthorizationFilter() {
 

@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Entity
 @Table(name = "community")
 public class Community {
