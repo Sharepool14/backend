@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson and Hugo Lindstedt
+ */
+
 @Repository
 public interface Loan_PostRepository extends JpaRepository<Loan_Post, Long> {
     List<Loan_Post> findAllByCommunity_id(Long communityID);

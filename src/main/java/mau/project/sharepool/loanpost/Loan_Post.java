@@ -1,6 +1,4 @@
 package mau.project.sharepool.loanpost;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mau.project.sharepool.account.Account;
 import mau.project.sharepool.community.Community;
@@ -11,6 +9,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Entity
 @Table(name = "loan_post")
 public class Loan_Post {

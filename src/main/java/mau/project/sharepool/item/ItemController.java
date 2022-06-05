@@ -20,11 +20,22 @@ public class ItemController {
         this.itemService = service;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param item
+     */
     @PostMapping("/item/create")
     public void addItemBy(@RequestBody Item item) {
             itemService.addItemBy(item);
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param item
+     * @param account
+     * @param account_id
+     * @param item_id
+     */
     @PostMapping("items/{item_id}")
     public void changeItem(@RequestBody Item item, Account account, @PathVariable Long account_id, @PathVariable Long item_id){
         if(AccountID.get().equals(account_id)){
