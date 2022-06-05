@@ -40,6 +40,11 @@ public class Loan_PostController {
         service.createPost(createPostDTO);
     }
 
+
+    /**
+     * @author Elisabeth Aronsson & Robert Korpics
+     */
+
     @GetMapping("{communityID}/posts/{postID}")
     public Loan_Post getSpecificPost(@PathVariable Long communityID, @PathVariable Long postID) {
         return service.getSpecificPost(communityID, postID);
