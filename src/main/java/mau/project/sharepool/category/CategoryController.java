@@ -31,7 +31,7 @@ public class CategoryController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping(path = "delete")
+    @DeleteMapping(path = "delete")
     public ResponseEntity delete(@RequestBody Long id){
         service.deleteCategory(id);
         return ResponseEntity.ok(HttpStatus.OK);
