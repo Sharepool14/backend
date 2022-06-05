@@ -16,6 +16,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Hugo Lindstedt
+ * Account class that represent the Account table in the database. This class extends Springframework Userdetails
+ * That is used to authenticate against the database.
+ */
 @Entity
 @Table(name = "account")
 public class Account implements org.springframework.security.core.userdetails.UserDetails {
