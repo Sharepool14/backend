@@ -48,6 +48,12 @@ public class AccountService implements UserDetailsService {
         return accountRepository.findAll();
     }
 
+    /**
+     * Tries to find a Account by its username and load it from the database.
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByUsername(username);
@@ -59,6 +65,11 @@ public class AccountService implements UserDetailsService {
         return account;
     }
 
+    /**
+     * takes a Account object and tries to save it in the database.
+     * @param login
+     * @return
+     */
     public int create_account(Account login) {
         try {
             login.setPassword(passwordEncoder.encode(login.getPassword()));
@@ -69,6 +80,11 @@ public class AccountService implements UserDetailsService {
         }
     }
 
+    /**
+     * Edit an exiting accounts information.
+     * @param userDetails
+     * @param account_id
+     */
     public void changeAccount(UserInformation userDetails, Long account_id) {
         if(AccountID.get() == account_id){
             Account account = accountRepository.getById(account_id);
