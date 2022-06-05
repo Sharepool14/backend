@@ -81,12 +81,6 @@ public class AccountController {
         accountService.changeAccount(userDetails, account_id);
     }
 
-    @GetMapping("test")
-    public Account test() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return accountService.ad();
-    }
-
     /**
      * @author Elisabet Aronsson
      * @return
