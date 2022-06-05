@@ -32,10 +32,6 @@ public class ItemController {
         }
     }
 
-    @DeleteMapping("items/{item_id}")
-    public void deleteItem(){
-    }
-
     @GetMapping
     public Set<Item> getItems() {
         return itemService.itemsBy();

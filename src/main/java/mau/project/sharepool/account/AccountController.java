@@ -76,10 +76,4 @@ public class AccountController {
     public Set<Loan_Post> getYourPosts(){
         return accountService.getYourPosts();
     }
-
-   // @PostMapping("")
-    public void editLoanPost(){
-        // Man kan kan bara edit om saken inte är i
-        // accepted loans och accepted
-    }
 }
