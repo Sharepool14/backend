@@ -1,5 +1,9 @@
 package mau.project.sharepool.acceptedloan;
 
+/**
+ * @author Hugo Lindstedt
+ * Data Transfer Object class that is used to map information from the Loan table to frontend.
+ */
 public class LoanDTO {
     private Long id;
     private boolean accepted;

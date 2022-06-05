@@ -1,5 +1,9 @@
 package mau.project.sharepool.invite;
 
+/**
+ * @author Hugo Lindstedt
+ * Data Transfer Object class that is used to map information from the Invite table to frontend.
+ */
 public class InviteDTO {
     private long id;
     private String inviter;

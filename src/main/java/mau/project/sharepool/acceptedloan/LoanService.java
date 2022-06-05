@@ -66,7 +66,7 @@ public class LoanService {
     }
 
     /***
-     * @author Elisabet Aronsson
+     * @author Elisabet Aronssonm, Hugo Lindstedt
      * @param loan_id
      * If the request is accepted the visibility will change
      * Sets visible to false for the loan_post and saves loan with accepted = true
@@ -79,7 +79,7 @@ public class LoanService {
     }
 
     /**
-     * @author Elisabet Aronsson
+     * @author Elisabet Aronsson, Hugo Lindstedt
      * @return Returns all loan requests of your items
      */
     public List<LoanDTO> getPendingLoanReqFromOthers() {
@@ -101,7 +101,7 @@ public class LoanService {
     }
 
     /**
-     * @author Elisabet Aronsson
+     * @author Elisabet Aronsson, Hugo Lindstedt
      * @return All of my requests of others items
      */
     public List<LoanDTO> getMyLoanOrReq() {
