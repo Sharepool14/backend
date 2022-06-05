@@ -16,11 +16,19 @@ import mau.project.sharepool.account.Views;
 public class CommunityController {
     private final CommunityService service;
 
+    /**
+     * @author Elisabet Aronsson
+     * @param service
+     */
     @Autowired
     public CommunityController(CommunityService service){
         this.service = service;
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @return
+     */
     @GetMapping(path = "all")
     public List getCommunities(){
         return service.getCommunities();
@@ -63,11 +71,14 @@ public class CommunityController {
         }
     }
 
-    @PostMapping(path = "/user/{account_id}/community/delete")
+    /**
+     * @author Elisabet Aronsson
+     * @param id
+     * @return
+     */
+    @DeleteMapping(path = "/user/{account_id}/community/delete")
     public ResponseEntity deleteYourCommunity(@RequestBody Long id){
         service.deleteACommunity(id);
-
-
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -76,6 +87,11 @@ public class CommunityController {
         return service.getAccountCommunities();
     }
 
+    /**
+     * @author Elisabet Aronsson
+     * @param community_id
+     * @return
+     */
     @GetMapping("{community_id}")
     public Community getCommunity(@PathVariable Long community_id){
         return service.getACommunity(community_id);
@@ -87,7 +103,7 @@ public class CommunityController {
     }
 
     /**
-     * @author Anthon Haväng
+     * @author Elisabet Aronsson
      * @param community_id
      * @return
      */

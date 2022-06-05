@@ -28,7 +28,12 @@ public class AccountService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountService(ItemRepository itemRepository, AccountRepository loginRepo, PasswordEncoder passwordEncoder, CommunityAccountRepository communityAccountRepository) {
+    public AccountService(
+              ItemRepository itemRepository,
+              AccountRepository loginRepo,
+              PasswordEncoder passwordEncoder,
+              CommunityAccountRepository communityAccountRepository) {
+
         this.communityAccountRepository = communityAccountRepository;
         this.itemRepository = itemRepository;
         this.accountRepository = loginRepo;

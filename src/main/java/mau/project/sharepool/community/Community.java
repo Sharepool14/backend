@@ -10,6 +10,9 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * @author Elisabet Aronsson
+ */
 @Entity
 @Table(name = "community")
 public class Community {
@@ -17,6 +20,7 @@ public class Community {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
     @OneToMany(mappedBy = "community")
     private Set<CommunityAccount> communityAccounts;
 

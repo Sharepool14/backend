@@ -42,5 +42,4 @@ public class CategoryController {
         service.deleteAllCategories();
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
 }
